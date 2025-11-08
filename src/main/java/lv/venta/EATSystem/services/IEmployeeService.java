@@ -7,7 +7,7 @@ import lv.venta.EATSystem.models.Employee;
 
 public interface IEmployeeService {
 	
-public abstract ArrayList<Employee> selectAllEmployees();
+	public abstract ArrayList<Employee> selectAllEmployees();
 	
 	public abstract Employee selectEmployeeById(int id) throws Exception;
 	
