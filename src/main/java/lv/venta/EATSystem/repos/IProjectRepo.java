@@ -6,4 +6,8 @@ import lv.venta.EATSystem.models.Project;
 
 public interface IProjectRepo extends CrudRepository<Project, Integer>{
 
+	Project findByIdProject(int id);
+
+	void deleteByIdProject(int id);
+
 }
