@@ -6,4 +6,8 @@ import lv.venta.EATSystem.models.Order;
 
 public interface IOrderRepo extends CrudRepository<Order, Integer>{
 
+	Order findByIdOrder(int id);
+
+	void deleteByIdOrder(int id);
+
 }
