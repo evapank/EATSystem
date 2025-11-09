@@ -3,7 +3,6 @@ package lv.venta.EATSystem.services.impl;
 import java.util.ArrayList;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
-import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;

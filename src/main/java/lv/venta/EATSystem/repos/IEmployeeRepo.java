@@ -6,4 +6,8 @@ import lv.venta.EATSystem.models.Employee;
 
 public interface IEmployeeRepo extends CrudRepository<Employee, Integer>{
 
+	Employee findByIdEmployee(int id);
+
+	void deleteByIdEmployee(int id);
+
 }
