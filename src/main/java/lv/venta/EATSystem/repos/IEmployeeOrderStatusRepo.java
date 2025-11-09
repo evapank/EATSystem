@@ -6,4 +6,8 @@ import lv.venta.EATSystem.models.EmployeeOrderStatus;
 
 public interface IEmployeeOrderStatusRepo extends CrudRepository<EmployeeOrderStatus, Integer>{
 
+	EmployeeOrderStatus findByIdEmployeeOrderStatus(int id);
+
+	void deleteByIdEmployeeOrderStatus(int id);
+
 }
