@@ -37,6 +37,7 @@ public class EmployeeStatus extends Status{
 	
 	public EmployeeStatus (Employee employee, GeneralStatus generalStatus,
 			LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
+		
 		setEmployee(employee);
 		setGeneralStatus(generalStatus);
 		this.dateTimeStart = dateTimeStart;

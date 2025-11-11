@@ -31,8 +31,7 @@ public class EmployeeController {
 		try {
 			model.addAttribute("employee", employeeService.selectEmployeeById(id));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "error-page";
 		}
 		return "employee/employee-one-page";
 	}

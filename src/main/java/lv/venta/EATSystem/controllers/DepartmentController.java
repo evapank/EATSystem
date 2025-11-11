@@ -31,8 +31,7 @@ public class DepartmentController {
 		try {
 			model.addAttribute("department", departmentService.selectDepartmentById(id));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "error-page";
 		}
 		return "department/department-one-page";
 	}

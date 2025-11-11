@@ -32,7 +32,7 @@ public class EmployeeOrderStatusController {
 			model.addAttribute("eos", eosService.selectEmployeeOrderStatusById(id));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "error-page";
 		}
 		return "status/employeeOrderStatus/eos-all-page";
 	}
