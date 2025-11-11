@@ -23,7 +23,7 @@ public class DepartmentController {
 	@GetMapping("/all")
 	public String getAllDepartments(Model model) {
 		model.addAttribute("department", departmentService.selectAllDepartments());
-		return "department-all-page";
+		return "department/department-all-page";
 	}
 	
 	@GetMapping("/all/{id}")
