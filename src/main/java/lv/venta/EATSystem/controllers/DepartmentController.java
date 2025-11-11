@@ -54,5 +54,28 @@ public class DepartmentController {
 		}
 		return "department/department-add-page";
 	}
+	
+	@GetMapping("/update")
+	public String getUpdateDepartmentById(@PathVariable(name="id") int id, Model model) {
+		try {
+			model.addAttribute("department", departmentService.selectDepartmentById(id));
+		} catch (Exception e) {
+			return "error-page";
+		}
+		return "department/department-update-page";
+	}
+	
+	public String postUpdateDepartmentById(@PathVariable(name="id") int id, Department department, BindingResult result) {
+		if(!result.hasErrors()) {
+			try {
+				departmentService.updateDepartmentById(id, department.getTitle(), department.getManager());
+			} catch (Exception e) {
+				return "error-page";
+			}
+		}
+			return "department/department-update-page";
+		
+	}
 
 }
+
