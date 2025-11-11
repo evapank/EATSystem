@@ -32,18 +32,18 @@ public class DepartmentController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "department-one-page";
+		return "department/department-one-page";
 	}
 
 	@GetMapping("/remove/{id}")
 	public String deleteDepartmentById(Model model, @PathVariable(name = "id") int id) {
 		model.addAttribute("department", departmentService.deleteDepartmentById(id));
-		return "department-all-page";
+		return "department/department-all-page";
 	}
 	
 	@GetMapping("/create")
 	public String getAddDepartment(Department department) {
-		return "department-add-page";
+		return "department/department-add-page";
 	}
 	
 	@PostMapping("/create")
@@ -51,7 +51,7 @@ public class DepartmentController {
 		if(!result.hasErrors()) {
 			departmentService.insertNewDepartment(department.getTitle(), department.getManager());
 		}
-		return "department-add-page";
+		return "department/department-add-page";
 	}
 
 }
