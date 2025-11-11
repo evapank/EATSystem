@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
-import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.services.IEmployeeService;
 
@@ -28,7 +27,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getEmplyeeById(Model model, @PathVariable(name = "id") int id) {
+	public String getEmployeeById(Model model, @PathVariable(name = "id") int id) {
 		try {
 			model.addAttribute("employee", employeeService.selectEmployeeById(id));
 		} catch (Exception e) {
