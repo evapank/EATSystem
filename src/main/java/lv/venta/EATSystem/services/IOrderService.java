@@ -9,7 +9,7 @@ import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 
-public interface IOrderStatusService {
+public interface IOrderService {
 	
 	public abstract ArrayList<Order> selectAllOrders();
 	

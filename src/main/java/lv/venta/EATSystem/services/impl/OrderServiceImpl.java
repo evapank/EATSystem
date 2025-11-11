@@ -9,9 +9,9 @@ import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IOrderRepo;
-import lv.venta.EATSystem.services.IOrderStatusService;
+import lv.venta.EATSystem.services.IOrderService;
 
-public class OrderStatusServiceImpl implements IOrderStatusService{
+public class OrderServiceImpl implements IOrderService{
 	
 	private IOrderRepo orderRepo;
 

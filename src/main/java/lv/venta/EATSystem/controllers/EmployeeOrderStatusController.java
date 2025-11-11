@@ -34,7 +34,7 @@ public class EmployeeOrderStatusController {
 			// TODO Auto-generated catch block
 			return "error-page";
 		}
-		return "status/employeeOrderStatus/eos-all-page";
+		return "status/employeeOrderStatus/eos-one-page";
 	}
 	
 	@GetMapping("/remove/{id}")
@@ -45,7 +45,7 @@ public class EmployeeOrderStatusController {
 	
 	@GetMapping("/create")
 	public String getAddEmployeeOrderStatus(EmployeeOrderStatus eos) {
-		return "status/employeeOrderStatus/eos-all-page";
+		return "status/employeeOrderStatus/eos-add-page";
 	}
 	
 	@PostMapping("/create")
@@ -53,6 +53,6 @@ public class EmployeeOrderStatusController {
 		if(!result.hasErrors()) {
 			eosService.insertNewEmployeeOrderStatus(eos.getEmployee(), eos.getGeneralStatus());
 		}
-		return "status/employeeOrderStatus/eos-all-page";
+		return "status/employeeOrderStatus/eos-add-page";
 	}
 }
