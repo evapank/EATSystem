@@ -21,13 +21,13 @@ public class OrderController {
 	IOrderService orderService;
 	
 	@GetMapping("/all")
-	public String getAllOrderStatuses(Model model) {
+	public String getAllOrders(Model model) {
 		model.addAttribute("order", orderService.selectAllOrders());
 		return "order/order-all-page";
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getOrderStatusById(Model model, @PathVariable(name = "id") int id) {
+	public String getOrderById(Model model, @PathVariable(name = "id") int id) {
 		try {
 			model.addAttribute("order", orderService.selectOrderById(id));
 		} catch (Exception e) {
@@ -38,18 +38,18 @@ public class OrderController {
 	}
 	
 	@GetMapping("/remove/{id}")
-	public String deleteOrderStatusById(Model model, @PathVariable(name = "id") int id) {
+	public String deleteOrderById(Model model, @PathVariable(name = "id") int id) {
 		model.addAttribute("order", orderService.deleteOrderById(id));
 		return "order/order-all-page";
 	}
 	
 	@GetMapping("/create")
-	public String getAddOrderStatus(Order order) {
+	public String getAddOrder(Order order) {
 		return "order/order-add-page";
 	}
 	
 	@PostMapping("/create")
-	public String postAddOrderStatus(@Valid Order order, BindingResult result) {
+	public String postAddOrder(@Valid Order order, BindingResult result) {
 		if(!result.hasErrors()) {
 			orderService.insertNewOrder(order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());
