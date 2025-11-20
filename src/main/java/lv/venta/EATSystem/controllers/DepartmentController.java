@@ -1,19 +1,22 @@
 package lv.venta.EATSystem.controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.services.IDepartmentService;
 
-@Controller
+@RestController
 @RequestMapping("/department")
 public class DepartmentController {
 	
@@ -21,60 +24,36 @@ public class DepartmentController {
 	IDepartmentService departmentService;
 	
 	@GetMapping("/all")
-	public String getAllDepartments(Model model) {
-		model.addAttribute("department", departmentService.selectAllDepartments());
-		return "department/department-all-page";
+	public Collection<Department> getAllDepartments() {
+		return departmentService.selectAllDepartments();
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getDepartmentById(Model model, @PathVariable(name = "id") int id) {
-		try {
-			model.addAttribute("department", departmentService.selectDepartmentById(id));
-		} catch (Exception e) {
-			return "error-page";
-		}
-		return "department/department-one-page";
+	public Department getDepartmentById(@PathVariable(name = "id") int id) throws Exception { //TODO validation
+		return departmentService.selectDepartmentById(id);
 	}
 
 	@GetMapping("/remove/{id}")
-	public String deleteDepartmentById(Model model, @PathVariable(name = "id") int id) {
-		model.addAttribute("department", departmentService.deleteDepartmentById(id));
-		return "department/department-all-page";
-	}
-	
-	@GetMapping("/create")
-	public String getAddDepartment(Department department) {
-		return "department/department-add-page";
+	public void deleteDepartmentById(Model model, @PathVariable(name = "id") int id) {
+		departmentService.deleteDepartmentById(id);
 	}
 	
 	@PostMapping("/create")
-	public String postAddDepartment (@Valid Department department, BindingResult result) {
+	public Department addDepartment ( @Valid Department department, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			departmentService.insertNewDepartment(department.getTitle(), department.getManager());
+			return departmentService.insertNewDepartment(department.getTitle(), department.getManager());
+		} else {
+			throw new Exception("can't create");
 		}
-		return "department/department-add-page";
 	}
 	
-	@GetMapping("/update")
-	public String getUpdateDepartmentById(@PathVariable(name="id") int id, Model model) {
-		try {
-			model.addAttribute("department", departmentService.selectDepartmentById(id));
-		} catch (Exception e) {
-			return "error-page";
+	@PutMapping("/update")
+	public Department updateDepartmentById(@PathVariable(name="id") int id, @Valid Department department, BindingResult result) throws Exception {
+	if(!result.hasErrors()) {
+			return departmentService.updateDepartmentById(id, department.getTitle(), department.getManager());
+		} else {
+			throw new Exception("can't update");
 		}
-		return "department/department-update-page";
-	}
-	
-	public String postUpdateDepartmentById(@PathVariable(name="id") int id, Department department, BindingResult result) {
-		if(!result.hasErrors()) {
-			try {
-				departmentService.updateDepartmentById(id, department.getTitle(), department.getManager());
-			} catch (Exception e) {
-				return "error-page";
-			}
-		}
-			return "department/department-update-page";
-		
 	}
 
 }
