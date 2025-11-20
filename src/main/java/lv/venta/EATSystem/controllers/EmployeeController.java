@@ -1,12 +1,14 @@
 package lv.venta.EATSystem.controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
@@ -21,38 +23,40 @@ public class EmployeeController {
 	IEmployeeService employeeService;
 	
 	@GetMapping("/all")
-	public String getAllEmployees(Model model) {
-		model.addAttribute("employee", employeeService.selectAllEmployees());
-		return "employee/employee-all-page";
+	public Collection<Employee> getAllEmployees() {
+		return employeeService.selectAllEmployees();
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getEmployeeById(Model model, @PathVariable(name = "id") int id) {
+	public Employee getEmployeeById(@PathVariable(name = "id") int id) throws Exception {
 		try {
-			model.addAttribute("employee", employeeService.selectEmployeeById(id));
+			return employeeService.selectEmployeeById(id);
 		} catch (Exception e) {
-			return "error-page";
+			throw new Exception("can't find");
 		}
-		return "employee/employee-one-page";
 	}
 	
 	@GetMapping("/remove/{id}")
-	public String deleteEmployeeById(Model model, @PathVariable(name = "id") int id) {
-		model.addAttribute("employee", employeeService.deleteEmployeeById(id));
-		return "employee/employee-all-page";
-	}
-	
-	@GetMapping("/create")
-	public String getAddEmployee(Employee employee) {
-		return "employee/employee-add-page";
+	public void deleteEmployeeById(@PathVariable(name = "id") int id) {
+		employeeService.deleteEmployeeById(id);
 	}
 	
 	@PostMapping("/create")
-	public String postAddEmployee(@Valid Employee employee, BindingResult result) {
+	public Employee postAddEmployee(@Valid Employee employee, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPostion(), employee.getDepartment(), employee.getEmail());
+			return employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPostion(), employee.getDepartment(), employee.getEmail());
+		} else {
+			throw new Exception("can't create");
 		}
-		return "employee/employee-add-page";
+	}
+	
+	@PutMapping("/update")
+	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid Employee employee, BindingResult result) throws Exception {
+	if(!result.hasErrors()) {
+			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPostion(), employee.getDepartment(), employee.getEmail());
+		} else {
+			throw new Exception("can't update");
+		}
 	}
 
 }

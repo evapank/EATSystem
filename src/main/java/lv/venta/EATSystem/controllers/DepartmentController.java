@@ -30,7 +30,11 @@ public class DepartmentController {
 	
 	@GetMapping("/all/{id}")
 	public Department getDepartmentById(@PathVariable(name = "id") int id) throws Exception { //TODO validation
+		try {
 		return departmentService.selectDepartmentById(id);
+		} catch (Exception e) {
+			throw new Exception("can't find");
+		}
 	}
 
 	@GetMapping("/remove/{id}")
