@@ -1,19 +1,21 @@
 package lv.venta.EATSystem.controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.services.IEmployeeStatusService;
 
-@Controller
+@RestController
 @RequestMapping("/employeestatus")
 public class EmployeeStatusController {
 	
@@ -21,40 +23,42 @@ public class EmployeeStatusController {
 	IEmployeeStatusService emplStatusService;
 	
 	@GetMapping("/all")
-	public String getAllEmployeeStatuses(Model model) {
-		model.addAttribute("employeeStatus", emplStatusService.selectAllEmployeeStatuses());
-		return "status/employeeStatus/employee-status-all-page";
+	public Collection<EmployeeStatus> getAllEmployeeStatuses() {
+		return emplStatusService.selectAllEmployeeStatuses();
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getEmployeeStatusById(Model model, @PathVariable(name = "id") int id) {
+	public EmployeeStatus getEmployeeStatusById(@PathVariable(name = "id") int id) throws Exception {
 		try {
-			model.addAttribute("employeeStatus", emplStatusService.selectEmployeeStatusById(id));
+			return emplStatusService.selectEmployeeStatusById(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return "error-page";
+			throw new Exception("can't find");
 		}
-		return "status/employeeStatus/employee-status-all-page";
 	}
 	
 	@GetMapping("/remove/{id}")
-	public String deleteEmployeeStatusById(Model model, @PathVariable(name = "id") int id) {
-		model.addAttribute("employeeStatus", emplStatusService.deleteEmployeeStatusById(id));
-		return "status/employeeStatus/employee-status-all-page";
-	}
-	
-	@GetMapping("/create")
-	public String getAddEmployeeStatus(EmployeeStatus employeeStatus) {
-		return "status/employeeStatus/employee-status-all-page";
+	public void deleteEmployeeStatusById(@PathVariable(name = "id") int id) {
+		emplStatusService.deleteEmployeeStatusById(id);
 	}
 	
 	@PostMapping("/create")
-	public String postAddEmployeeOrderStatus(@Valid EmployeeStatus employeeStatus, BindingResult result) {
+	public EmployeeStatus postAddEmployeeOrderStatus(@Valid EmployeeStatus employeeStatus, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			emplStatusService.insertNewEmployeeStatus(employeeStatus.getEmployee(), employeeStatus.getGeneralStatus(),
+			return emplStatusService.insertNewEmployeeStatus(employeeStatus.getEmployee(), employeeStatus.getGeneralStatus(),
 					employeeStatus.getDateTimeStart(), employeeStatus.getDateTimeEnd());
+		} else {
+			throw new Exception("can't create");
 		}
-		return "status/employeeStatus/employee-status-all-page";
+	}
+	
+	@PutMapping("/update")
+	public EmployeeStatus updateEmployeeStatusById(@PathVariable(name="id") int id, @Valid EmployeeStatus employeeStatus, BindingResult result) throws Exception {
+	if(!result.hasErrors()) {
+			return emplStatusService.updateEmployeeStatusById(id, employeeStatus.getEmployee(), employeeStatus.getGeneralStatus(),
+					employeeStatus.getDateTimeStart(), employeeStatus.getDateTimeEnd());
+		} else {
+			throw new Exception("can't update");
+		}
 	}
 
 }
