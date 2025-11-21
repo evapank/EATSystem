@@ -1,19 +1,21 @@
 package lv.venta.EATSystem.controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.services.IOrderService;
 
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 	
@@ -21,40 +23,42 @@ public class OrderController {
 	IOrderService orderService;
 	
 	@GetMapping("/all")
-	public String getAllOrders(Model model) {
-		model.addAttribute("order", orderService.selectAllOrders());
-		return "order/order-all-page";
+	public Collection<Order> getAllOrders() {
+		return orderService.selectAllOrders();
 	}
 	
 	@GetMapping("/all/{id}")
-	public String getOrderById(Model model, @PathVariable(name = "id") int id) {
+	public Order getOrderById(@PathVariable(name = "id") int id) throws Exception {
 		try {
-			model.addAttribute("order", orderService.selectOrderById(id));
+			return orderService.selectOrderById(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return "error-page";
+			throw new Exception("can't find");
 		}
-		return "order/order-one-page";
 	}
 	
 	@GetMapping("/remove/{id}")
-	public String deleteOrderById(Model model, @PathVariable(name = "id") int id) {
-		model.addAttribute("order", orderService.deleteOrderById(id));
-		return "order/order-all-page";
-	}
-	
-	@GetMapping("/create")
-	public String getAddOrder(Order order) {
-		return "order/order-add-page";
+	public void deleteOrderById(@PathVariable(name = "id") int id) {
+		orderService.deleteOrderById(id);
 	}
 	
 	@PostMapping("/create")
-	public String postAddOrder(@Valid Order order, BindingResult result) {
+	public Order postAddOrder(@Valid Order order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			orderService.insertNewOrder(order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
+			return orderService.insertNewOrder(order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());
+		} else {
+			throw new Exception("can't create");
 		}
-		return "order/order-add-page";
+	}
+	
+	@PutMapping("/update")
+	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid Order order, BindingResult result) throws Exception {
+		if(!result.hasErrors()) {
+			return orderService.updateOrderById(id, order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
+					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());
+		} else {
+			throw new Exception("can't update");
+		}
 	}
 
 }
