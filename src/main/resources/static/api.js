@@ -19,7 +19,7 @@ const api = axios.create({
   error => Promise.reject(error)
 );
 
-export const DepartmentService = {
+export const departmentService = {
 	getAll: () => api.get('/department/all'),
 	getById: (id) => api.get(`/department/all/${id}`),
 	delete: (id) => api.delete(`/department/remove/${id}`),
