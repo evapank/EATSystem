@@ -51,7 +51,7 @@ public class DepartmentController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public Department updateDepartmentById(@PathVariable(name="id") int id, @Valid Department department, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return departmentService.updateDepartmentById(id, department.getTitle(), department.getManager());

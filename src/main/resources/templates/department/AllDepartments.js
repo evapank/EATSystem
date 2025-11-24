@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { departmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 
-const DepartmentList = () => {
+const AllDepartments = () => {
 	const [department, setDepartments] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -47,8 +47,18 @@ const DepartmentList = () => {
                   <td>{department.title}</td>
                   <td>{department.manager}</td>
                   <td>
-                  	<Link to={`/departments/${department.id}`} className="btn btn-info mr-2">
+                  	<Link to={`/department/all/${department.id}`} className="btn btn-primary">
                    	 View
+                 	 </Link>
+                  </td>
+                  <td>
+                  	<Link to={`/department/update/${department.id}`} className="btn btn-secondary">
+                   	 Update
+                 	 </Link>
+                  </td>
+                  <td>
+                  	<Link to={`/department/remove/${department.id}`} className="btn btn-danger">
+                   	 Delete
                  	 </Link>
                   </td>
                   </tbody>
@@ -60,4 +70,4 @@ const DepartmentList = () => {
     </div>
   );
 };
-export default DepartmentList;
+export default AllDepartments;
