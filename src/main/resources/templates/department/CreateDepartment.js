@@ -3,6 +3,7 @@ import { departmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 
 const CreateDepartment = () => {
+	const [department, setDepartment] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	
@@ -10,6 +11,7 @@ const CreateDepartment = () => {
 		const fetchDepartment = async () => {
 			try {
 				const response = await departmentService.create();
+				setDepartment(response);
 				setLoading(false);
 			} catch (error){
 				setError('cannot create');
@@ -25,11 +27,17 @@ const CreateDepartment = () => {
   return (
     <div className="container mt-4">
       <h2>Add new department</h2>
-       	<form>
-       		<div>
-       			<label>Title</label>
-       			<input type='text' name='title' className='form-control' placeholder='Enter title'/>
-       		</div>
+       	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"'>
+       		<table>
+       			<tr>
+       			<td><label>Title</label></td>
+       			<td><input type='text' name='title' className='form-control' placeholder='Enter title'/> </td>
+       			<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+       			</tr>
+       		</table>
+       		 <Link to="/department/create" className="btn btn-success mb-3">
+        Submit
+      </Link>
        	</form>
       </div>
       )

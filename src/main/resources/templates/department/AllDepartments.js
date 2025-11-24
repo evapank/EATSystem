@@ -27,7 +27,7 @@ const AllDepartments = () => {
   return (
     <div className="container mt-4">
       <h2>Departments</h2>
-      <Link to="/department/create" className="btn btn-primary mb-3">
+      <Link to="/department/create" className="btn btn-success mb-3">
         Add New Department
       </Link>
        <div className="row">
