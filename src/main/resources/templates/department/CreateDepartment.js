@@ -10,9 +10,9 @@ const CreateDepartment = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	
-	useEffect(() => {
-		const fetchDepartment = async () => {
-			try {
+	const handleSubmit = (e) => {
+		e.preventDeafult();
+		try {
 				const response = await departmentService.create(department);
 				setDepartment(response);
 				setLoading(false);
@@ -21,16 +21,14 @@ const CreateDepartment = () => {
 				setLoading(false);
 				console.log(error);
 			}
-		};
-		fetchDepartment();
-	}, []);
+	};
 	
 	if (loading) return <div>Loading...</div>;
   if (error)return <div className="alert alert-danger">{error}</div>;
   return (
     <div className="container mt-4">
       <h2>Add new department</h2>
-       	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"'>
+       	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"' onSubmit={handleSubmit}>
        		<table>
        			<tr>
        			<td><label>Title:</label></td>
@@ -47,7 +45,7 @@ const CreateDepartment = () => {
        			</td>
        			</tr>
        		</table>
-       		 <Link to="/department/create" className="btn btn-success mb-3">
+       		 <Link to="/department/all" className="btn btn-success mb-3">
         Submit
       </Link>
        	</form>
