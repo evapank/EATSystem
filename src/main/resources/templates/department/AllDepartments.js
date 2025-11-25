@@ -35,7 +35,7 @@ const AllDepartments = () => {
           <p>No Departments found</p>
         ) : (
           department.map(department => (
-            <div className="col-md-4 mb-3" key={department.id}>
+            <div className="col-md-4 mb-3" key={department.idDepartment}>
               <table class="table-primary table-hover">
               	<thead>
               		<th scope="col">ID</th>
@@ -47,17 +47,17 @@ const AllDepartments = () => {
                   <td>{department.title}</td>
                   <td>{department.manager}</td>
                   <td>
-                  	<Link to={`/department/all/${department.id}`} className="btn btn-primary">
+                  	<Link to={`/department/all/${department.idDepartment}`} className="btn btn-primary">
                    	 View
                  	 </Link>
                   </td>
                   <td>
-                  	<Link to={`/department/update/${department.id}`} className="btn btn-secondary">
+                  	<Link to={`/department/update/${department.idDepartment}`} className="btn btn-secondary">
                    	 Update
                  	 </Link>
                   </td>
                   <td>
-                  	<Link to={`/department/remove/${department.id}`} className="btn btn-danger">
+                  	<Link to={`/department/remove/${department.idDepartment}`} className="btn btn-danger">
                    	 Delete
                  	 </Link>
                   </td>
@@ -70,4 +70,5 @@ const AllDepartments = () => {
     </div>
   );
 };
+
 export default AllDepartments;
