@@ -14,7 +14,7 @@ const UpdateDepartment = () => {
 		e.preventDeafult();
 		try {
 				const response = await departmentService.update(department.idDepartment);
-				setDepartment(response);
+				setDepartment(response.data);
 				setLoading(false);
 			} catch (error){
 				setError('cannot create');
@@ -33,13 +33,15 @@ const UpdateDepartment = () => {
        			<tr>
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
-       						onChange= {e => setValues({...values, name: e.target.value})}/> </td>
+       						value={department.title}
+       						onChange= {e => setDepartment({...department, name: e.target.value})}/> </td>
        			<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
        			</tr>
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       				<select th:field='*{manager}' name='manager' onChange= {e => setValues({...values, manager: e.target.value})}>
+       				<select th:field='*{manager}' name='manager' value={department.manager}
+       				onChange= {e => setDepartment({...department, manager: e.target.value})}>
        					<option th:each="e: ${employees}"th:value="${e.idEmployee}" th:text="${e.name} ${e.surname}"/>
        				</select>
        			</td>

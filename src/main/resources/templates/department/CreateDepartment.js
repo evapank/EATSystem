@@ -3,7 +3,7 @@ import { departmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 
 const CreateDepartment = () => {
-	const [department, setDepartment] = useState({
+	const [values, setValues] = useState({
 		title : '',
 		manager: null
 	});

@@ -22,6 +22,13 @@ const AllDepartments = () => {
 		fetchDepartments();
 	}, []);
 	
+	const handleDelete = (id) => {
+		const confirm = window.confirm("Record will be deleted");
+		if(confirm){
+			DepadepartmentService.delete(id).then(location.reload());
+		};
+	};
+	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
   return (
@@ -57,7 +64,7 @@ const AllDepartments = () => {
                  	 </Link>
                   </td>
                   <td>
-                  	<Link to={`/department/remove/${department.idDepartment}`} className="btn btn-danger">
+                  	<Link to={`/department/remove/${department.idDepartment}`}  onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
                    	 Delete
                  	 </Link>
                   </td>
