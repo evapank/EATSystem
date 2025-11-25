@@ -14,7 +14,7 @@ const OneDepartment = () => {
 				setDepartment(response.data);
 				setLoading(false);
 			} catch (error){
-				setError('cannot find department');
+				setError('cannot update department');
 				setLoading(false);
 				console.log(error);
 			}
@@ -33,7 +33,7 @@ const OneDepartment = () => {
       <Link to="/department/remove/${department.idDepartment}" className="btn btn-danger mb-3">
         Delete Department
       </Link>
-       <Link to="/department/remove/${department.idDepartment}" className="btn btn-primary mb-3">
+       <Link to="/department/all" className="btn btn-primary mb-3">
         Back
       </Link>
        <div className="row">
