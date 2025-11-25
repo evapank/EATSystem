@@ -3,14 +3,17 @@ import { departmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 
 const CreateDepartment = () => {
-	const [department, setDepartment] = useState([]);
+	const [department, setDepartment] = useState({
+		title : '',
+		manager: null
+	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	
 	useEffect(() => {
 		const fetchDepartment = async () => {
 			try {
-				const response = await departmentService.create();
+				const response = await departmentService.create(department);
 				setDepartment(response);
 				setLoading(false);
 			} catch (error){
@@ -23,16 +26,25 @@ const CreateDepartment = () => {
 	}, []);
 	
 	if (loading) return <div>Loading...</div>;
-  if (error) return <div className="alert alert-danger">{error}</div>;
+  if (error)return <div className="alert alert-danger">{error}</div>;
   return (
     <div className="container mt-4">
       <h2>Add new department</h2>
        	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"'>
        		<table>
        			<tr>
-       			<td><label>Title</label></td>
-       			<td><input type='text' name='title' className='form-control' placeholder='Enter title'/> </td>
+       			<td><label>Title:</label></td>
+       			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
+       						onChange= {e => setValues({...values, name: e.target.value})}/> </td>
        			<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+       			</tr>
+       			<tr>
+       			<td><label>Manager:</label></td>
+       			<td>
+       				<select th:field='*{manager}' name='manager' onChange= {e => setValues({...values, manager: e.target.value})}>
+       					<option th:each="e: ${employees}"th:value="${e.idEmployee}" th:text="${e.name} ${e.surname}"/>
+       				</select>
+       			</td>
        			</tr>
        		</table>
        		 <Link to="/department/create" className="btn btn-success mb-3">
