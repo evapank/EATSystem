@@ -2,13 +2,18 @@ package lv.venta.EATSystem.services.impl;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.services.IEmployeeService;
 
+@Service
 public class EmployeeServiceImpl implements IEmployeeService{
 
+	@Autowired
 	private IEmployeeRepo employeeRepo;
 	
 	@Override

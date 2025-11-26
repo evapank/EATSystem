@@ -3,13 +3,18 @@ package lv.venta.EATSystem.services.impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IProjectRepo;
 import lv.venta.EATSystem.services.IProjectService;
 
+@Service
 public class ProjectServiceImpl implements IProjectService{
 	
+	@Autowired
 	private IProjectRepo projectRepo;
 
 	@Override

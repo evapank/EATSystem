@@ -1,5 +1,7 @@
 package lv.venta.EATSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,7 @@ public class Department {
 	
 	@OneToOne
 	@JoinColumn(name = "IdEmployee")
+	@JsonIgnore
 	private Employee manager;
 	
 	public Department (String title, Employee manager) {

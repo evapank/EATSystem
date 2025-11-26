@@ -2,15 +2,21 @@ package lv.venta.EATSystem.services.impl;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.services.IEmployeeOrderStatusService;
 
+@Service
 public class EmployeeOrderStatusServiceImpl implements IEmployeeOrderStatusService{
 
+	@Autowired
 	private IEmployeeOrderStatusRepo eosRepo;
+	
 	@Override
 	public ArrayList<EmployeeOrderStatus> selectAllEmployeeOrderStatuses() {
 		ArrayList<EmployeeOrderStatus> result = (ArrayList<EmployeeOrderStatus>) eosRepo.findAll();

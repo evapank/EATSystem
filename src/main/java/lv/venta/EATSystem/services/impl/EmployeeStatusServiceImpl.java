@@ -3,14 +3,19 @@ package lv.venta.EATSystem.services.impl;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
 import lv.venta.EATSystem.services.IEmployeeStatusService;
 
+@Service
 public class EmployeeStatusServiceImpl implements IEmployeeStatusService{
 	
+	@Autowired
 	private IEmployeeStatusRepo empStRepo;
 
 	@Override

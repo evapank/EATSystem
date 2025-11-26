@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lv.venta.EATSystem.enums.OrderStatus;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.Order;
@@ -11,8 +14,10 @@ import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IOrderRepo;
 import lv.venta.EATSystem.services.IOrderService;
 
+@Service
 public class OrderServiceImpl implements IOrderService{
 	
+	@Autowired
 	private IOrderRepo orderRepo;
 
 	@Override
