@@ -84,4 +84,4 @@ const AllEmployees = () => {
   );
 };
 
-export default AllDepartments;
+export default AllEmployees;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DepartmentService } from '../static/api';
 import { Link } from 'react-router-dom';
+import TextError from '../static/TextError';
 
 const CreateDepartment = () => {
 	const [values, setValues] = useState({
