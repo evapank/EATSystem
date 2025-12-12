@@ -28,4 +28,13 @@ export const DepartmentService = {
 	
 };
 
+export const EmployeeService = {
+	getAll: () => api.get('/employee/all'),
+	getById: (id) => api.get(`/employee/all/${id}`),
+	delete: (id) => api.delete(`/employee/remove/${id}`),
+	create: (employee) => api.post('/employee/create', employee),
+	update: (id, employee) => api.put(`/employee/update/${id}`, employee)
+	
+};
+
 export default api;
