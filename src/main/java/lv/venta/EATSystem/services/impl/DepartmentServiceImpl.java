@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.repos.IDepartmentRepo;
+import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.services.IDepartmentService;
 
 @Service
@@ -15,6 +16,9 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	
 	@Autowired
 	private IDepartmentRepo departmentRepo;
+	
+	@Autowired
+	private IEmployeeRepo employeeRepo;
 
 	@Override
 	public ArrayList<Department> selectAllDepartments() {
@@ -46,6 +50,14 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		Department result = departmentRepo.findByIdDepartment(id);
 		result = new Department (title, manager);
 		return result;
+	}
+
+	@Override
+	public ArrayList<Employee> selectAllEmployeesInDepartment(int id) {
+		if(departmentRepo.existsById(id)) {
+			employeeRepo.findByIdDepartment(id);
+		}
+		return null;
 	}
 
 }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import TextError from '../static/TextError';
 
 const CreateDepartment = () => {
-	const [values, setValues] = useState({
+	const [department , setDepartment]= useState({
 		title : '',
 		manager: null
 	});
@@ -29,19 +29,20 @@ const CreateDepartment = () => {
   return (
     <div className="container mt-4">
       <h2>Add new department</h2>
-       	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"' onSubmit={handleSubmit}>
+       	<form action="@{/department/create}" object={department} method="post" onSubmit={handleSubmit}>
        		<table>
        			<tr>
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
-       						onChange= {e => setValues({...values, name: e.target.value})}/> </td>
-       			<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+       						onChange= {e => setDepartment({...department, name: e.target.value})}/> </td>
        			</tr>
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       				<select th:field='*{manager}' name='manager' onChange= {e => setValues({...values, manager: e.target.value})}>
-       					<option th:each="e: ${employees}"th:value="${e.idEmployee}" th:text="${e.name} ${e.surname}"/>
+       				<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
+       					{employees.map((e) => (
+							<option value={e} text={e.name}{...e.surname}></option>
+						))};
        				</select>
        			</td>
        			</tr>

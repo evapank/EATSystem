@@ -10,4 +10,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer>{
 
 	void deleteByIdEmployee(int id);
 
+	void findByIdDepartment(int id);
+
 }

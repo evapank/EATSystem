@@ -17,4 +17,5 @@ public interface IDepartmentService {
 	
 	public abstract Department updateDepartmentById(int id, String title, Employee manager) throws Exception;
 
+	public abstract ArrayList<Employee> selectAllEmployeesInDepartment(int id);
 }
