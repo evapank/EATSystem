@@ -55,7 +55,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	@Override
 	public ArrayList<Employee> selectAllEmployeesInDepartment(int id) {
 		if(departmentRepo.existsById(id)) {
-			employeeRepo.findByIdDepartment(id);
+			employeeRepo.findByDepartmentIdDepartment(id);
 		}
 		return null;
 	}

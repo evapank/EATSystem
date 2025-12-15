@@ -51,24 +51,26 @@ const AllDepartments = () => {
               		<th scope="col">Manager</th>
               	</thead>
               	<tbody>
-              	  <td>{department.idDepartment}</td>
-                  <td>{department.title}</td>
-                  <td>{department.manager}</td>
-                  <td>
-                  	<Link to={`/department/all/${department.idDepartment}`} className="btn btn-primary">
-                   	 View
-                 	 </Link>
-                  </td>
-                  <td>
-                  	<Link to={`/department/update/${department.idDepartment}`} className="btn btn-secondary">
-                   	 Update
-                 	 </Link>
-                  </td>
-                  <td>
-                  	<Link to={`/department/remove/${department.idDepartment}`}  onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
-                   	 Delete
-                 	 </Link>
-                  </td>
+					<tr>
+						<td>{department.idDepartment}</td>
+                  		<td>{department.title}</td>
+                  		<td>{department.manager}</td>
+                  		<td>
+                  			<Link to={`/department/all/${department.idDepartment}`} className="btn btn-primary">
+                   	 		View
+                 	 		</Link>
+                  		</td>
+                  		<td>
+                  			<Link to={`/department/update/${department.idDepartment}`} className="btn btn-secondary">
+                   	 		Update
+                 	 		</Link>
+                  		</td>
+                  		<td>
+                  			<Link to={`/department/remove/${department.idDepartment}`}  onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
+                   	 		Delete
+                 	 		</Link>
+                  		</td>
+					</tr>
                   </tbody>
               </table>
             </div>

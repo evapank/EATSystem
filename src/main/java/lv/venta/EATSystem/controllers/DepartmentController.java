@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Department;
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.services.IDepartmentService;
+import lv.venta.EATSystem.services.IEmployeeService;
 
 @RestController
 @RequestMapping("/department")
@@ -24,6 +26,9 @@ public class DepartmentController {
 	
 	@Autowired
 	IDepartmentService departmentService;
+	
+	@Autowired
+	IEmployeeService employeeService;
 	
 	@GetMapping("/all")
 	public Collection<Department> getAllDepartments() {
@@ -45,12 +50,17 @@ public class DepartmentController {
 	}
 	
 	@PostMapping("/create")
-	public Department addDepartment ( @Valid Department department, BindingResult result) throws Exception {
+	public Department addDepartment (@Valid Department department, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return departmentService.insertNewDepartment(department.getTitle(), department.getManager());
 		} else {
 			throw new Exception("can't create");
 		}
+	}
+	
+	@GetMapping("/create")
+	public Collection<Employee> showEmployeeList(){
+		return employeeService.selectAllEmployees();
 	}
 	
 	@PutMapping("/update/{id}")
@@ -60,6 +70,11 @@ public class DepartmentController {
 		} else {
 			throw new Exception("can't update");
 		}
+	}
+	
+	@GetMapping("/update/{id}")
+	public Collection<Employee> showDepartmentEmployeeList(@PathVariable(name = "id") int id){
+		return departmentService.selectAllEmployeesInDepartment(id);
 	}
 
 }

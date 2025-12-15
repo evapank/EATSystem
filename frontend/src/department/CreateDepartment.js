@@ -10,12 +10,14 @@ const CreateDepartment = () => {
 	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [employees, setEmployees] = useState([]);
 	
 	const handleSubmit = async (e) => {
 		e.preventDeafult();
 		try {
-				const response = await DepartmentService.create(department);
+				const response = await DepartmentService.create(department, employees);
 				setDepartment(response);
+				setEmployees(response.data);
 				setLoading(false);
 			} catch (error){
 				setError('cannot create');

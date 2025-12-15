@@ -11,9 +11,9 @@ const App = () => {
     <Router>
       <Routes>
         <Route path='/department/all' exact={true} element={<AllDepartments/>}/>
-        <Route path={`/department/all/${id}`} exact={true} element={<OneDepartment/>}/>
+        <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>
         <Route path={`/department/create`} exact={true} element={<CreateDepartment/>}/>
-        <Route path={`/department/update/${id}`} exact={true} element={<UpdateDepartment/>}/>
+        <Route path={`/department/update/:id`} exact={true} element={<UpdateDepartment/>}/>
       </Routes>
     </Router>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { DepartmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 
@@ -9,12 +9,14 @@ const UpdateDepartment = () => {
 	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [employees, setEmployees] = useState([]);
 	
 	const handleSubmit = async (e) => {
 		e.preventDeafult();
 		try {
-				const response = await DepartmentService.update(department.idDepartment);
+				const response = await DepartmentService.update(department.idDepartment, department, employees);
 				setDepartment(response.data);
+				setEmployees(response.data);
 				setLoading(false);
 			} catch (error){
 				setError('cannot create');
@@ -28,21 +30,21 @@ const UpdateDepartment = () => {
   return (
     <div className="container mt-4">
       <h2>Update department</h2>
-       	<form action='#  th:action="@{/department/create}" th:object=${department} method="post"' onSubmit={handleSubmit}>
+       	<form action="@{/department/create}" object={department} method="post" onSubmit={handleSubmit}>
        		<table>
        			<tr>
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
        						value={department.title}
        						onChange= {e => setDepartment({...department, name: e.target.value})}/> </td>
-       			<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
        			</tr>
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       				<select th:field='*{manager}' name='manager' value={department.manager}
-       				onChange= {e => setDepartment({...department, manager: e.target.value})}>
-       					<option th:each="e: ${employees}"th:value="${e.idEmployee}" th:text="${e.name} ${e.surname}"/>
+       				<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
+       					{employees.map((e) => (
+							<option value={e} text={e.name}{...e.surname}></option>
+						))};
        				</select>
        			</td>
        			</tr>
