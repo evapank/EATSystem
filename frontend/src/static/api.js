@@ -27,7 +27,6 @@ export const DepartmentService = {
   getEmployees: (employees) => api.get('/department/create', employees),
 	update: (id, department) => api.put(`/department/update/${id}`, department),
   getDepartmentEmployees: (id, employees) => api.get(`/department/update/${id}`, employees)
-	
 };
 
 export const EmployeeService = {

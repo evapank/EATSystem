@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { DepartmentService } from '../static/api';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const OneDepartment = () => {
-	const [department, setDepartment] = useState();
+	const [department, setDepartment] = useState({
+		title : '',
+		manager: null
+	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
@@ -11,7 +14,7 @@ const OneDepartment = () => {
 	useEffect(() => {
 		const fetchDepartment = async () => {
 			try {
-				const response = await DepartmentService.getById(department.idDepartment);
+				const response = await DepartmentService.getById(this.department.idDepartment);
 				setDepartment(response.data);
 				setLoading(false);
 			} catch (error){

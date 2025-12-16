@@ -7,6 +7,7 @@ const UpdateDepartment = () => {
 		title : '',
 		manager: null
 	});
+	const initialEmployees = [];
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
@@ -16,8 +17,8 @@ const UpdateDepartment = () => {
 		try {
 				const response = await DepartmentService.update(department.idDepartment, department);
 				const employeesResponse = await DepartmentService.getDepartmentEmployees(employees);
-				setDepartment(response.data);
-				setEmployees(employeesResponse.data);
+				setDepartment(response);
+				setEmployees(employeesResponse);
 				setLoading(false);
 			} catch (error){
 				setError('cannot update');

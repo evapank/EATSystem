@@ -29,6 +29,8 @@ const AllDepartments = () => {
 			DepartmentService.delete(id).then(location.reload());
 		};
 	};
+
+
 	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
@@ -43,18 +45,18 @@ const AllDepartments = () => {
           <p>No Departments found</p>
         ) : (
           department.map(department => (
-            <div className="col-md-4 mb-3" key={department.idDepartment}>
+            <div>
               <table className="table-primary table-hover">
               	<thead>
-					<tr>
+					<tr className='container-fluid'>
               			<th scope="col">ID</th>
               			<th scope="col">Title</th>
               			<th scope="col">Manager</th>
 					</tr>
               	</thead>
               	<tbody>
-					<tr>
-						<td>{department.idDepartment}</td>
+					<tr key={department.idDepartment}>
+						<td scope='row'>{department.idDepartment}</td>
                   		<td>{department.title}</td>
                   		<td>{department.manager}</td>
                   		<td>

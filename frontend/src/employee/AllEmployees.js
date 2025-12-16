@@ -54,26 +54,28 @@ const AllEmployees = () => {
                     <th scope="col">Email</th>
                 </thead>
                 <tbody>
-                  <td>{employee.idEmployee}</td>
-                  <td>{employee.name}</td>
-                  <td>{employee.surname}</td>
-                  <td>{employee.department}</td>
-                  <td>{employee.email}</td>
-                  <td>
-                    <Link to={`/employee/all/${employee.idEmployee}`} className="btn btn-primary">
-                     View
-                     </Link>
-                  </td>
-                  <td>
-                    <Link to={`/employee/update/${employee.idEmployee}`} className="btn btn-secondary">
-                     Update
-                     </Link>
-                  </td>
-                  <td>
-                    <Link to={`/employee/remove/${employee.idEmployee}`}  onClick={e =>handleDelete(e.idEmployee)} className="btn btn-danger">
-                     Delete
-                     </Link>
-                  </td>
+                  <tr>
+                   <td>{employee.idEmployee}</td>
+                   <td>{employee.name}</td>
+                   <td>{employee.surname}</td>
+                   <td>{employee.department}</td>
+                   <td>{employee.email}</td>
+                    <td>
+                     <Link to={`/employee/all/${employee.idEmployee}`} className="btn btn-primary">
+                      View
+                       </Link>
+                    </td>
+                   <td>
+                      <Link to={`/employee/update/${employee.idEmployee}`} className="btn btn-secondary">
+                      Update
+                      </Link>
+                    </td>
+                     <td>
+                     <Link to={`/employee/remove/${employee.idEmployee}`}  onClick={e =>handleDelete(e.idEmployee)} className="btn btn-danger">
+                       Delete
+                       </Link>
+                    </td>
+                  </tr>
                   </tbody>
               </table>
             </div>
