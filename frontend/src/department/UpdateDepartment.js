@@ -14,12 +14,13 @@ const UpdateDepartment = () => {
 	const handleSubmit = async (e) => {
 		e.preventDeafult();
 		try {
-				const response = await DepartmentService.update(department.idDepartment, department, employees);
+				const response = await DepartmentService.update(department.idDepartment, department);
+				const employeesResponse = await DepartmentService.getDepartmentEmployees(employees);
 				setDepartment(response.data);
-				setEmployees(response.data);
+				setEmployees(employeesResponse.data);
 				setLoading(false);
 			} catch (error){
-				setError('cannot create');
+				setError('cannot update');
 				setLoading(false);
 				console.log(error);
 			}
@@ -42,8 +43,8 @@ const UpdateDepartment = () => {
        			<td><label>Manager:</label></td>
        			<td>
        				<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
-       					{employees.map((e) => (
-							<option value={e} text={e.name}{...e.surname}></option>
+       					{this.state.employees.map((e, myKey) => (
+							<option key={myKey} value={e} text={e.name}{...e.surname}></option>
 						))};
        				</select>
        			</td>

@@ -23,8 +23,10 @@ export const DepartmentService = {
 	getAll: () => api.get('/department/all'),
 	getById: (id) => api.get(`/department/all/${id}`),
 	delete: (id) => api.delete(`/department/remove/${id}`),
-	create: (department, employees) => api.post('/department/create', department, employees),
-	update: (id, department, employees) => api.put(`/department/update/${id}`, department, employees)
+	create: (department) => api.post('/department/create', department),
+  getEmployees: (employees) => api.get('/department/create', employees),
+	update: (id, department) => api.put(`/department/update/${id}`, department),
+  getDepartmentEmployees: (id, employees) => api.get(`/department/update/${id}`, employees)
 	
 };
 

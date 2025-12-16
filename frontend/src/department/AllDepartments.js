@@ -44,11 +44,13 @@ const AllDepartments = () => {
         ) : (
           department.map(department => (
             <div className="col-md-4 mb-3" key={department.idDepartment}>
-              <table class="table-primary table-hover">
+              <table className="table-primary table-hover">
               	<thead>
-              		<th scope="col">ID</th>
-              		<th scope="col">Title</th>
-              		<th scope="col">Manager</th>
+					<tr>
+              			<th scope="col">ID</th>
+              			<th scope="col">Title</th>
+              			<th scope="col">Manager</th>
+					</tr>
               	</thead>
               	<tbody>
 					<tr>

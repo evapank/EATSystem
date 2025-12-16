@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DepartmentService } from '../static/api';
 import { Link } from 'react-router-dom';
 import TextError from '../static/TextError';
@@ -8,23 +8,30 @@ const CreateDepartment = () => {
 		title : '',
 		manager: null
 	});
+	const initialEmployees = [{}];
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [employees, setEmployees] = useState([]);
+	const [employees, setEmployees] = useState(initialEmployees);
 	
-	const handleSubmit = async (e) => {
-		e.preventDeafult();
+	const handleSubmit = (event) => {
+		event.preventDefault();
+	};
+	useEffect(() => {
+	const fetchDepartment = async () => {
 		try {
-				const response = await DepartmentService.create(department, employees);
+				const response = await DepartmentService.create(department);
+				const employeesResponse = await DepartmentService.getEmployees(employees);
 				setDepartment(response);
-				setEmployees(response.data);
+				setEmployees([employeesResponse.data]);
 				setLoading(false);
 			} catch (error){
 				setError('cannot create');
 				setLoading(false);
 				console.log(error);
 			}
-	};
+		};
+		fetchDepartment();
+	}, []);
 	
 	if (loading) return <div>Loading...</div>;
   if (error)return <div className="alert alert-danger">{error}</div>;
@@ -32,23 +39,19 @@ const CreateDepartment = () => {
     <div className="container mt-4">
       <h2>Add new department</h2>
        	<form action="@{/department/create}" object={department} method="post" onSubmit={handleSubmit}>
-       		<table>
-       			<tr>
-       			<td><label>Title:</label></td>
-       			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
-       						onChange= {e => setDepartment({...department, name: e.target.value})}/> </td>
-       			</tr>
-       			<tr>
-       			<td><label>Manager:</label></td>
-       			<td>
-       				<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
-       					{employees.map((e) => (
-							<option value={e} text={e.name}{...e.surname}></option>
+       			<div>
+       			<label>Title:</label>
+       			<input type='text' name='title' className='form-control' placeholder='Enter title'
+       						onChange= {e => setDepartment({...department, name: e.target.value})}/>
+       			</div>
+				<div>
+       			<label>Manager:</label>
+       					{employees.map((e, myKey) => (
+							<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
+								<option key={myKey} value={e} text={e.name}{...e.surname}></option>
+							</select>
 						))};
-       				</select>
-       			</td>
-       			</tr>
-       		</table>
+       		</div>
        		 <Link to="/department/all" className="btn btn-success mb-3">
         Submit
       </Link>
