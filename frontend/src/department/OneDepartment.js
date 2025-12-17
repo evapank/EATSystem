@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DepartmentService } from '../static/api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const OneDepartment = () => {
 	const [department, setDepartment] = useState({
@@ -10,11 +10,13 @@ const OneDepartment = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
+	const {id} = useParams();
 	
 	useEffect(() => {
 		const fetchDepartment = async () => {
 			try {
-				const response = await DepartmentService.getById(this.department.idDepartment);
+				console.log(id);
+				const response = await DepartmentService.getById(id);
 				setDepartment(response.data);
 				setLoading(false);
 			} catch (error){
@@ -26,11 +28,13 @@ const OneDepartment = () => {
 		fetchDepartment();
 	}, []);
 	
-	const handleDelete = (id) => {
+	const handleDelete = () => {
 		const confirm = window.confirm("Record will be deleted");
 		if(confirm){
-			DepartmentService.delete(id).then(
-			navigate(DepartmentService.getAll()))
+			console.log(id);
+			DepartmentService.delete(id);
+			//DepartmentService.delete(id).then(
+			//navigate(DepartmentService.getAll()))
 		};
 	};
 	
@@ -50,7 +54,8 @@ const OneDepartment = () => {
       </Link>
        <div className="row">
             <div className="col-md-4 mb-3" key={department.idDepartment}>
-              <table class="table-primary table-hover">
+              <table className="table-primary table-hover">
+				<tbody>
               	<tr>
               		<td scope="col">ID:</td>
               		<td>{department.idDepartment}</td>
@@ -63,6 +68,7 @@ const OneDepartment = () => {
               		<td scope="col">Manager:</td>
               		<td>{department.manager}</td>
                  </tr>
+				 </tbody>
               </table>
             </div>
         )

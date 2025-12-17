@@ -39,6 +39,7 @@ public class Department {
 	@OneToOne
 	@JoinColumn(name = "IdEmployee")
 	@JsonIgnore
+	@ToString.Exclude
 	private Employee manager;
 	
 	public Department (String title, Employee manager) {

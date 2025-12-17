@@ -12,11 +12,12 @@ const UpdateDepartment = () => {
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
 	
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDeafult();
 		try {
-				const response = await DepartmentService.update(department.idDepartment, department);
-				const employeesResponse = await DepartmentService.getDepartmentEmployees(employees);
+				const employeesResponse = DepartmentService.getDepartmentEmployees(employees);
+				const response = DepartmentService.update(department.idDepartment, department);
+				
 				setDepartment(response);
 				setEmployees(employeesResponse);
 				setLoading(false);

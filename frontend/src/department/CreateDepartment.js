@@ -19,8 +19,11 @@ const CreateDepartment = () => {
 	useEffect(() => {
 	const fetchDepartment = async () => {
 		try {
-				const response = await DepartmentService.create(department);
+				console.log("dfdfn");
 				const employeesResponse = await DepartmentService.getEmployees(employees);
+				console.log("jsdosijdo");
+				console.log(employeesResponse);
+				const response = await DepartmentService.create(department);
 				setDepartment(response);
 				setEmployees([employeesResponse]);
 				setLoading(false);
@@ -46,11 +49,15 @@ const CreateDepartment = () => {
        			</div>
 				<div>
        			<label>Manager:</label>
-       					{employees.map((e, myKey) => (
-							<select value="*{manager}" name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
-								<option key={myKey} value={e} text={e.name}{...e.surname}></option>
+			
+					
+							{employees.map((e) => (
+							<select value="*{manager}" name='manager' onChange= {event => setDepartment({...department, manager: event.target.value})}>
+								<option key={e.idEmployee} value={e} text={e.name}{...e.surname}></option>
 							</select>
 						))}
+					
+				
        		</div>
        		 <Link to="/department/all" className="btn btn-success mb-3">
         Submit

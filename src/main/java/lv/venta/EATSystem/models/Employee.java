@@ -3,6 +3,8 @@ package lv.venta.EATSystem.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -64,12 +66,17 @@ public class Employee {
 	@JoinTable(joinColumns = @JoinColumn(name = "IdEmployee"),inverseJoinColumns = @JoinColumn(name = "IdProject"),
 	name = "projects_employees")
 	@ToString.Exclude
+	@JsonIgnore
 	private Collection<Project> projects  = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	@ToString.Exclude
 	private Collection<EmployeeOrderStatus> orderStatuses  = new ArrayList<EmployeeOrderStatus>();
 	
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	@ToString.Exclude
 	private Collection<EmployeeStatus> statuses  = new ArrayList<EmployeeStatus>();
 	
 	public Employee (String name, String surname, String position, Department department,
