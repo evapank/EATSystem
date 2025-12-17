@@ -31,7 +31,7 @@ const OneDepartment = () => {
 	const handleDelete = () => {
 		const confirm = window.confirm("Record will be deleted");
 		if(confirm){
-			console.log(id);
+			console.log(DepartmentService.delete(id));
 			DepartmentService.delete(id);
 			//DepartmentService.delete(id).then(
 			//navigate(DepartmentService.getAll()))
