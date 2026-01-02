@@ -53,6 +53,11 @@ public class EatSystem1Application {
 				employeeRepo.save(emp1);
 				employeeRepo.save(emp2);
 				
+				dep1.addEmployee(emp2);
+				dep2.addEmployee(emp1);
+				departmentRepo.save(dep1);
+				departmentRepo.save(dep2);
+				
 				EmployeeStatus empSt1 = new EmployeeStatus(emp1, GeneralStatus.Online,
 										LocalDateTime.of(LocalDate.of(2025, 11, 4), LocalTime.of(13, 0)),
 										LocalDateTime.of(LocalDate.of(2025, 11, 4), LocalTime.of(16, 30)));

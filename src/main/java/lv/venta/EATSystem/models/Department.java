@@ -40,8 +40,7 @@ public class Department {
 	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	private String title;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "IdEmployee")
+	@OneToMany(mappedBy = "department")
 	@JsonIgnore
 	@ToString.Exclude
 	private Collection<Employee> employees = new ArrayList<Employee>();
