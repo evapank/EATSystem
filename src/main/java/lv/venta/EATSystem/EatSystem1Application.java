@@ -43,18 +43,15 @@ public class EatSystem1Application {
 			@Override
 			public void run(String... args) throws Exception {
 				
-				Department dep1 = new Department("Accounting", null);
-				Department dep2 = new Department("Software engineering", null);
+				Department dep1 = new Department("Accounting");
+				Department dep2 = new Department("Software engineering");
 				departmentRepo.save(dep1);
 				departmentRepo.save(dep2);
 				
-				Employee emp1 = new Employee ("John", "Smith", "Software engineer", dep2, "jsmith@gmail.com");
-				Employee emp2 = new Employee ("Anne", "Lee", "Accounting", dep1, "annelee123@gmail.com");
+				Employee emp1 = new Employee ("John", "Smith", "Software engineer", dep2, "jsmith@gmail.com", true);
+				Employee emp2 = new Employee ("Anne", "Lee", "Accounting", dep1, "annelee123@gmail.com", false);
 				employeeRepo.save(emp1);
 				employeeRepo.save(emp2);
-				
-				dep1.setManager(emp2);
-				departmentRepo.save(dep1);
 				
 				EmployeeStatus empSt1 = new EmployeeStatus(emp1, GeneralStatus.Online,
 										LocalDateTime.of(LocalDate.of(2025, 11, 4), LocalTime.of(13, 0)),

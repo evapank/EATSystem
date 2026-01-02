@@ -37,16 +37,16 @@ public class EmployeeServiceImpl implements IEmployeeService{
 
 	@Override
 	public Employee insertNewEmployee(String name, String surname, String position, Department department,
-			String email) {
-		Employee result = new Employee(name, surname, position, department, email);
+			String email, boolean isManager) {
+		Employee result = new Employee(name, surname, position, department, email, isManager);
 		return result;
 	}
 
 	@Override
 	public Employee updateEmployeeById(int id, String name, String surname, String position, Department department,
-			String email) throws Exception {
+			String email, boolean isManager) throws Exception {
 		Employee result = employeeRepo.findByIdEmployee(id);
-		result = new Employee(name, surname, position, department, email);
+		result = new Employee(name, surname, position, department, email, isManager);
 		return result;
 	}
 

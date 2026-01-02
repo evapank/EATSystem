@@ -1,5 +1,7 @@
 package lv.venta.EATSystem.repos;
 
+import java.util.ArrayList;
+
 import org.springframework.data.repository.CrudRepository;
 
 import lv.venta.EATSystem.models.Employee;
@@ -10,6 +12,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer>{
 
 	void deleteByIdEmployee(int id);
 
-	void findByDepartmentIdDepartment(int id);
+	ArrayList<Employee> findByDepartmentIdDepartment(int id);
 
 }

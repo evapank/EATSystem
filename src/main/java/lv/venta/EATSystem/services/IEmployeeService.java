@@ -13,8 +13,8 @@ public interface IEmployeeService {
 	
 	public abstract ArrayList<Employee> deleteEmployeeById(int id);
 	
-	public abstract Employee insertNewEmployee(String name, String surname, String position, Department department, String email);
+	public abstract Employee insertNewEmployee(String name, String surname, String position, Department department, String email, boolean isManager);
 	
-	public abstract Employee updateEmployeeById(int id, String name, String surname, String position, Department department, String email) throws Exception;
+	public abstract Employee updateEmployeeById(int id, String name, String surname, String position, Department department, String email, boolean isManager) throws Exception;
 
 }

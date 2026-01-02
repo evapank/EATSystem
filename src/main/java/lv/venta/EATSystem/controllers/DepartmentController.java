@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
@@ -57,28 +56,33 @@ public class DepartmentController {
 	@PostMapping("/create")
 	public Department addDepartment (@Valid Department department, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			return departmentService.insertNewDepartment(department.getTitle(), department.getManager());
+			return departmentService.insertNewDepartment(department.getTitle());
 		} else {
 			throw new Exception("can't create");
 		}
 	}
 	
-	@GetMapping("/create/getemployees")
+	@GetMapping("/getemployees")
 	public Collection<Employee> showEmployeeList(){
 		System.out.println(employeeService.selectAllEmployees());
 		return employeeService.selectAllEmployees();
 	}
 	
+	@GetMapping("/getManager/{id}")
+	public Employee showDepartmentManager(@PathVariable(name="id") int id) {
+		return departmentService.getDepartmentManagerByDepartmentId(id);
+	}
+	
 	@PutMapping("/update/{id}")
 	public Department updateDepartmentById(@PathVariable(name="id") int id, @Valid Department department, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
-			return departmentService.updateDepartmentById(id, department.getTitle(), department.getManager());
+			return departmentService.updateDepartmentById(id, department.getTitle());
 		} else {
 			throw new Exception("can't update");
 		}
 	}
 	
-	@GetMapping("/update/{id}")
+	@GetMapping("/getemployees/{id}")
 	public Collection<Employee> showDepartmentEmployeeList(@PathVariable(name = "id") int id){
 		return departmentService.selectAllEmployeesInDepartment(id);
 	}

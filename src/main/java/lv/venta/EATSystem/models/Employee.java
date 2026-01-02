@@ -62,6 +62,9 @@ public class Employee {
 	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 	private String email;
 	
+	@Column(name = "IsManager")
+	private boolean isManager;
+	
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "IdEmployee"),inverseJoinColumns = @JoinColumn(name = "IdProject"),
 	name = "projects_employees")
@@ -80,13 +83,14 @@ public class Employee {
 	private Collection<EmployeeStatus> statuses  = new ArrayList<EmployeeStatus>();
 	
 	public Employee (String name, String surname, String position, Department department,
-			String email) {
+			String email, boolean isManager) {
 		
 		this.name = name;
 		this.surname = surname;
 		this.postion = position;
 		this.department = department;
 		this.email = email;
+		this.isManager = isManager;
 	}
 	
 	public void addProjects(Project project) {

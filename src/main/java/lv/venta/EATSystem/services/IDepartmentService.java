@@ -13,9 +13,11 @@ public interface IDepartmentService {
 	
 	public abstract ArrayList<Department> deleteDepartmentById(int id);
 	
-	public abstract Department insertNewDepartment(String title, Employee manager);
+	public abstract Department insertNewDepartment(String title);
 	
-	public abstract Department updateDepartmentById(int id, String title, Employee manager) throws Exception;
+	public abstract Department updateDepartmentById(int id, String title) throws Exception;
 
 	public abstract ArrayList<Employee> selectAllEmployeesInDepartment(int id);
+	
+	public abstract Employee getDepartmentManagerByDepartmentId(int id);
 }

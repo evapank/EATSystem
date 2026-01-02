@@ -1,14 +1,18 @@
 package lv.venta.EATSystem.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -36,16 +40,21 @@ public class Department {
 	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
 	private String title;
 	
-	@OneToOne
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "IdEmployee")
 	@JsonIgnore
 	@ToString.Exclude
-	private Employee manager;
+	private Collection<Employee> employees = new ArrayList<Employee>();
 	
-	public Department (String title, Employee manager) {
+	public Department (String title) {
 		
 		this.title = title;
-		this.manager = manager;
 		
 	}
+	
+	public void addEmployee(Employee employee) {
+		employees.add(employee);
+	}
+	
+	
 }

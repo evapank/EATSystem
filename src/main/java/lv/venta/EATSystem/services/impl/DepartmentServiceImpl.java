@@ -40,24 +40,45 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	}
 
 	@Override
-	public Department insertNewDepartment(String title, Employee manager) {
-		Department result = new Department(title, manager);
+	public Department insertNewDepartment(String title) {
+		Department result = new Department(title);
 		return result;
 	}
 
 	@Override
-	public Department updateDepartmentById(int id, String title, Employee manager) throws Exception {
+	public Department updateDepartmentById(int id, String title) throws Exception {
 		Department result = departmentRepo.findByIdDepartment(id);
-		result = new Department (title, manager);
+		result = new Department (title);
 		return result;
 	}
 
 	@Override
 	public ArrayList<Employee> selectAllEmployeesInDepartment(int id) {
+		ArrayList<Employee> result = new ArrayList<Employee>();
+		
+		if(departmentRepo.existsById(id)) {
+			result = employeeRepo.findByDepartmentIdDepartment(id);
+		}
+		return result;
+	}
+
+	@Override
+	public Employee getDepartmentManagerByDepartmentId(int id) {
+		ArrayList<Employee> employees = new ArrayList<Employee>();
+		
 		if(departmentRepo.existsById(id)) {
 			employeeRepo.findByDepartmentIdDepartment(id);
 		}
-		return null;
+		
+		Employee result = new Employee();
+		
+		for (Employee e: employees) {
+			if (e.isManager()) {
+				result = e;
+				break;
+			}
+		}
+		return result;
 	}
 
 }
