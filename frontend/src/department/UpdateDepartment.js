@@ -4,22 +4,25 @@ import { Link } from 'react-router-dom';
 
 const UpdateDepartment = () => {
 	const [department, setDepartment] = useState({
-		title : '',
-		manager: null
+		title : ''
 	});
-	const initialEmployees = [];
+	const [manager, setManager] = useState({
+		name : '',
+		surname: ''
+	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
 	
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDeafult();
 		try {
-				const employeesResponse = DepartmentService.getDepartmentEmployees(employees);
-				const response = DepartmentService.update(department.idDepartment, department);
-				
-				setDepartment(response);
-				setEmployees(employeesResponse);
+				const responseEmp = await DepartmentService.getDepartmentEmployees();
+				const responseDep = await DepartmentService.update(department.idDepartment, department);
+				const responseMan = await DepartmentService.getManager(department.idDepartment);
+				setDepartment(responseDep);
+				setEmployees(responseEmp);
+				setManager(responseMan);
 				setLoading(false);
 			} catch (error){
 				setError('cannot update');
@@ -44,7 +47,7 @@ const UpdateDepartment = () => {
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       				<select value='*{manager}' name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
+       				<select value={manager.surname} name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
        					{this.state.employees.map((e, myKey) => (
 							<option key={myKey} value={e} text={e.name}{...e.surname}></option>
 						))};
