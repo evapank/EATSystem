@@ -4,8 +4,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const OneDepartment = () => {
 	const [department, setDepartment] = useState({
-		title : '',
-		manager: null
+		title : ''
+	});
+	const [manager, setManager] = useState({
+		name : '',
+		surname: ''
 	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -16,8 +19,11 @@ const OneDepartment = () => {
 		const fetchDepartment = async () => {
 			try {
 				console.log(id);
-				const response = await DepartmentService.getById(id);
-				setDepartment(response.data);
+				const responseMan = await DepartmentService.getManager(id);
+				const responseDep = await DepartmentService.getById(id);
+				console.log(responseMan.data);
+				setDepartment(responseDep.data);
+				setManager(responseMan.data);
 				setLoading(false);
 			} catch (error){
 				setError('cannot find department');
@@ -66,7 +72,7 @@ const OneDepartment = () => {
               	</tr>
               	<tr>
               		<td scope="col">Manager:</td>
-              		<td>{department.manager}</td>
+              		<td>{manager.name} {manager.surname}</td>
                  </tr>
 				 </tbody>
               </table>

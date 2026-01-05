@@ -67,7 +67,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		
 		if(departmentRepo.existsById(id)) {
-			employeeRepo.findByDepartmentIdDepartment(id);
+			employees = employeeRepo.findByDepartmentIdDepartment(id);
 		}
 		
 		Employee result = new Employee();
@@ -75,7 +75,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		for (Employee e: employees) {
 			if (e.isManager()) {
 				result = e;
-				break;
+				return result;
 			}
 		}
 		return result;

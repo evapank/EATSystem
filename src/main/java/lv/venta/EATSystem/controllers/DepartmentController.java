@@ -21,6 +21,7 @@ import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.services.IDepartmentService;
 import lv.venta.EATSystem.services.IEmployeeService;
 
+
 @RestController
 @RequestMapping("/department")
 @CrossOrigin(origins ="http://localhost:3000")
@@ -68,7 +69,7 @@ public class DepartmentController {
 		return employeeService.selectAllEmployees();
 	}
 	
-	@GetMapping("/getManager/{id}")
+	@GetMapping("/getmanager/{id}")
 	public Employee showDepartmentManager(@PathVariable(name="id") int id) {
 		return departmentService.getDepartmentManagerByDepartmentId(id);
 	}
