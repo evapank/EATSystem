@@ -1,34 +1,51 @@
-import React, { use, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DepartmentService } from '../static/api';
-import { Link } from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 
 const UpdateDepartment = () => {
-	const [department, setDepartment] = useState({
+	const initialDepartment = useState({
 		title : ''
 	});
+	const [department, setDepartment] = initialDepartment;
 	const [manager, setManager] = useState({
 		name : '',
 		surname: ''
 	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [employees, setEmployees] = useState([]);
+	const employees = DepartmentService.getDepartmentEmployees();
+	const {id} = useParams();
+
+	useEffect(() => {
+			const fetchDepartment = async () => {
+				try {
+					console.log(id);
+					const responseDep = await DepartmentService.update(id, department);
+					const responseMan = await DepartmentService.getManager(id);
+					
+					setManager(responseMan);
+					setLoading(false);
+				} catch (error){
+					setError('cannot find department');
+					setLoading(false);
+					console.log(error);
+				}
+			};
+			fetchDepartment();
+		}, [id, setDepartment]);
 	
-	const handleSubmit = async (e) => {
+		const handleChange = (e) => {
+			const { name, value } = e.target;
+    		setDepartment({ ...department, [name]: value });
+			setManager({ ...manager, [name]: value });
+		};
+
+	const handleSubmit = (e) => {
 		e.preventDeafult();
-		try {
-				const responseEmp = await DepartmentService.getDepartmentEmployees();
-				const responseDep = await DepartmentService.update(department.idDepartment, department);
-				const responseMan = await DepartmentService.getManager(department.idDepartment);
-				setDepartment(responseDep);
-				setEmployees(responseEmp);
-				setManager(responseMan);
-				setLoading(false);
-			} catch (error){
-				setError('cannot update');
-				setLoading(false);
-				console.log(error);
-			}
+		DepartmentService.update(id, department);
+		setDepartment(initialDepartment);
+				
+		
 	};
 	
 	if (loading) return <div>Loading...</div>;
@@ -42,13 +59,13 @@ const UpdateDepartment = () => {
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control' placeholder='Enter title'
        						value={department.title}
-       						onChange= {e => setDepartment({...department, name: e.target.value})}/> </td>
+       						onChange={handleChange}/> </td>
        			</tr>
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       				<select value={manager.surname} name='manager' onChange= {e => setDepartment({...department, manager: e.target.value})}>
-       					{this.state.employees.map((e, myKey) => (
+       				<select value={manager.name}{...manager.surname} name='manager' onChange= {handleChange}>
+       					{employees.map((e, myKey) => (
 							<option key={myKey} value={e} text={e.name}{...e.surname}></option>
 						))};
        				</select>

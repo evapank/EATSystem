@@ -34,7 +34,14 @@ public class DepartmentServiceImpl implements IDepartmentService{
 
 	@Override
 	public ArrayList<Department> deleteDepartmentById(int id) {
-		departmentRepo.deleteByIdDepartment(id);
+		if(departmentRepo.existsById(id)) {
+			ArrayList<Employee> employees = employeeRepo.findByDepartmentIdDepartment(id);
+			for(Employee e: employees) {
+				e.setDepartment(null);
+				employeeRepo.save(e);
+			}
+			departmentRepo.deleteByIdDepartment(id);
+		}
 		ArrayList<Department> result = selectAllDepartments();
 		return result;
 	}
@@ -61,6 +68,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		}
 		return result;
 	}
+	
 
 	@Override
 	public Employee getDepartmentManagerByDepartmentId(int id) {
@@ -80,5 +88,6 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		}
 		return result;
 	}
+
 
 }

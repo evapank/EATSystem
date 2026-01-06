@@ -39,8 +39,8 @@ const OneDepartment = () => {
 		if(confirm){
 			console.log(DepartmentService.delete(id));
 			DepartmentService.delete(id);
-			//DepartmentService.delete(id).then(
-			//navigate(DepartmentService.getAll()))
+			DepartmentService.delete(id).then(
+			navigate(DepartmentService.getAll()))
 		};
 	};
 	
