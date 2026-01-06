@@ -42,7 +42,6 @@ public class DepartmentController {
 	@GetMapping("/all/{id}")
 	public Department getDepartmentById(@PathVariable(name = "id") int id) throws Exception { //TODO validation
 		try {
-			System.out.println(departmentService.selectDepartmentById(id));
 		return departmentService.selectDepartmentById(id);
 		} catch (Exception e) {
 			throw new Exception("can't find");
@@ -65,7 +64,6 @@ public class DepartmentController {
 	
 	@GetMapping("/getemployees")
 	public Collection<Employee> showEmployeeList(){
-		System.out.println(employeeService.selectAllEmployees());
 		return employeeService.selectAllEmployees();
 	}
 	
@@ -83,7 +81,7 @@ public class DepartmentController {
 		}
 	}
 	
-	@GetMapping("/getemployees/{id}")
+	@PutMapping("/getemployees/{id}")
 	public Collection<Employee> showDepartmentEmployeeList(@PathVariable(name = "id") int id){
 		return departmentService.selectAllEmployeesInDepartment(id);
 	}

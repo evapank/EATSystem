@@ -63,15 +63,15 @@ const OneDepartment = () => {
               <table className="table-primary table-hover">
 				<tbody>
               	<tr>
-              		<td scope="col">ID:</td>
+              		<td className="col">ID:</td>
               		<td>{department.idDepartment}</td>
               	</tr>
               	<tr>
-              		<td scope="col">Title:</td>
+              		<td className="col">Title:</td>
               		<td>{department.title}</td>
               	</tr>
               	<tr>
-              		<td scope="col">Manager:</td>
+              		<td className="col">Manager:</td>
               		<td>{manager.name} {manager.surname}</td>
                  </tr>
 				 </tbody>

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { DepartmentService } from '../static/api';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import TextError from '../static/TextError';
 
 const CreateDepartment = () => {
 	const [department , setDepartment]= useState({
 		title : '',
-		manager: null
 	});
-	const initialEmployees = [];
+	const [manager, setManager] = useState({
+			name : '',
+			surname: ''
+		});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
-	const [employees, setEmployees] = useState(initialEmployees);
+	const [employees, setEmployees] = useState([]);
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -20,7 +22,7 @@ const CreateDepartment = () => {
 	const fetchDepartment = async () => {
 		try {
 				console.log("dfdfn");
-				const employeesResponse = await DepartmentService.getEmployees(employees);
+				const employeesResponse = await DepartmentService.getEmployees();
 				console.log("jsdosijdo");
 				console.log(employeesResponse);
 				const response = await DepartmentService.create(department);
@@ -44,7 +46,7 @@ const CreateDepartment = () => {
        	<form action="@{/department/create}" object={department} method="post" onSubmit={handleSubmit}>
        			<div>
        			<label>Title:</label>
-       			<input type='text' name='title' className='form-control' placeholder='Enter title'
+       			<input type='text' name='title' className='form-control' placeholder='Enter title' value={department.title}
        						onChange= {e => setDepartment({...department, name: e.target.value})}/>
        			</div>
 				<div>
@@ -52,7 +54,7 @@ const CreateDepartment = () => {
 			
 					
 							{employees.map((e) => (
-							<select value="*{manager}" name='manager' onChange= {event => setDepartment({...department, manager: event.target.value})}>
+							<select value="*{manager}" name='manager' onChange= {event => setManager({...manager, name: event.target.value, surname: event.target.value})}>
 								<option key={e.idEmployee} value={e} text={e.name}{...e.surname}></option>
 							</select>
 						))}
