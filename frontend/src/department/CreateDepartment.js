@@ -17,7 +17,7 @@ const CreateDepartment = () => {
 		event.preventDefault();
 		try{
 			const response = await DepartmentService.create(department, Number(manager));
-			navigate(DepartmentService.getAll);
+			navigate('/department/all');
 		} catch (error) {
 			console.error('Submit error: ', error);
 		}

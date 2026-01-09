@@ -47,8 +47,11 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	}
 
 	@Override
-	public Department insertNewDepartment(String title) {
-		Department result = new Department(title);
+	public Department insertNewDepartment(String title, int managerId) {
+		Department result = departmentRepo.save(new Department(title));
+		Employee manager = employeeRepo.findByIdEmployee(managerId);
+		manager.setManager(true);
+		
 		return result;
 	}
 

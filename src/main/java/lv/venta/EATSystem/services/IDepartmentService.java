@@ -13,7 +13,7 @@ public interface IDepartmentService {
 	
 	public abstract ArrayList<Department> deleteDepartmentById(int id);
 	
-	public abstract Department insertNewDepartment(String title);
+	public abstract Department insertNewDepartment(String title, int managerId);
 	
 	public abstract Department updateDepartmentById(int id, String title) throws Exception;
 

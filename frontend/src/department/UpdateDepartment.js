@@ -4,14 +4,10 @@ import { Link, useNavigate, useParams} from 'react-router-dom';
 
 const UpdateDepartment = () => {
 	const {id} = useParams();
-	const initialDepartment = useState({
+	const [department, setDepartment] = useState({
 		title : ''
 	});
-	const [department, setDepartment] = initialDepartment;
-	const [manager, setManager] = useState({
-		name : '',
-		surname: ''
-	});
+	const [manager, setManager] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
@@ -21,12 +17,12 @@ const UpdateDepartment = () => {
 			const fetchDepartment = async () => {
 				try {
 					console.log(id);
-					const responseMan = await DepartmentService.getManager(id);
-					const responseEmp = await DepartmentService.getDepartmentEmployees(id);
-					const responseDep = await DepartmentService.update(id, department)
-					setDepartment(responseDep.data);
-					setManager(responseMan.data);
-					setEmployees(responseEmp.data);
+					const updatedDepartment = await DepartmentService.getById(id);
+					const managerResponse = await DepartmentService.getManager(id);
+					const employeesResponse = await DepartmentService.getEmployees();
+					setDepartment(updatedDepartment.data);
+					setManager(managerResponse.data.idEmployee);
+					setEmployees(employeesResponse.data);
 					setLoading(false);
 				} catch (error){
 					setError('cannot find department');
@@ -35,7 +31,7 @@ const UpdateDepartment = () => {
 				}
 			};
 			fetchDepartment();
-		}, [id, setDepartment, setManager, setEmployees]);
+		}, [id]);
 	
 		const handleChange = (e) => {
 			const { name, value } = e.target;
