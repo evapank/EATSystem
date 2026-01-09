@@ -21,9 +21,9 @@ const UpdateDepartment = () => {
 			const fetchDepartment = async () => {
 				try {
 					console.log(id);
-					const responseDep = await DepartmentService.update(id, department)
 					const responseMan = await DepartmentService.getManager(id);
 					const responseEmp = await DepartmentService.getDepartmentEmployees(id);
+					const responseDep = await DepartmentService.update(id, department)
 					setDepartment(responseDep.data);
 					setManager(responseMan.data);
 					setEmployees(responseEmp.data);
@@ -59,7 +59,7 @@ const UpdateDepartment = () => {
       <h2>Update department</h2>
        	<form action="@{/department/create}" object={department} method="post" onSubmit={handleSubmit}>
        		<table>
-				<tbody>
+			
        			<tr>
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control'
@@ -76,7 +76,7 @@ const UpdateDepartment = () => {
        				</select>
        			</td>
        			</tr>
-				</tbody>
+				
        		</table>
        		 <Link to="/department/all" className="btn btn-success mb-3">
         Submit
