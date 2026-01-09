@@ -51,7 +51,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 		Department result = departmentRepo.save(new Department(title));
 		Employee manager = employeeRepo.findByIdEmployee(managerId);
 		manager.setManager(true);
-		
+		employeeRepo.save(manager);
 		return result;
 	}
 
@@ -59,6 +59,7 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	public Department updateDepartmentById(int id, String title) throws Exception {
 		Department result = departmentRepo.findByIdDepartment(id);
 		result = new Department (title);
+		departmentRepo.save(result);
 		return result;
 	}
 
