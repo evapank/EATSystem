@@ -17,7 +17,7 @@ const OneDepartment = () => {
 			try {
 				const responseMan = await DepartmentService.getManager(id);
 				const responseDep = await DepartmentService.getById(id);
-				console.log(responseMan.data.idEmployee);
+				console.log(responseMan.data);
 				setDepartment(responseDep.data);
 				setManager(responseMan.data);
 				setLoading(false);

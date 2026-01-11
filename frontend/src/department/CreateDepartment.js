@@ -49,7 +49,7 @@ const CreateDepartment = () => {
        			</div>
 				<div>
        			<label>Manager:</label>
-						<select options={employees} name='manager' className='form-control' onChange= {event => setManager(event.target.value)}>
+						<select options={employees} name='manager' className='form-control' onChange= {e => setManager(e.target.value)}>
 							<option value=''>-- Select manager --</option>
 							{employees.map(e => (
 								<option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>

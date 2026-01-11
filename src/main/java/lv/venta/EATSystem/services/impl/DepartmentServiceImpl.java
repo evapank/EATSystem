@@ -60,11 +60,19 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	@Override
 	public Department updateDepartmentById(int departmentId, String title, int managerId) throws Exception {
 		Department result = departmentRepo.findByIdDepartment(departmentId);
-		Employee manager = employeeRepo.findByIdEmployee(managerId);
-		result = new Department (title);
+		Employee manager = new Employee();
+		result.setTitle(title);
+		System.out.println("manager id: " + managerId);
+		System.out.println(departmentRepo.findByIdDepartment(departmentId));
+		System.out.println(employeeRepo.findByIdEmployee(managerId));
+		if(employeeRepo.existsById(managerId)) {
+			manager = employeeRepo.findByIdEmployee(managerId);
+		}
+		manager.setDepartment(result);
 		manager.setManager(true);
-		employeeRepo.save(manager);
+		result.addEmployee(manager);
 		departmentRepo.save(result);
+		employeeRepo.save(manager);
 		return result;
 	}
 

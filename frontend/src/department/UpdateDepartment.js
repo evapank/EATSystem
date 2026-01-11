@@ -7,7 +7,7 @@ const UpdateDepartment = () => {
 	const [department, setDepartment] = useState({
 		title : ''
 	});
-	const [manager, setManager] = useState('');
+	const [manager, setManager] = useState();
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
@@ -16,13 +16,13 @@ const UpdateDepartment = () => {
 	useEffect(() => {
 			const fetchDepartment = async () => {
 				try {
-					console.log(id);
 					const updatedDepartment = await DepartmentService.getById(id);
 					const managerResponse = await DepartmentService.getManager(id);
 					const employeesResponse = await DepartmentService.getEmployees();
 					setDepartment(updatedDepartment.data);
-					setManager(managerResponse.data);
+					setManager(managerResponse.data.idEmployee);
 					setEmployees(employeesResponse.data);
+					console.log(managerResponse.data.idEmployee);
 					setLoading(false);
 				} catch (error){
 					setError('cannot find department');
@@ -36,8 +36,9 @@ const UpdateDepartment = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			console.log(Number(manager));
 			await DepartmentService.update(id, {...department, managerId: Number(manager)});
-			navigate('/department/all');
+			navigate('/department/all/' + id);
 		} catch (error) {
 			console.log(error);
 		}
@@ -62,7 +63,7 @@ const UpdateDepartment = () => {
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       					<select options={employees} name='manager' className='form-control' onChange= {e => setManager(Number(e.target.value))}>
+       					<select options={employees} name='manager' value={manager} className='form-control' onChange= {e => setManager(Number(e.target.value))}>
 							<option value=''>-- Select manager --</option>
 							{employees.map(e => (
 								<option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>
