@@ -34,15 +34,13 @@ const OneDepartment = () => {
 		fetchDepartment();
 	}, []);
 	
-	const handleDelete = () => {
-		const confirm = window.confirm("Record will be deleted");
-		if(confirm){
-			console.log(DepartmentService.delete(id));
-			DepartmentService.delete(id);
-			DepartmentService.delete(id).then(
-			navigate(DepartmentService.getAll()))
+	const handleDelete = (id) => {
+			const confirm = window.confirm("Record will be deleted");
+			if(confirm){
+				DepartmentService.delete(id);
+				navigate('/department/all');
+			};
 		};
-	};
 	
 		if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;

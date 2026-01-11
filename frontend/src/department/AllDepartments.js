@@ -26,7 +26,8 @@ const AllDepartments = () => {
 	const handleDelete = (id) => {
 		const confirm = window.confirm("Record will be deleted");
 		if(confirm){
-			DepartmentService.delete(id).then(location.reload());
+			DepartmentService.delete(id);
+			window.location.reload();
 		};
 	};
 
@@ -70,9 +71,9 @@ const AllDepartments = () => {
                  	 		</Link>
                   		</td>
                   		<td>
-                  			<Link to={`/department/remove/${department.idDepartment}`}  onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
+                  			<button onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
                    	 		Delete
-                 	 		</Link>
+                 	 		</button>
                   		</td>
 					</tr>
                   </tbody>
