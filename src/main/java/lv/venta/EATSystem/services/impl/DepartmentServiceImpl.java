@@ -35,6 +35,8 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	@Override
 	public ArrayList<Department> deleteDepartmentById(int id) {
 		if(departmentRepo.existsById(id)) {
+			Employee manager = getDepartmentManagerByDepartmentId(id);
+			manager.setManager(false);
 			ArrayList<Employee> employees = employeeRepo.findByDepartmentIdDepartment(id);
 			for(Employee e: employees) {
 				e.setDepartment(null);
@@ -56,9 +58,12 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	}
 
 	@Override
-	public Department updateDepartmentById(int id, String title) throws Exception {
-		Department result = departmentRepo.findByIdDepartment(id);
+	public Department updateDepartmentById(int departmentId, String title, int managerId) throws Exception {
+		Department result = departmentRepo.findByIdDepartment(departmentId);
+		Employee manager = employeeRepo.findByIdEmployee(managerId);
 		result = new Department (title);
+		manager.setManager(true);
+		employeeRepo.save(manager);
 		departmentRepo.save(result);
 		return result;
 	}

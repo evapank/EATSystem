@@ -15,7 +15,7 @@ public interface IDepartmentService {
 	
 	public abstract Department insertNewDepartment(String title, int managerId);
 	
-	public abstract Department updateDepartmentById(int id, String title) throws Exception;
+	public abstract Department updateDepartmentById(int departmentId, String title, int managerId) throws Exception;
 
 	public abstract ArrayList<Employee> selectAllEmployeesInDepartment(int id);
 	
