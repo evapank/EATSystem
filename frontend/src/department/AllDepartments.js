@@ -23,10 +23,10 @@ const AllDepartments = () => {
 		fetchDepartments();
 	}, []);
 	
-	const handleDelete = (id) => {
+	const handleDelete = async (id) => {
 		const confirm = window.confirm("Record will be deleted");
 		if(confirm){
-			DepartmentService.delete(id);
+			await DepartmentService.delete(id);
 			window.location.reload();
 		};
 	};

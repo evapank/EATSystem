@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DepartmentService } from '../static/api';
-import { Link, useNavigate, useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 
 const UpdateDepartment = () => {
 	const {id} = useParams();
@@ -21,7 +21,7 @@ const UpdateDepartment = () => {
 					const managerResponse = await DepartmentService.getManager(id);
 					const employeesResponse = await DepartmentService.getEmployees();
 					setDepartment(updatedDepartment.data);
-					setManager(managerResponse.data.idEmployee);
+					setManager(managerResponse.data);
 					setEmployees(employeesResponse.data);
 					setLoading(false);
 				} catch (error){
@@ -34,9 +34,9 @@ const UpdateDepartment = () => {
 		}, [id]);
 
 	const handleSubmit = async (e) => {
-		e.preventDeafult();
+		e.preventDefault();
 		try {
-			const response = await DepartmentService.update(id, {...department, managerId: Number(manager)});
+			await DepartmentService.update(id, {...department, managerId: Number(manager)});
 			navigate('/department/all');
 		} catch (error) {
 			console.log(error);
@@ -50,19 +50,19 @@ const UpdateDepartment = () => {
   return (
     <div className="container mt-4">
       <h2>Update department</h2>
-       	<form action="@{/department/update/{id}}" object={department} method="post" onSubmit={handleSubmit}>
+       	<form object={department} method="put" onSubmit={handleSubmit}>
        		<table>
-			
+			<tbody>
        			<tr>
        			<td><label>Title:</label></td>
        			<td><input type='text' name='title' className='form-control'
        						value={department.title}
-       						onChange={e => setDepartment({... department, title: e.target.value})}/> </td>
+       						onChange={e => setDepartment({...department, title: e.target.value})}/> </td>
        			</tr>
        			<tr>
        			<td><label>Manager:</label></td>
        			<td>
-       					<select options={employees} name='manager' classname='form-control' onChange= {e => setManager(e.target.value)}>
+       					<select options={employees} name='manager' className='form-control' onChange= {e => setManager(Number(e.target.value))}>
 							<option value=''>-- Select manager --</option>
 							{employees.map(e => (
 								<option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>
@@ -70,7 +70,7 @@ const UpdateDepartment = () => {
 						</select>
        			</td>
        			</tr>
-				
+			</tbody>
        		</table>
        		 <button type="submit" className="btn btn-success mb-3">
         Submit

@@ -13,10 +13,10 @@ const CreateDepartment = () => {
 	const [employees, setEmployees] = useState([]);
 	const navigate = useNavigate();
 	
-	const handleSubmit = async (event) => {
-		event.preventDefault();
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 		try{
-			const response = await DepartmentService.create(department, Number(manager));
+			await DepartmentService.create(department, Number(manager));
 			navigate('/department/all');
 		} catch (error) {
 			console.error('Submit error: ', error);
@@ -49,7 +49,7 @@ const CreateDepartment = () => {
        			</div>
 				<div>
        			<label>Manager:</label>
-						<select options={employees} name='manager' classname='form-control' onChange= {event => setManager(event.target.value)}>
+						<select options={employees} name='manager' className='form-control' onChange= {event => setManager(event.target.value)}>
 							<option value=''>-- Select manager --</option>
 							{employees.map(e => (
 								<option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>

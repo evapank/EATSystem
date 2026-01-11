@@ -6,10 +6,7 @@ const OneDepartment = () => {
 	const [department, setDepartment] = useState({
 		title : ''
 	});
-	const [manager, setManager] = useState({
-		name : '',
-		surname: ''
-	});
+	const [manager, setManager] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
@@ -18,10 +15,9 @@ const OneDepartment = () => {
 	useEffect(() => {
 		const fetchDepartment = async () => {
 			try {
-				console.log(id);
 				const responseMan = await DepartmentService.getManager(id);
 				const responseDep = await DepartmentService.getById(id);
-				console.log(responseMan.data);
+				console.log(responseMan.data.idEmployee);
 				setDepartment(responseDep.data);
 				setManager(responseMan.data);
 				setLoading(false);
@@ -34,10 +30,10 @@ const OneDepartment = () => {
 		fetchDepartment();
 	}, []);
 	
-	const handleDelete = (id) => {
+	const handleDelete = async () => {
 			const confirm = window.confirm("Record will be deleted");
 			if(confirm){
-				DepartmentService.delete(id);
+				await DepartmentService.delete(id);
 				navigate('/department/all');
 			};
 		};

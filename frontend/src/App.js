@@ -21,10 +21,8 @@ const App = () => {
         <Route path={`/department/create`} exact={true} element={<CreateDepartment/>}/>
         <Route path={`/department/update/:id`} exact={true} element={<UpdateDepartment/>}/>
         <Route path={`/department/getmanager/:id`} exact={true} element={<UpdateDepartment/>}/>
-        <Route path={`/department/getemployees/:id`} exact={true} element={<UpdateDepartment/>}/>
-        <Route path={`/department/remove/:id`} exact={true} element={<UpdateDepartment/>}/>
-        <Route path={`/department/remove/:id`} exact={true} element={<AllDepartments/>}/>
-        <Route path={`/department/remove/:id`} exact={true} element={<OneDepartment/>}/>
+        <Route path={`/department/getemployees`} exact={true} element={<UpdateDepartment/>}/>
+      
 
         <Route path={'/employee/all'} exact={true} element={<AllEmployees/>}/>
         <Route path={`/employee/all/:id`} exact={true} element={<OneEmployee/>}/>
