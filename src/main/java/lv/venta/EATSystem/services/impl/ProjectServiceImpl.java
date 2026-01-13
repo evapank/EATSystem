@@ -31,7 +31,9 @@ public class ProjectServiceImpl implements IProjectService{
 
 	@Override
 	public ArrayList<Project> deleteProjectById(int id) {
+		if(projectRepo.existsById(id)) {
 		projectRepo.deleteByIdProject(id);
+		}
 		ArrayList<Project> result = selectAllProjects();
 		return result;
 	}
@@ -40,6 +42,7 @@ public class ProjectServiceImpl implements IProjectService{
 	public Project insertNewProject(int projectNumber, String title, LocalDate dateStart, LocalDate dateEnd,
 			Employee projectManager) {
 		Project result = new Project(projectNumber, title, dateStart, dateEnd, projectManager);
+		projectRepo.save(result);
 		return result;
 	}
 
@@ -47,7 +50,12 @@ public class ProjectServiceImpl implements IProjectService{
 	public Project updateProjectById(int id, int projectNumber, String title, LocalDate dateStart, LocalDate dateEnd,
 			Employee projectManager) throws Exception {
 		Project result = projectRepo.findByIdProject(id);
-		result = new Project(projectNumber, title, dateStart, dateEnd, projectManager);
+		result.setProjectNumber(projectNumber);
+		result.setTitle(title);
+		result.setDateStart(dateStart);
+		result.setDateEnd(dateEnd);
+		result.setProjectManager(projectManager);
+		projectRepo.save(result);
 		return result;
 	}
 

@@ -31,7 +31,9 @@ public class EmployeeOrderStatusServiceImpl implements IEmployeeOrderStatusServi
 
 	@Override
 	public ArrayList<EmployeeOrderStatus> deleteEmployeeOrderStatusById(int id) {
-		eosRepo.deleteByIdEmployeeOrderStatus(id);
+		if(eosRepo.existsById(id)) {
+			eosRepo.deleteByIdEmployeeOrderStatus(id);
+		}
 		ArrayList<EmployeeOrderStatus> result = selectAllEmployeeOrderStatuses();
 		return result;
 	}
@@ -39,6 +41,7 @@ public class EmployeeOrderStatusServiceImpl implements IEmployeeOrderStatusServi
 	@Override
 	public EmployeeOrderStatus insertNewEmployeeOrderStatus(Employee employee, GeneralStatus generalStatus) {
 		EmployeeOrderStatus result = new EmployeeOrderStatus(employee, generalStatus);
+		eosRepo.save(result);
 		return result;
 	}
 
@@ -46,7 +49,9 @@ public class EmployeeOrderStatusServiceImpl implements IEmployeeOrderStatusServi
 	public EmployeeOrderStatus updateEmployeeOrderStatusById(int id, Employee employee, GeneralStatus generalStatus)
 			throws Exception {
 		EmployeeOrderStatus result = eosRepo.findByIdEmployeeOrderStatus(id);
-		result = new EmployeeOrderStatus(employee, generalStatus);
+		result.setEmployee(employee);
+		result.setGeneralStatus(generalStatus);
+		eosRepo.save(result);
 		return result;
 	}
 

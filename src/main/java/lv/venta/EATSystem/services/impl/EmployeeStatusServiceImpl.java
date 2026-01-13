@@ -32,7 +32,9 @@ public class EmployeeStatusServiceImpl implements IEmployeeStatusService{
 
 	@Override
 	public ArrayList<EmployeeStatus> deleteEmployeeStatusById(int id) {
+		if(empStRepo.existsById(id)) {
 		empStRepo.deleteByIdEmployeeStatus(id);
+		}
 		ArrayList<EmployeeStatus> result = selectAllEmployeeStatuses();
 		return result;
 	}
@@ -41,6 +43,7 @@ public class EmployeeStatusServiceImpl implements IEmployeeStatusService{
 	public EmployeeStatus insertNewEmployeeStatus(Employee employee, GeneralStatus generalStatus,
 			LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
 		EmployeeStatus result = new EmployeeStatus(employee, generalStatus, dateTimeStart, dateTimeEnd);
+		empStRepo.save(result);
 		return result;
 	}
 
@@ -48,7 +51,11 @@ public class EmployeeStatusServiceImpl implements IEmployeeStatusService{
 	public EmployeeStatus updateEmployeeStatusById(int id, Employee employee, GeneralStatus generalStatus,
 			LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) throws Exception {
 		EmployeeStatus result = empStRepo.findByIdEmployeeStatus(id);
-		result = new EmployeeStatus(employee, generalStatus, dateTimeStart, dateTimeEnd);
+		result.setEmployee(employee);
+		result.setGeneralStatus(generalStatus);
+		result.setDateTimeStart(dateTimeStart);
+		result.setDateTimeEnd(dateTimeEnd);
+		empStRepo.save(result);
 		return result;
 	}
 

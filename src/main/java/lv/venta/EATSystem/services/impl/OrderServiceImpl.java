@@ -34,7 +34,9 @@ public class OrderServiceImpl implements IOrderService{
 
 	@Override
 	public ArrayList<Order> deleteOrderById(int id) {
+		if(orderRepo.existsById(id)) {
 		orderRepo.deleteByIdOrder(id);
+		}
 		ArrayList<Order> result = selectAllOrders();
 		return result;
 	}
@@ -43,6 +45,7 @@ public class OrderServiceImpl implements IOrderService{
 	public Order insertNewOrder(int orderNumber, Project project, LocalDate orderDate, LocalDateTime dateTimeStart,
 			LocalDateTime dateTimeEnd, OrderStatus orderStatus, EmployeeOrderStatus employeeOrderStatus) {
 		Order result = new Order(orderNumber, project, orderDate, dateTimeStart, dateTimeEnd, orderStatus, employeeOrderStatus);
+		orderRepo.save(result);
 		return result;
 	}
 
@@ -51,7 +54,14 @@ public class OrderServiceImpl implements IOrderService{
 			LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, OrderStatus orderStatus,
 			EmployeeOrderStatus employeeOrderStatus) throws Exception {
 		Order result = orderRepo.findByIdOrder(id);
-		result = new Order(orderNumber, project, orderDate, dateTimeStart, dateTimeEnd, orderStatus, employeeOrderStatus);
+		result.setOrderNumber(orderNumber);
+		result.setProject(project);
+		result.setOrderDate(orderDate);
+		result.setDateTimeStart(dateTimeStart);
+		result.setDateTimeEnd(dateTimeEnd);
+		result.setOrderStatus(orderStatus);
+		result.setEmployeeOrderStatus(employeeOrderStatus);
+		orderRepo.save(result);
 		return result;
 	}
 
