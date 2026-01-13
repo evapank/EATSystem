@@ -51,7 +51,7 @@ public class Employee {
 	@Column(name = "Position")
 	@Size(min = 3, max = 100)
 	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
-	private String postion;
+	private String position;
 	
 	@ManyToOne
 	@JoinColumn(name = "IdDepartment")
@@ -87,7 +87,7 @@ public class Employee {
 		
 		this.name = name;
 		this.surname = surname;
-		this.postion = position;
+		this.position = position;
 		this.department = department;
 		this.email = email;
 		this.isManager = isManager;

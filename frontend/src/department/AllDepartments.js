@@ -47,19 +47,17 @@ const AllDepartments = () => {
         ) : (
           department.map(department => (
             <div>
-              <table className="table-primary table-hover">
+              <table className="table table-hover">
               	<thead>
-					<tr className='container-fluid'>
+					<tr>
               			<th scope="col">ID</th>
               			<th scope="col">Title</th>
-              			<th scope="col">Manager</th>
 					</tr>
               	</thead>
               	<tbody>
 					<tr key={department.idDepartment}>
-						<td scope='row'>{department.idDepartment}</td>
+						<th scope='row'>{department.idDepartment}</th>
                   		<td>{department.title}</td>
-                  		<td>{department.manager}</td>
                   		<td>
                   			<Link to={`/department/all/${department.idDepartment}`} className="btn btn-primary">
                    	 		View

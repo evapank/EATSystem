@@ -44,7 +44,7 @@ public class EmployeeController {
 	@PostMapping("/create")
 	public Employee postAddEmployee(@Valid Employee employee, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
-			return employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPostion(), employee.getDepartment(), employee.getEmail(), employee.isManager());
+			return employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {
 			throw new Exception("can't create");
 		}
@@ -53,7 +53,7 @@ public class EmployeeController {
 	@PutMapping("/update")
 	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid Employee employee, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
-			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPostion(), employee.getDepartment(), employee.getEmail(), employee.isManager());
+			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {
 			throw new Exception("can't update");
 		}

@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 		Employee result = employeeRepo.findByIdEmployee(id);
 		result.setName(name);
 		result.setSurname(surname);
-		result.setPostion(position);
+		result.setPosition(position);
 		result.setDepartment(department);
 		result.setEmail(email);
 		result.setManager(isManager);

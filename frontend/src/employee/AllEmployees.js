@@ -47,7 +47,7 @@ const AllEmployees = () => {
         ) : (
           employee.map(employee => (
             <div>
-              <table className="table-primary table-hover">
+              <table className="table table-hover">
               	<thead>
 					<tr className='container-fluid'>
               			<th scope="col">ID</th>
