@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AllDepartments from './department/AllDepartments';
 import OneDepartment from './department/OneDepartment';
@@ -9,18 +10,20 @@ import AllEmployees from './employee/AllEmployees';
 import CreateEmployee from './employee/CreateEmployee';
 import OneEmployee from './employee/OneEmployee';
 import UpdateEmployee from './employee/UpdateEmployee';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from './static/NavigationBar';
+
 
 const App = () => {
   return (
     <Router>
-      <Routes>
+        <NavigationBar />
+        <Routes>
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>
         <Route path={`/department/create`} exact={true} element={<CreateDepartment/>}/>
         <Route path={`/department/update/:id`} exact={true} element={<UpdateDepartment/>}/>
+            
       
-
         <Route path={'/employee/all'} exact={true} element={<AllEmployees/>}/>
         <Route path={`/employee/all/:id`} exact={true} element={<OneEmployee/>}/>
         <Route path={`/employee/create`} exact={true} element={<CreateEmployee/>}/>
