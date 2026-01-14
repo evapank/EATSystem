@@ -14,4 +14,6 @@ public interface IEmployeeRepo extends CrudRepository<Employee, Integer>{
 
 	ArrayList<Employee> findByDepartmentIdDepartment(int id);
 
+	Employee findByDepartmentIdDepartmentAndIsManager(int departmentId, boolean b);
+
 }

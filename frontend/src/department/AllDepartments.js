@@ -69,7 +69,7 @@ const AllDepartments = () => {
                  	 		</Link>
                   		</td>
                   		<td>
-                  			<button onClick={e =>handleDelete(e.idDepartment)} className="btn btn-danger">
+                  			<button onClick={e =>handleDelete(department.idDepartment)} className="btn btn-danger">
                    	 		Delete
                  	 		</button>
                   		</td>

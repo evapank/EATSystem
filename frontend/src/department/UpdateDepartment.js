@@ -4,10 +4,12 @@ import { useNavigate, useParams} from 'react-router-dom';
 
 const UpdateDepartment = () => {
 	const {id} = useParams();
-	const [department, setDepartment] = useState({
-		title : ''
-	});
-	const [manager, setManager] = useState();
+	//const [department, setDepartment] = useState({
+	//	title : ''
+	//});
+	//const [manager, setManager] = useState();
+	const [department, setDepartment] = useState({ title: '' });
+	const [manager, setManager] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
@@ -36,7 +38,7 @@ const UpdateDepartment = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log(Number(manager));
+			console.log("managerid:"+Number(manager));
 			await DepartmentService.update(id, {...department, managerId: Number(manager)});
 			navigate('/department/all/' + id);
 		} catch (error) {
@@ -51,7 +53,7 @@ const UpdateDepartment = () => {
   return (
     <div className="container mt-4">
       <h2>Update department</h2>
-       	<form object={department} method="put" onSubmit={handleSubmit}>
+       	<form object={department} action="@{/department/update/{id}}" method="put" onSubmit={handleSubmit}>
        		<table>
 			<tbody>
        			<tr>
