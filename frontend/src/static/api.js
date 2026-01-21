@@ -26,7 +26,6 @@ export const DepartmentService = {
 	create: (department, managerId) => api.post('/department/create', {...department, managerId:managerId}),
   getEmployees: () => api.get('/department/getemployees'),
   getManager: (departmentId) => api.get(`/department/getmanager/${departmentId}`),
-	//update: (departmentId, department, managerId) => api.put(`/department/update/${departmentId}`, {...department, managerId:managerId}),
   update: (id, department) => api.put(`/department/update/${id}`, department),
   getDepartmentEmployees: (id) => api.get(`/department/update/${id}`)
 };
