@@ -11,7 +11,10 @@ import CreateEmployee from './employee/CreateEmployee';
 import OneEmployee from './employee/OneEmployee';
 import UpdateEmployee from './employee/UpdateEmployee';
 import NavigationBar from './static/NavigationBar';
-
+import AllProjects from './project/AllProjects';
+import OneProject from './project/OneProject';
+import CreateProject from './project/CreateProject';
+import UpdateProject from './project/UpdateProject';
 
 const App = () => {
   return (
@@ -28,6 +31,11 @@ const App = () => {
         <Route path={`/employee/all/:id`} exact={true} element={<OneEmployee/>}/>
         <Route path={`/employee/create`} exact={true} element={<CreateEmployee/>}/>
         <Route path={`/employee/update/:id`} exact={true} element={<UpdateEmployee/>}/>
+
+        <Route path={'/project/all'} exact={true} element={<AllProjects/>}/>
+        <Route path={`/project/all/:id`} exact={true} element={<OneProject/>}/>
+        <Route path={`/project/create`} exact={true} element={<CreateProject/>}/>
+        <Route path={`/project/update/:id`} exact={true} element={<UpdateProject/>}/>
       </Routes>
     </Router>
   )

@@ -9,6 +9,7 @@ const NavigationBar = () => {
                     <li className="nav-item"><NavLink className="nav-link" eventKey ="2" as={Link} to="/department/all">Departments</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" eventKey ="3" as={Link} to="/employee/all">Employees</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" eventKey ="4" as={Link} to="/project/all">Projects</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" eventKey ="5" as={Link} to="/order/all">Orders</NavLink></li>
                 </ul>
             </div>
                    

@@ -39,4 +39,13 @@ export const EmployeeService = {
 	
 };
 
+export const ProjectService = {
+	getAll: () => api.get('/project/all'),
+	getById: (id) => api.get(`/project/all/${id}`),
+	delete: (id) => api.delete(`/project/remove/${id}`),
+	create: (project) => api.post('/project/create', project),
+	update: (id, project) => api.put(`/project/update/${id}`, project)
+	
+};
+
 export default api;
