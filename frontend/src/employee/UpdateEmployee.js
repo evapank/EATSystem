@@ -22,7 +22,8 @@ const UpdateEmployee = () => {
 					const updatedEmployee = await EmployeeService.getById(id);
 					const departmentsResponse = await DepartmentService.getAll();
 					setEmployee(updatedEmployee.data);
-					setDepartments(departmentsResponse.data);
+					setDepartments(Array.from(departmentsResponse.data));
+                    console.log(departments);
 					setLoading(false);
 				} catch (error){
 					setError('cannot find employee');
@@ -54,22 +55,41 @@ const UpdateEmployee = () => {
        		<table>
 			<tbody>
        			<tr>
-       			<td><label>Title:</label></td>
+       			<td><label>Name:</label></td>
        			<td><input type='text' name='name' className='form-control'
        						value={employee.name}
        						onChange={e => setEmployee({...employee, name: e.target.value})}/> </td>
        			</tr>
+                <tr>
+                    <td><label>Surname:</label></td>
+                <td><input type='text' name='surname' className='form-control'
+       						value={employee.surname}
+       						onChange={e => setEmployee({...employee, surname: e.target.value})}/> </td>
+       			</tr>
+                <tr>
+                    <td><label>Position:</label></td>
+                <td><input type='text' name='surname' className='form-control'
+       						value={employee.position}
+       						onChange={e => setEmployee({...employee, position: e.target.value})}/> </td>
+       			</tr>
        			<tr>
-       			<td><label>Manager:</label></td>
-       			<td>
-       					<select options={employees} name='manager' value={manager} className='form-control' onChange= {e => setManager(Number(e.target.value))}>
-							<option value=''>-- Select manager --</option>
-							{employees.map(e => (
-								<option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>
+       			<td><label>Department:</label></td>
+                <td>
+						<select options={departments} name='departments' className='form-control' onChange= {e => {setEmployee({...employee, department: e.target.value}); setDepartments(e.target.value)}}>
+							<option value=''>-- Select department --</option>
+							{departments.map(e => (
+								<option key={e.idDepartment} value={e.idDepartment}>{e.title}</option>
 							))};
 						</select>
-       			</td>
+                </td>
        			</tr>
+                <tr>
+                     <td><label>Is manager?:</label></td>
+                     <td>
+       			        <input type='checkbox' value={employee.isManager}
+       						    onClick= {() => setEmployee({...employee, isManager: true})}/>
+                    </td>
+                </tr>
 			</tbody>
        		</table>
        		 <button type="submit" className="btn btn-success mb-3">
@@ -80,4 +100,4 @@ const UpdateEmployee = () => {
       )
 	};
 	
-	export default UpdateDepartment;
+	export default UpdateEmployee;

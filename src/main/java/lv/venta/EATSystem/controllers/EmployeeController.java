@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/create")
-	public Employee postAddEmployee(@Valid Employee employee, BindingResult result) throws Exception {
+	public Employee postAddEmployee(@Valid @RequestBody Employee employee, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {
@@ -51,7 +52,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/update")
-	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid Employee employee, BindingResult result) throws Exception {
+	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid @RequestBody Employee employee, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {
