@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EmployeeService } from '../static/api';
+import { DepartmentService, EmployeeService } from '../static/api';
 import { Link, useNavigate} from 'react-router-dom';
 import TextError from '../static/TextError';
 
@@ -8,12 +8,13 @@ const CreateEmployee = () => {
 		name : '',
         surname : '',
         position : '',
-        department : null,
+		department : '',
         isManager : false
 	});
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
+	const [departments, setDepartments] = useState([]);
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -24,6 +25,20 @@ const CreateEmployee = () => {
 			console.error('Submit error: ', error);
 		}
 	};
+
+	useEffect(() => {
+		const fetchDepartments = async () => {
+			try {
+					const departmentsResponse = await DepartmentService.getAll();
+					setDepartments(departmentsResponse.data);
+				console.log(departments);
+					setLoading(false);
+				} catch (error){
+					setError('Departments fetch error:', error);
+				}
+			};
+			fetchDepartments();
+		}, []);
 	
 	if (loading) return <div>Loading...</div>;
   if (error)return <div className="alert alert-danger">{error}</div>;
@@ -48,17 +63,17 @@ const CreateEmployee = () => {
        			</div>
 				<div>
        			<label>Department:</label>
-						<select options={department} name='department' className='form-control' onChange= {e => setEmployee({...employee, department: e.target.value})}>
+						<select options={departments} name='departments' className='form-control' onChange= {e => setEmployee({...employee, department: e.target.value})}>
 							<option value=''>-- Select department --</option>
-							{department.map(e => (
+							{departments.map(e => (
 								<option key={e.idDepartment} value={e.idDepartment}>{e.title}</option>
 							))};
 						</select>
        		</div>
             <div>
        			<label>Is manager?:</label>
-       			<input type='text' name='isManager' className='form-control' placeholder='Enter isManager' value={employee.isManager}
-       						onChange= {e => setEmployee({...employee, isManager: e.target.value})}/>
+       			<input type='checkbox' value={employee.isManager}
+       						onClick= {() => setEmployee({...employee, isManager: true})}/>
        		</div>
        		 <button type='submit' className="btn btn-success mb-3">Submit</button>
        	</form>

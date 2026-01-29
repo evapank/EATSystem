@@ -30,8 +30,6 @@ const AllEmployees = () => {
 			window.location.reload();
 		};
 	};
-
-
 	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
@@ -64,7 +62,7 @@ const AllEmployees = () => {
                   		<td>{employee.name}</td>
                   		<td>{employee.surname}</td>
                       <td>{employee.position}</td>
-                      <td>{employee.department.title}</td>
+                      <td>{employee.idDepartment}</td>
                       <td>{employee.isManager}</td>
                   		<td>
                   			<Link to={`/employee/all/${employee.idEmployee}`} className="btn btn-primary">
@@ -77,7 +75,7 @@ const AllEmployees = () => {
                  	 		</Link>
                   		</td>
                   		<td>
-                  			<button onClick={e =>handleDelete(e.idEmployee)} className="btn btn-danger">
+                  			<button onClick={e =>handleDelete(employee.idEmployee)} className="btn btn-danger">
                    	 		Delete
                  	 		</button>
                   		</td>

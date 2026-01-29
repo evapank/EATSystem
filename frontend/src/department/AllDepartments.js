@@ -30,8 +30,6 @@ const AllDepartments = () => {
 			window.location.reload();
 		};
 	};
-
-
 	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
