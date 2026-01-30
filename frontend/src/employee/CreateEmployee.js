@@ -8,7 +8,7 @@ const CreateEmployee = () => {
 		name : '',
         surname : '',
         position : '',
-		department : '',
+		department : {},
         isManager : false
 	});
 	const [loading, setLoading] = useState(true);

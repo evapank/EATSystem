@@ -7,7 +7,7 @@ const OneEmployee = () => {
 		name : '',
         surname : '',
         position : '',
-		department : null,
+		department : {},
         isManager : false
 	});
 	const [loading, setLoading] = useState(true);
@@ -22,6 +22,7 @@ const OneEmployee = () => {
 				console.log(responseEmployee.data);
 				setEmployee(responseEmployee.data);
 				setLoading(false);
+				console.log("department: " + employee.department);
 			} catch (error){
 				setError('cannot find employee');
 				setLoading(false);

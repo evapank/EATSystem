@@ -8,7 +8,7 @@ const UpdateEmployee = () => {
         name : '',
         surname : '',
         position : '',
-		department : null,
+		department : {},
         isManager : false 
     });
 	const [loading, setLoading] = useState(true);
