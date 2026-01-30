@@ -65,12 +65,12 @@ const AllProjects = () => {
                         <td>{project.dateEnd}</td>
                         <td>{project.idEmployee}</td>
                   		<td>
-                  			<Link to={`/department/all/${project.idProject}`} className="btn btn-primary">
+                  			<Link to={`/project/all/${project.idProject}`} className="btn btn-primary">
                    	 		View
                  	 		</Link>
                   		</td>
                   		<td>
-                  			<Link to={`/department/update/${project.idProject}`} className="btn btn-secondary">
+                  			<Link to={`/project/update/${project.idProject}`} className="btn btn-secondary">
                    	 		Update
                  	 		</Link>
                   		</td>
