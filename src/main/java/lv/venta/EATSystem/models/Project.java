@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -55,6 +57,7 @@ public class Project {
 	private Employee projectManager;
 	
 	@ManyToMany(mappedBy = "projects")
+	@JsonIgnore
 	@ToString.Exclude
 	private Collection<Employee> employees = new ArrayList<Employee>();
 	

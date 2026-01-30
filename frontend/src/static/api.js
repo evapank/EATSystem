@@ -48,4 +48,13 @@ export const ProjectService = {
 	
 };
 
+export const OrderService = {
+	getAll: () => api.get('/order/all'),
+	getById: (id) => api.get(`/order/all/${id}`),
+	delete: (id) => api.delete(`/order/remove/${id}`),
+	create: (order) => api.post('/order/create', order),
+	update: (id, order) => api.put(`/order/update/${id}`, order)
+	
+};
+
 export default api;

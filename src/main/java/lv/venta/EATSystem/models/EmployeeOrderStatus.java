@@ -4,6 +4,8 @@ package lv.venta.EATSystem.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +35,8 @@ public class EmployeeOrderStatus extends Status{
 	protected int idEmployeeOrderStatus;
 	
 	@OneToMany(mappedBy = "employeeOrderStatus")
+	@JsonIgnore
+	@ToString.Exclude
 	private Collection<Order> orders = new ArrayList<Order>();
 	
 	public EmployeeOrderStatus (Employee employee, GeneralStatus generalStatus) {

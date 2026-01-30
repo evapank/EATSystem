@@ -15,6 +15,7 @@ import AllProjects from './project/AllProjects';
 import OneProject from './project/OneProject';
 import CreateProject from './project/CreateProject';
 import UpdateProject from './project/UpdateProject';
+import AllOrders from './order/AllOrders';
 
 const App = () => {
   return (
@@ -36,6 +37,8 @@ const App = () => {
         <Route path={`/project/all/:id`} exact={true} element={<OneProject/>}/>
         <Route path={`/project/create`} exact={true} element={<CreateProject/>}/>
         <Route path={`/project/update/:id`} exact={true} element={<UpdateProject/>}/>
+
+        <Route path={'/order/all'} exact={true} element={<AllOrders/>}/>
       </Routes>
     </Router>
   )
