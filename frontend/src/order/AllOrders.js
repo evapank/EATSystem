@@ -64,7 +64,6 @@ const AllOrders = () => {
                     <tr key={order.idOrder}>
                         <th scope='row'>{order.idOrder}</th>
                         <td>{order.orderNumber}</td>
-
                         <td>{order.project?.title}</td>
                         <td>{order.orderDate}</td>
                         <td>{order.dateTimeStart}</td>

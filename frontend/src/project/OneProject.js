@@ -6,8 +6,8 @@ const OneProject = () => {
 	const [project, setProject] = useState({
 		projectNumber: 0,
         title: '',
-        dateStart: new Date("01-01-1990"),
-        dateEnd: new Date("31-01-1990"),
+        dateStart: null,
+        dateEnd: null,
         projectManager: {}
 	});
 	const [loading, setLoading] = useState(true);

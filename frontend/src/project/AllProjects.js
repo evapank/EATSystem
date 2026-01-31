@@ -63,7 +63,7 @@ const AllProjects = () => {
                         <td>{project.title}</td>
                         <td>{project.dateStart}</td>
                         <td>{project.dateEnd}</td>
-                        <td>{project.projectManager}</td>
+                        <td>{project.projectManager?.name} {project.projectManager?.surname}</td>
                   		<td>
                   			<Link to={`/project/all/${project.idProject}`} className="btn btn-primary">
                    	 		View
