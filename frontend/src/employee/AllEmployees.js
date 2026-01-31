@@ -62,7 +62,7 @@ const AllEmployees = () => {
                   		<td>{employee.name}</td>
                   		<td>{employee.surname}</td>
                       <td>{employee.position}</td>
-                      <td>{employee.department.title}</td>
+                      <td>{employee.department?.title}</td>
                       <td>{employee.isManager}</td>
                   		<td>
                   			<Link to={`/employee/all/${employee.idEmployee}`} className="btn btn-primary">

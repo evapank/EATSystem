@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/create")
-	public Order postAddOrder(@Valid Order order, BindingResult result) throws Exception {
+	public Order postAddOrder(@Valid @RequestBody Order order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return orderService.insertNewOrder(order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());
@@ -52,7 +53,7 @@ public class OrderController {
 	}
 	
 	@PutMapping("/update")
-	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid Order order, BindingResult result) throws Exception {
+	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid @RequestBody Order order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return orderService.updateOrderById(id, order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());

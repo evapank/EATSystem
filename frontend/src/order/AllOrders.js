@@ -57,20 +57,19 @@ const AllOrders = () => {
                         <th scope="col">Date time start</th>
                         <th scope="col">Date time end</th>
                         <th scope="col">Order status</th>
-                       <th scope="col">Employee</th>
-                        <th scope="col">General status</th> 
+                       <th scope="col">Employee order status</th> 
                     </tr>
                 </thead>
                 <tbody>
                     <tr key={order.idOrder}>
                         <th scope='row'>{order.idOrder}</th>
                         <td>{order.orderNumber}</td>
-                        <td>{order.project}</td>
+
+                        <td>{order.project?.title}</td>
                         <td>{order.orderDate}</td>
                         <td>{order.dateTimeStart}</td>
                         <td>{order.dateTimeEnd}</td>
-                        <td>{order.employeeOrderStatus.employee.name} {order.employeeOrderStatus.employee.surname}</td>
-                        <td>{order.employeeOrderStatus.generalStatus}</td>
+                        <td>{order.employeeOrderStatus?.idEmployeeOrderStatus}</td>
                         <td>
                             <Link to={`/order/all/${order.idOrder}`} className="btn btn-primary">
                             View
