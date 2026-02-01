@@ -57,4 +57,13 @@ export const OrderService = {
 	
 };
 
+export const EosService = {
+	getAll: () => api.get('/eos/all'),
+	getById: (id) => api.get(`/eos/all/${id}`),
+	delete: (id) => api.delete(`/eos/remove/${id}`),
+	create: (eos) => api.post('/eos/create', eos),
+	update: (id, eos) => api.put(`/eos/update/${id}`, eos)
+	
+};
+
 export default api;
