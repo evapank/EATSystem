@@ -19,6 +19,7 @@ import AllOrders from './order/AllOrders';
 import OneOrder from './order/OneOrder';
 import CreateOrder from './order/CreateOrder';
 import AllEmployeeOrderStatuses from './employeeOrderStatus/AllEmployeeOrderStatuses';
+import UpdateOrder from './order/UpdateOrder';
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const App = () => {
         <Route path={'/order/all'} exact={true} element={<AllOrders/>}/>
         <Route path={`/order/all/:id`} exact={true} element={<OneOrder/>}/>
         <Route path={`/order/create`} exact={true} element={<CreateOrder/>}/>
+        <Route path={`/order/update/:id`} exact={true} element={<UpdateOrder/>}/>
 
         <Route path={'/employeeorderstatus/all'} exact={true} element={<AllEmployeeOrderStatuses/>}/>
       </Routes>
