@@ -59,12 +59,12 @@ const AllEmployeeOrderStatuses = () => {
                   		<td>{eos.employee?.name} {eos.employee?.surname}</td>
                         <td>{eos.generalStatus}</td>
                   		<td>
-                  			<Link to={`/eos/all/${eos.idEmployeeOrderStatus}`} className="btn btn-primary">
+                  			<Link to={`/employeeorderstatus/all/${eos.idEmployeeOrderStatus}`} className="btn btn-primary">
                    	 		View
                  	 		</Link>
                   		</td>
                   		<td>
-                  			<Link to={`/eos/update/${eos.idEmployeeOrderStatus}`} className="btn btn-secondary">
+                  			<Link to={`/employeeorderstatus/update/${eos.idEmployeeOrderStatus}`} className="btn btn-secondary">
                    	 		Update
                  	 		</Link>
                   		</td>

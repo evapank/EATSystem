@@ -20,6 +20,7 @@ import OneOrder from './order/OneOrder';
 import CreateOrder from './order/CreateOrder';
 import AllEmployeeOrderStatuses from './employeeOrderStatus/AllEmployeeOrderStatuses';
 import UpdateOrder from './order/UpdateOrder';
+import OneEmployeeOrderStatus from './employeeOrderStatus/OneEmployeeOrderStatus';
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Route path={`/order/update/:id`} exact={true} element={<UpdateOrder/>}/>
 
         <Route path={'/employeeorderstatus/all'} exact={true} element={<AllEmployeeOrderStatuses/>}/>
+        <Route path={`/employeeorderstatus/all/:id`} exact={true} element={<OneEmployeeOrderStatus/>}/>
       </Routes>
     </Router>
   )
