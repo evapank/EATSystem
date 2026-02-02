@@ -66,7 +66,7 @@ const OneDepartment = () => {
               	</tr>
               	<tr>
               		<td className="col">Manager:</td>
-              		<td>{manager.name} {manager.surname}</td>
+              		<td>{manager?.name} {manager?.surname}</td>
                  </tr>
 				 </tbody>
               </table>

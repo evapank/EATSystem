@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class EmployeeStatusController {
 	}
 	
 	@PostMapping("/create")
-	public EmployeeStatus postAddEmployeeOrderStatus(@Valid EmployeeStatus employeeStatus, BindingResult result) throws Exception {
+	public EmployeeStatus postAddEmployeeOrderStatus(@Valid @RequestBody EmployeeStatus employeeStatus, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return emplStatusService.insertNewEmployeeStatus(employeeStatus.getEmployee(), employeeStatus.getGeneralStatus(),
 					employeeStatus.getDateTimeStart(), employeeStatus.getDateTimeEnd());
@@ -52,7 +53,7 @@ public class EmployeeStatusController {
 	}
 	
 	@PutMapping("/update")
-	public EmployeeStatus updateEmployeeStatusById(@PathVariable(name="id") int id, @Valid EmployeeStatus employeeStatus, BindingResult result) throws Exception {
+	public EmployeeStatus updateEmployeeStatusById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeStatus employeeStatus, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return emplStatusService.updateEmployeeStatusById(id, employeeStatus.getEmployee(), employeeStatus.getGeneralStatus(),
 					employeeStatus.getDateTimeStart(), employeeStatus.getDateTimeEnd());

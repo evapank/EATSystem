@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +44,7 @@ public class EmployeeOrderStatusController {
 	}
 	
 	@PostMapping("/create")
-	public EmployeeOrderStatus postAddEmployeeOrderStatus(@Valid EmployeeOrderStatus eos, BindingResult result) throws Exception {
+	public EmployeeOrderStatus postAddEmployeeOrderStatus(@Valid @RequestBody EmployeeOrderStatus eos, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return eosService.insertNewEmployeeOrderStatus(eos.getEmployee(), eos.getGeneralStatus());
 		} else {
@@ -52,7 +53,7 @@ public class EmployeeOrderStatusController {
 	}
 	
 	@PutMapping("/update")
-	public EmployeeOrderStatus updateEmployeeOrderStatusById(@PathVariable(name="id") int id, @Valid EmployeeOrderStatus eos, BindingResult result) throws Exception {
+	public EmployeeOrderStatus updateEmployeeOrderStatusById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeOrderStatus eos, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return eosService.updateEmployeeOrderStatusById(id, eos.getEmployee(), eos.getGeneralStatus());
 		} else {

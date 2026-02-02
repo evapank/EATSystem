@@ -58,11 +58,11 @@ export const OrderService = {
 };
 
 export const EosService = {
-	getAll: () => api.get('/eos/all'),
-	getById: (id) => api.get(`/eos/all/${id}`),
-	delete: (id) => api.delete(`/eos/remove/${id}`),
-	create: (eos) => api.post('/eos/create', eos),
-	update: (id, eos) => api.put(`/eos/update/${id}`, eos)
+	getAll: () => api.get('/employeeorderstatus/all'),
+	getById: (id) => api.get(`/employeeorderstatus/all/${id}`),
+	delete: (id) => api.delete(`/employeeorderstatus/remove/${id}`),
+	create: (eos) => api.post('/employeeorderstatus/create', eos),
+	update: (id, eos) => api.put(`/employeeorderstatus/update/${id}`, eos)
 	
 };
 

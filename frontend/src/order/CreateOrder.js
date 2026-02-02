@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EmployeeService, OrderService, ProjectService } from '../static/api';
+import { EmployeeService, EosService, OrderService, ProjectService } from '../static/api';
 import { Link, useNavigate} from 'react-router-dom';
 import TextError from '../static/TextError';
 
@@ -14,7 +14,7 @@ const CreateOrder = () => {
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [employees, setEmployees] = useState([]);
+    const [eoses, setEoses] = useState([]);
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
     
@@ -28,18 +28,18 @@ const CreateOrder = () => {
         }
     };
     useEffect(() => {
-    const fetchEmployee = async () => {
+    const fetchObjects = async () => {
         try {
-                const employeesResponse = await EmployeeService.getAll();
+                const eosesResponse = await EosService.getAll();
                 const projectsResponse = await ProjectService.getAll();
-                setEmployees(employeesResponse.data);
+                setEoses(eosesResponse.data);
                 setProjects(projectsResponse.data);
                 setLoading(false);
             } catch (error){
-                setError('Employee fetch error:', error);
+                setError('Employee order service/project fetch error:', error);
             }
         };
-        fetchEmployee();
+        fetchObjects();
     }, []);
     
     if (loading) return <div>Loading...</div>;
@@ -57,7 +57,7 @@ const CreateOrder = () => {
                 <label>Project:</label>
                         <select options={projects} name='project' className='form-control' onChange= {e => setOrder({...order, project: e.target.value})}>
                             <option value=''>-- Select project --</option>
-                            {employees.map(e => (
+                            {projects.map(e => (
                                 <option key={e.idProject} value={e.idProject}>{e.title}</option>
                             ))};
                         </select>
@@ -79,10 +79,10 @@ const CreateOrder = () => {
                 </div>
                 <div>
                 <label>Employee order status:</label>
-                        <select options={employees} name='projectManager' className='form-control' onChange= {e => setOrder({...order, projectManager: e.target.value})}>
-                            <option value=''>-- Select manager --</option>
-                            {employees.map(e => (
-                                <option key={e.idEmployee} value={e.idEmployee}>{e.name} {e.surname}</option>
+                        <select options={eoses} name='employeeOrderStatus' className='form-control' onChange= {e => setOrder({...order, employeeOrderStatus: e.target.value})}>
+                            <option value=''>-- Select employee order status --</option>
+                            {eoses.map(e => (
+                                <option key={e.idEmployeeOrderStatus} value={e.idEmployeeOrderStatus}>{e.employee.name} {e.employee.surname} / {e.generalStatus}</option>
                             ))};
                         </select>
             </div>

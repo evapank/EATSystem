@@ -78,7 +78,7 @@ const OneProject = () => {
                  </tr>
                  <tr>
               		<td className="col">Project manager:</td>
-              		<td>{project.projectManager.name} {project.projectManager.surname}</td>
+              		<td>{project.projectManager?.name} {project.projectManager?.surname}</td>
                  </tr>
 				 </tbody>
               </table>
