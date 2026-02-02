@@ -20,7 +20,6 @@ const UpdateEmployeeOrderStatus = () => {
 					const employeesResponse = await EmployeeService.getAll();
 					setEos(updatedEos.data);
 					setEmployees(employeesResponse.data);
-					console.log(managerResponse.data.idEmployee);
 					setLoading(false);
 				} catch (error){
 					setError('cannot find eos');
@@ -34,7 +33,6 @@ const UpdateEmployeeOrderStatus = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log("managerid:"+Number(manager));
 			await EosService.update(id, eos);
 			navigate('/employeeorderstatus/all/' + id);
 		} catch (error) {

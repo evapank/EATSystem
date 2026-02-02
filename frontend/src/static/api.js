@@ -66,4 +66,13 @@ export const EosService = {
 	
 };
 
+export const EmployeeStatusService = {
+	getAll: () => api.get('/employeestatus/all'),
+	getById: (id) => api.get(`/employeestatus/all/${id}`),
+	delete: (id) => api.delete(`/employeestatus/remove/${id}`),
+	create: (empst) => api.post('/employeestatus/create', empst),
+	update: (id, empst) => api.put(`/employeestatus/update/${id}`, empst)
+	
+};
+
 export default api;
