@@ -53,7 +53,7 @@ public class ProjectController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public Project updateProject(@Valid @RequestBody Project project, BindingResult result,  @PathVariable(name = "id") int id) throws Exception {
 		if(!result.hasErrors()) {
 			return projectService.updateProjectById(id, project.getProjectNumber(), project.getTitle(), project.getDateStart(), project.getDateEnd(),

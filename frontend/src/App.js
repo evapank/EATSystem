@@ -25,6 +25,8 @@ import UpdateEmployeeOrderStatus from './employeeOrderStatus/UpdateEmployeeOrder
 import CreateEmployeeOrderStatus from './employeeOrderStatus/CreateEmployeeOrderStatus';
 import AllEmployeeStatuses from './employeeStatus/AllEmployeeStatuses';
 import OneEmployeeStatus from './employeeStatus/OneEmployeeStatus';
+import CreateEmployeeStatus from './employeeStatus/CreateEmployeeStatus';
+import UpdateEmployeeStatus from './employeeStatus/UpdateEmployeeStatus';
 
 const App = () => {
   return (
@@ -59,6 +61,8 @@ const App = () => {
 
         <Route path={'/employeestatus/all'} exact={true} element={<AllEmployeeStatuses/>}/>
         <Route path={`/employeestatus/all/:id`} exact={true} element={<OneEmployeeStatus/>}/>
+        <Route path={`/employeestatus/create`} exact={true} element={<CreateEmployeeStatus/>}/>
+        <Route path={`/employeestatus/update/:id`} exact={true} element={<UpdateEmployeeStatus/>}/>
       </Routes>
     </Router>
   )

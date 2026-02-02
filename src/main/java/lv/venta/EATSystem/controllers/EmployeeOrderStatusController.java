@@ -52,7 +52,7 @@ public class EmployeeOrderStatusController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public EmployeeOrderStatus updateEmployeeOrderStatusById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeOrderStatus eos, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return eosService.updateEmployeeOrderStatusById(id, eos.getEmployee(), eos.getGeneralStatus());

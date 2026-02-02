@@ -51,7 +51,7 @@ public class EmployeeController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid @RequestBody Employee employee, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());

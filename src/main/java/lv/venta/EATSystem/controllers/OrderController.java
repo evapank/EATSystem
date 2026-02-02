@@ -52,7 +52,7 @@ public class OrderController {
 		}
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid @RequestBody Order order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return orderService.updateOrderById(id, order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
