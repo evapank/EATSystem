@@ -59,7 +59,7 @@ const OneEmployeeOrderStatus = () => {
               	</tr>
               	<tr>
               		<td className="col">Employee:</td>
-              		<td>{eos?.name} {eos?.surname}</td>
+              		<td>{eos.employee?.name} {eos.employee?.surname}</td>
               	</tr>
               	<tr>
               		<td className="col">Genera status:</td>
