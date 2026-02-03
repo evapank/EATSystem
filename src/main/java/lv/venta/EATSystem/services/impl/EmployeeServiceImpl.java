@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
+import lv.venta.EATSystem.models.EmployeeOrderStatus;
+import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
+import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
 import lv.venta.EATSystem.services.IEmployeeService;
 
 @Service
@@ -15,6 +19,12 @@ public class EmployeeServiceImpl implements IEmployeeService{
 
 	@Autowired
 	private IEmployeeRepo employeeRepo;
+	
+	@Autowired
+	private IEmployeeOrderStatusRepo eosRepo;
+	
+	@Autowired
+	private IEmployeeStatusRepo empStRepo;
 	
 	@Override
 	public ArrayList<Employee> selectAllEmployees() {
@@ -31,7 +41,17 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	@Override
 	public ArrayList<Employee> deleteEmployeeById(int id) {
 		if(employeeRepo.existsById(id)) {
-		employeeRepo.deleteByIdEmployee(id);
+			ArrayList<EmployeeOrderStatus> eos = eosRepo.findByEmployeeIdEmployee(id);
+			for (EmployeeOrderStatus e : eos) {
+				e.setEmployee(null);
+				eosRepo.save(e);
+			}
+			ArrayList<EmployeeStatus> empSt = empStRepo.findByEmployeeIdEmployee(id);
+			for (EmployeeStatus e : empSt) {
+				e.setEmployee(null);
+				empStRepo.save(e);
+			}
+			employeeRepo.deleteByIdEmployee(id);
 		}
 		ArrayList<Employee> result = selectAllEmployees();
 		return result;

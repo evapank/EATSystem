@@ -76,7 +76,7 @@ const OneEmployee = () => {
               	</tr>
                 <tr>
               		<td className="col">Department:</td>
-              		<td>{employee.department.title}</td>
+              		<td>{employee.department?.title}</td>
               	</tr>
                 <tr>
               		<td className="col">Is manager?:</td>

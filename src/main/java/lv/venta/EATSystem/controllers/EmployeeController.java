@@ -3,7 +3,9 @@ package lv.venta.EATSystem.controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.services.IEmployeeService;
 
 @RestController
 @RequestMapping("/employee")
+@CrossOrigin(origins ="http://localhost:3000")
+@Transactional
 public class EmployeeController {
 	
 	@Autowired
@@ -39,7 +44,7 @@ public class EmployeeController {
 	}
 	
 	@DeleteMapping("/remove/{id}")
-	public void deleteEmployeeById(@PathVariable(name = "id") int id) {
+	public void deleteEmployeeById(Model model, @PathVariable(name = "id") int id) {
 		employeeService.deleteEmployeeById(id);
 	}
 	
