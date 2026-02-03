@@ -51,6 +51,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 				e.setEmployee(null);
 				empStRepo.save(e);
 			}
+			
 			employeeRepo.deleteByIdEmployee(id);
 		}
 		ArrayList<Employee> result = selectAllEmployees();
