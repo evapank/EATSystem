@@ -9,9 +9,12 @@ import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.Project;
+import lv.venta.EATSystem.repos.IDepartmentRepo;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
+import lv.venta.EATSystem.repos.IProjectRepo;
 import lv.venta.EATSystem.services.IEmployeeService;
 
 @Service
@@ -25,6 +28,12 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	
 	@Autowired
 	private IEmployeeStatusRepo empStRepo;
+	
+	@Autowired
+	private IDepartmentRepo departmentRepo;
+	
+	@Autowired
+	private IProjectRepo projectRepo;
 	
 	@Override
 	public ArrayList<Employee> selectAllEmployees() {
@@ -51,8 +60,18 @@ public class EmployeeServiceImpl implements IEmployeeService{
 				e.setEmployee(null);
 				empStRepo.save(e);
 			}
-			
-			employeeRepo.deleteByIdEmployee(id);
+			Employee temp = employeeRepo.findByIdEmployee(id);
+			ArrayList<Project> projects = projectRepo.findByEmployeesIdEmployee(id);
+			for (Project p : projects) {
+				temp.removeProject(p);
+				employeeRepo.save(temp);
+				p.removeEmployee(temp);
+				projectRepo.save(p);
+		
+			}
+			temp.setDepartment(null);
+			employeeRepo.save(temp);
+			employeeRepo.deleteById(id);
 		}
 		ArrayList<Employee> result = selectAllEmployees();
 		return result;
@@ -73,7 +92,9 @@ public class EmployeeServiceImpl implements IEmployeeService{
 		result.setName(name);
 		result.setSurname(surname);
 		result.setPosition(position);
-		result.setDepartment(department);
+		Department depart = departmentRepo.findByIdDepartment(Integer.parseInt(department.getTitle()));
+		System.out.println(depart);
+		result.setDepartment(depart);
 		result.setEmail(email);
 		result.setManager(isManager);
 		employeeRepo.save(result);

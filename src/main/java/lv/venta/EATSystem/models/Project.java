@@ -77,5 +77,9 @@ public class Project {
 		employees.add(employee);
 		
 	}
+	
+	public void removeEmployee(Employee employee) {
+		employees.remove(employee);
+	}
 
 }
