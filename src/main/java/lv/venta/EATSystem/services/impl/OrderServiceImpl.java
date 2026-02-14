@@ -35,7 +35,7 @@ public class OrderServiceImpl implements IOrderService{
 	@Override
 	public ArrayList<Order> deleteOrderById(int id) {
 		if(orderRepo.existsById(id)) {
-		orderRepo.deleteByIdOrder(id);
+			orderRepo.deleteByIdOrder(id);
 		}
 		ArrayList<Order> result = selectAllOrders();
 		return result;
