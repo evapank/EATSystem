@@ -19,6 +19,10 @@ const api = axios.create({
   error => Promise.reject(error)
 );
 
+export const UserService = {
+	logIn: (username, password) => api.get('/login', {...username, password:password})
+};
+
 export const DepartmentService = {
 	getAll: () => api.get('/department/all'),
 	getById: (id) => api.get(`/department/all/${id}`),
