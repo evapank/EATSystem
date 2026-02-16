@@ -28,13 +28,15 @@ const LoginPage = () => {
                     <h2 className="mb-4 text-center">Login Page</h2>
                     <input wrapperClass='mb-4' placeholder='Email address' id='email' value={username} type='email' onChange={(e) => setUsername(e.target.value)} />
                     <input wrapperClass='mb-4' placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    {error && <p className="text-danger">{error}</p>} {/* Render error message if exists */}
-                    <button className="mb-4 d-block btn-primary" style={{ height:'50px',width: '100%' }} onClick={handleLogin}>Sign in</button>
+                    {error && <p className="text-danger">{error}</p>}
+                    <button className="mb-4 d-block btn-primary" style={{ height:'50px',width: '100%' }} onClick={handleLogin}>Log in</button>
                     <div className="text-center">
-                        <p>Not a member? <a href="/signup" >Register</a></p>
+                        <p>Don't have an account? <a href="/signup" >Register</a></p>
                     </div>
                 </container>
             </div>
         </div>
     );
 }
+
+export default LoginPage;

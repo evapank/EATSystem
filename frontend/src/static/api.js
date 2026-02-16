@@ -20,7 +20,8 @@ const api = axios.create({
 );
 
 export const UserService = {
-	logIn: (username, password) => api.get('/login', {...username, password:password})
+	logIn: (username, password) => api.get('/login', {username, password}),
+	signUp: (username, email, password, role) => api.post('/login', {username, email, password, role})
 };
 
 export const DepartmentService = {
