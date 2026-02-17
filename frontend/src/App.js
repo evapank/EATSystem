@@ -36,9 +36,9 @@ const App = () => {
     <Router>
         <NavigationBar />
         <Routes>
-        <Route path="/" element={<LoginPage/>} />
-        <Route path="/signup" element={ <SignupPage/>} />
-        <Route path = "/dashboard" element={<WelcomeDashboard/>}/>
+        <Route path="/auth/login" element={<LoginPage/>} />
+        <Route path="/auth/signup" element={ <SignupPage/>} />
+        <Route path = "/auth/dashboard" element={<WelcomeDashboard/>}/>
 
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>

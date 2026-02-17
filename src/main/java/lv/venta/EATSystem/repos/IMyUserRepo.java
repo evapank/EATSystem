@@ -9,4 +9,6 @@ public interface IMyUserRepo extends MongoRepository<MyUser,String>{
 
 	MyUser findByUsername(String username);
 
+	MyUser findByEmployeeEmail(String email);
+
 }
