@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { UserService } from "./api";
 
 const SignupPage = async () => {
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -34,8 +35,10 @@ const SignupPage = async () => {
                     <h2 className="mb-4 text-center">Sign Up Page</h2>
                     {/* Render error message if exists */}
                     {error && <p className="text-danger">{error}</p>}
-                    <input wrapperClass='mb-3' id='fullName' placeholder={"Full Name"} value={fullName} type='text'
-                              onChange={(e) => setFullName(e.target.value)}/>
+                    <input wrapperClass='mb-3' id='name' placeholder={"Name"} value={name} type='text'
+                              onChange={(e) => setName(e.target.value)}/>
+                    <input wrapperClass='mb-3' id='surname' placeholder={"Surname"} value={surname} type='text'
+                              onChange={(e) => setSurname(e.target.value)}/>
                     <input wrapperClass='mb-3' placeholder='Email Address' id='email' value={email} type='email'
                               onChange={(e) => setEmail(e.target.value)}/>
                     <input wrapperClass='mb-3' placeholder='Password' id='password' type='password' value={password}

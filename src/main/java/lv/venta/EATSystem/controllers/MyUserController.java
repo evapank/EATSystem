@@ -41,6 +41,7 @@ public class MyUserController {
         String email = user.getEmployee().getEmail();
         String password = user.getPassword();
         String name = user.getEmployee().getName();
+        String surname = user.getEmployee().getSurname();
         ArrayList<SecurityRole> role = user.getRoles();
 
         MyUser isEmailExist = userRepo.findByEmployeeEmail(email);
@@ -51,6 +52,7 @@ public class MyUserController {
         MyUser createdUser = new MyUser();
         createdUser.getEmployee().setEmail(email);
         createdUser.getEmployee().setName(name);
+        createdUser.getEmployee().setSurname(surname);
         createdUser.setRoles(role);
         createdUser.setPassword(passwordEncoder.encode(password));
         
