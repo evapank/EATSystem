@@ -21,6 +21,7 @@ import lv.venta.EATSystem.enums.SecurityRole;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.response.AuthResponse;
+import lv.venta.EATSystem.services.IMyUserService;
 import lv.venta.EATSystem.services.impl.MyUserServiceImpl;
 
 @RestController
@@ -35,6 +36,9 @@ public class MyUserController {
 	
 	@Autowired 
 	private MyUserServiceImpl customUserDetails;
+	
+	@Autowired
+	private IMyUserService myUserService;
 	
 	@PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody MyUser user)  {

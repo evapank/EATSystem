@@ -1,6 +1,9 @@
 package lv.venta.EATSystem.models;
 
 import java.util.ArrayList;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -14,6 +17,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,8 +28,8 @@ import lv.venta.EATSystem.enums.SecurityRole;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table
-@Entity
+@Document(collection = "myUser")
+@Data
 public class MyUser {
 	
 	@Id
