@@ -1,20 +1,57 @@
 package lv.venta.EATSystem.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.crypto.SecretKey;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-public class JwtTokenValidator implements Filter {
+public class JwtTokenValidator extends OncePerRequestFilter {
 
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String jwt = request.getHeader(JwtConstant.JWT_HEADER);
+        System.out.println("JWT Token in JwtTokenValidator: " + jwt);
+        if (jwt != null && jwt.startsWith("Bearer ")) {
+            jwt = jwt.substring(7);
+            
+            System.out.println("JWT Token in JwtTokenValidator: " + jwt);
+            try {
+                SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
+                @SuppressWarnings("deprecation")
+                Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
+                System.out.print(claims);
 
-	}
+                String email = String.valueOf(claims.get("email"));
+                System.out.print(email);
+                String authorities = String.valueOf(claims.get("authorities"));
+                ArrayList<GrantedAuthority> auth = (ArrayList<GrantedAuthority>) AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, null, auth);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            } catch (Exception e) {
+                throw new BadCredentialsException("Invalid token", e);
+            }
+        }
+
+        filterChain.doFilter(request, response);
+    }
 }
