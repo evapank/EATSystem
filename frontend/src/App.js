@@ -27,12 +27,19 @@ import AllEmployeeStatuses from './employeeStatus/AllEmployeeStatuses';
 import OneEmployeeStatus from './employeeStatus/OneEmployeeStatus';
 import CreateEmployeeStatus from './employeeStatus/CreateEmployeeStatus';
 import UpdateEmployeeStatus from './employeeStatus/UpdateEmployeeStatus';
+import LoginPage from './static/LoginPage';
+import SignupPage from './static/SignupPage';
+import WelcomeDashboard from './static/WelcomeDashboard';
 
 const App = () => {
   return (
     <Router>
         <NavigationBar />
         <Routes>
+        <Route path="/" element={<LoginPage/>} />
+        <Route path="/signup" element={ <SignupPage/>} />
+        <Route path = "/dashboard" element={<WelcomeDashboard/>}/>
+
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>
         <Route path={`/department/create`} exact={true} element={<CreateDepartment/>}/>
