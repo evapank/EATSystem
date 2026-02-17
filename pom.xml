@@ -57,6 +57,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+		<dependency>
+    		<groupId>org.springframework.data</groupId>
+   			<artifactId>spring-data-mongodb</artifactId>
+   			 <scope>compile</scope>
+		</dependency>
 		<dependency>
 <groupId>org.projectlombok</groupId>
 <artifactId>lombok</artifactId>
