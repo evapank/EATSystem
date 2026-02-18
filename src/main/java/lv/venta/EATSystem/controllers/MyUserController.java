@@ -26,10 +26,9 @@ import lv.venta.EATSystem.services.impl.MyUserServiceImpl;
 
 @RestController
 @RequestMapping("/auth")
-public class MyUserController {
+public class MyUserController{}
+/*public class MyUserController {
 	
-	@Autowired
-	private IMyUserRepo userRepo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -46,9 +45,9 @@ public class MyUserController {
         String password = user.getPassword();
         String name = user.getEmployee().getName();
         String surname = user.getEmployee().getSurname();
-        ArrayList<SecurityRole> role = user.getRoles();
+        ArrayList<SecurityRole> role = (ArrayList<SecurityRole>) user.getRoles();
 
-        MyUser isEmailExist = userRepo.findByEmployeeEmail(email);
+        MyUser isEmailExist = myUserService.findUserByEmail(email);
         if (isEmailExist != null) {
             //throw new Exception("Email Is Already Used With Another Account");
 
@@ -60,8 +59,7 @@ public class MyUserController {
         createdUser.setRoles(role);
         createdUser.setPassword(passwordEncoder.encode(password));
         
-        MyUser savedUser = userRepo.save(createdUser);
-        userRepo.save(savedUser);
+        myUserService.saveUser(createdUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(email,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = JwtProvider.generateToken(authentication);
@@ -106,7 +104,7 @@ public class MyUserController {
 
         System.out.println(username+"---++----"+password);
 
-        UserDetails userDetails = customUserDetails.loadUserByUsername(username);
+        UserDetails userDetails = null;//customUserDetails.loadUserByUsername(username);
 
         System.out.println("Sig in in user details"+ userDetails);
 
@@ -127,3 +125,4 @@ public class MyUserController {
 
 
 }
+*/

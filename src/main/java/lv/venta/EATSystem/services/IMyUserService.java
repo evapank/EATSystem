@@ -13,5 +13,7 @@ public interface IMyUserService {
     public MyUser findUserByEmail(String email);
     
     public MyUser findUserById(String userId);
+    
+    public void saveUser(MyUser user);
 
 }

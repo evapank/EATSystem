@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
+/*
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer{
@@ -91,5 +91,5 @@ public class WebConfig implements WebMvcConfigurer{
     
 }
 
-
+*/
 

@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.enums.OrderStatus;
@@ -16,6 +17,7 @@ import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IDayRepo;
@@ -23,6 +25,7 @@ import lv.venta.EATSystem.repos.IDepartmentRepo;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
+import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.repos.IOrderRepo;
 import lv.venta.EATSystem.repos.IProjectRepo;
 
@@ -37,7 +40,7 @@ public class EatSystem1Application {
 	@Bean
 	public CommandLineRunner runner(IDayRepo dayRepo, IDepartmentRepo departmentRepo,
 			IEmployeeOrderStatusRepo employeeOrderStatusRepo, IEmployeeRepo employeeRepo,
-			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo) {
+			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo, IMyUserRepo userRepo) {
 		return new CommandLineRunner() {
 
 			@Override
@@ -57,6 +60,11 @@ public class EatSystem1Application {
 				dep2.addEmployee(emp1);
 				departmentRepo.save(dep1);
 				departmentRepo.save(dep2);
+				
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				MyUser u1 = new MyUser("admin", encoder.encode("admin"), emp2);
+				userRepo.save(u1);
+				
 				
 				EmployeeStatus empSt1 = new EmployeeStatus(emp1, GeneralStatus.Online,
 										LocalDateTime.of(LocalDate.of(2025, 11, 4), LocalTime.of(13, 0)),
