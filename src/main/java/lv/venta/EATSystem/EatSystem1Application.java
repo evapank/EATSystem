@@ -66,12 +66,17 @@ public class EatSystem1Application {
 				departmentRepo.save(dep2);
 				
 				MyAuthority employee = new MyAuthority(SecurityRole.EMPLOYEE);
+				MyAuthority admin = new MyAuthority(SecurityRole.ADMIN);
 				authorityRepo.save(employee);
+				authorityRepo.save(admin);
 				
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				
-				MyUser u1 = new MyUser("admin", encoder.encode("admin"), employee);
+				MyUser u1 = new MyUser("admin", encoder.encode("admin"), admin, emp1);
+				MyUser u2 = new MyUser("employee", encoder.encode("employee"), employee, emp2);
 				userRepo.save(u1);
+				userRepo.save(u2);
+				authorityRepo.save(admin);
 				authorityRepo.save(employee);
 				
 				

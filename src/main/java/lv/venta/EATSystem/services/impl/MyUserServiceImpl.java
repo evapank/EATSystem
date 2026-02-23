@@ -25,8 +25,8 @@ public class MyUserServiceImpl implements IMyUserService{
 	
 	@Override
 	public ArrayList<MyUser> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MyUser> result = (ArrayList<MyUser>) userRepo.findAll();
+		return result;
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class MyUserServiceImpl implements IMyUserService{
 
 	@Override
 	public MyUser findUserByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		MyUser result = userRepo.findByEmployeeEmail(email);
+		return result;
 	}
 
 	@Override

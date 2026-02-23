@@ -1,5 +1,7 @@
 package lv.venta.EATSystem.models;
 
+import com.fasterxml.jackson.core.sym.Name;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
@@ -40,9 +43,14 @@ public class MyUser {
 	@JoinColumn(name = "idAuthority")
 	private MyAuthority authority;
 	
-	public MyUser(String username, String password, MyAuthority authority) {
+	@OneToOne
+	@JoinColumn(name = "idEmployee")
+	private Employee employee;
+	
+	public MyUser(String username, String password, MyAuthority authority, Employee employee) {
 	this.username = username;
 	this.password = password;
 	this.authority = authority;
+	this.employee = employee;
 	}
 }
