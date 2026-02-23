@@ -10,35 +10,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.models.MyUser;
+import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.services.IMyUserService;
 
 @Service
-public class MyUserServiceImpl{}
-/*public class MyUserServiceImpl implements UserDetailsService, IMyUserService{
+public class MyUserServiceImpl implements IMyUserService{
+
+	@Autowired
+	IMyUserRepo userRepo;
 	
 	@Autowired
-	private IMyUserRepo userRepo;
+	IMyAuthorityRepo authorityRepo;
 	
-	public MyUserServiceImpl(IMyUserRepo userRepo) {
-		this.userRepo = userRepo;
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MyUser user = userRepo.findByUsername(username);
-		
-		if (user==null) {
-			throw new UsernameNotFoundException("User " + username + " not found");
-		}
-		
-		ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		return new org.springframework.security.core.userdetails.User(
-                user.getEmployee().getEmail(),
-                user.getPassword(),
-                authorities);
-	}
-
 	@Override
 	public ArrayList<MyUser> getAllUsers() {
 		// TODO Auto-generated method stub
@@ -68,6 +52,6 @@ public class MyUserServiceImpl{}
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }
-*/
+
