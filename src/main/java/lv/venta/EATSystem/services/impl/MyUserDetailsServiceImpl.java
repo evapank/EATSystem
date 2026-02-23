@@ -6,7 +6,7 @@ import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 
 @Service
-public class MyUserDetailsServiceImpl{
+public class MyUserDetailsServiceImpl {
 	
 	IMyUserRepo userRepo;
 	
