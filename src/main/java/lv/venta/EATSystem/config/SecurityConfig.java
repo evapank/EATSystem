@@ -55,7 +55,7 @@ public class SecurityConfig {
 		.anyRequest().permitAll()
 		)
 		.authenticationManager(authenticationManager)
-		.userDetailsService((UserDetailsService) userDetailsService)
+		.userDetailsService(userDetailsService)
 		.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class)
 		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		.build();
