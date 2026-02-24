@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { UserService } from "./api";
+import { useState } from "react";
 
 const SignupPage = async () => {
+    const [username, setUserame] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +37,8 @@ const SignupPage = async () => {
                     <h2 className="mb-4 text-center">Sign Up Page</h2>
                     {/* Render error message if exists */}
                     {error && <p className="text-danger">{error}</p>}
+                    <input wrapperClass='mb-3' id='username' placeholder={"Username"} value={username} type='text'
+                              onChange={(e) => setUserame(e.target.value)}/>
                     <input wrapperClass='mb-3' id='name' placeholder={"Name"} value={name} type='text'
                               onChange={(e) => setName(e.target.value)}/>
                     <input wrapperClass='mb-3' id='surname' placeholder={"Surname"} value={surname} type='text'
@@ -47,10 +51,6 @@ const SignupPage = async () => {
                               value={confirmPassword}
                               onChange={(e) => setConfirmPassword(e.target.value)}/>
 
-
-                    <input wrapperClass='mb-2' placeholder='Mobile Number' id='mobileNumber' value={mobile}
-                              type='text'
-                              onChange={(e) => setMobileNumber(e.target.value)}/>
                     <label className="form-label mb-1">Role:</label>
                     <select className="form-select mb-4" value={role} onChange={(e) => setRole(e.target.value)}>
                         <option value="EMPLOYEE">Employee</option>

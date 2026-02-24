@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,6 @@ import lv.venta.EATSystem.models.MyUser;
 @Service
 public class JwtServiceImpl {
 	
-		@Value("${JWT_SECRET_KEY}")
 		private String SECRET_KEY;
 	
 		public String extractUsername(String token){

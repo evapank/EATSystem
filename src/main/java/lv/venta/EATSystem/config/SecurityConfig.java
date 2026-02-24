@@ -25,7 +25,7 @@ import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
 public class SecurityConfig {
 
 	private final MyUserDetailsServiceImpl userDetailsService;
-	//private final JwtAuthFilter jwtAuthFilter;
+	//private final JwtTokenValidator jwToken;
 	private final IMyUserRepo userRepo;
 	private final IMyAuthorityRepo authorityRepo;
 
@@ -33,6 +33,7 @@ public class SecurityConfig {
 		this.userDetailsService = userDetailsService;
 		this.userRepo = userRepo;
 		this.authorityRepo = authorityRepo;
+		//.jwToken = jwtToken;
 	}
 
 
@@ -46,6 +47,7 @@ public class SecurityConfig {
 		.csrf(AbstractHttpConfigurer::disable)
 		.authorizeHttpRequests(auth->
 		auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/**/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
