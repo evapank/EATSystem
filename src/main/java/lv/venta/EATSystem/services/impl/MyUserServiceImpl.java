@@ -43,13 +43,18 @@ public class MyUserServiceImpl implements IMyUserService{
 
 	@Override
 	public MyUser findUserById(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		MyUser result = null;
+		if (userRepo.existsById(userId)) {
+			result = userRepo.findByIdMyUser(userId);
+		}
+		return result;
 	}
 
 	@Override
 	public void saveUser(MyUser user) {
-		// TODO Auto-generated method stub
+		if(!userRepo.existsByUsername(user.getUsername())) {
+			userRepo.save(user);
+		}
 		
 	}
 	

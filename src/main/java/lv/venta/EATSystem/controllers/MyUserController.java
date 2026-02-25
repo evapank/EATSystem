@@ -23,6 +23,7 @@ import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.response.AuthResponse;
 import lv.venta.EATSystem.services.IMyUserService;
+import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
 import lv.venta.EATSystem.services.impl.MyUserServiceImpl;
 
 @RestController
@@ -34,13 +35,13 @@ public class MyUserController {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired 
-	private MyUserServiceImpl customUserDetails;
+	private MyUserDetailsServiceImpl customUserDetails;
 	
 	@Autowired
 	private IMyUserService myUserService;
 	
 	@PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody MyUser user)  {
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody MyUser user) throws Exception  {
         String email = user.getEmployee().getEmail();
         String password = user.getPassword();
         String name = user.getEmployee().getName();
@@ -49,7 +50,7 @@ public class MyUserController {
 
         MyUser isEmailExist = myUserService.findUserByEmail(email);
         if (isEmailExist != null) {
-            //throw new Exception("Email Is Already Used With Another Account");
+            throw new Exception("Email Is Already Used With Another Account");
 
         }
         MyUser createdUser = new MyUser();
@@ -98,13 +99,11 @@ public class MyUserController {
     }
 
 
-
-    
     private Authentication authenticate(String username, String password) {
 
         System.out.println(username+"---++----"+password);
 
-        UserDetails userDetails = null;//customUserDetails.loadUserByUsername(username);
+        UserDetails userDetails = customUserDetails.loadUserByUsername(username);
 
         System.out.println("Sig in in user details"+ userDetails);
 
@@ -112,8 +111,7 @@ public class MyUserController {
             System.out.println("Sign in details - null" + userDetails);
 
             throw new BadCredentialsException("Invalid username and password");
-        }
-        if(!passwordEncoder.matches(password,userDetails.getPassword())) {
+        }  else if(!passwordEncoder.matches(password,userDetails.getPassword())) {
             System.out.println("Sign in userDetails - password mismatch"+userDetails);
 
             throw new BadCredentialsException("Invalid password");

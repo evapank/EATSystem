@@ -11,4 +11,8 @@ public interface IMyUserRepo extends CrudRepository<MyUser,String>{
 
 	MyUser findByEmployeeEmail(String email);
 
+	MyUser findByIdMyUser(String userId);
+
+	boolean existsByUsername(String username);
+
 }
