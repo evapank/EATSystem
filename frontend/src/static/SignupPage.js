@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { UserService } from "./api";
 import { useState } from "react";
 
-const SignupPage = async () => {
+const SignupPage = () => {
     const [username, setUserame] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -33,21 +33,21 @@ const SignupPage = async () => {
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="border rounded-lg p-4" style={{width: '600px', height: 'auto'}}>
-                <container className="p-3">
+                <div className="p-3">
                     <h2 className="mb-4 text-center">Sign Up Page</h2>
                     {/* Render error message if exists */}
                     {error && <p className="text-danger">{error}</p>}
-                    <input wrapperClass='mb-3' id='username' placeholder={"Username"} value={username} type='text'
+                    <input className='form-control mb-3' id='username' placeholder={"Username"} value={username} type='text'
                               onChange={(e) => setUserame(e.target.value)}/>
-                    <input wrapperClass='mb-3' id='name' placeholder={"Name"} value={name} type='text'
+                    <input className='form-control mb-3' id='name' placeholder={"Name"} value={name} type='text'
                               onChange={(e) => setName(e.target.value)}/>
-                    <input wrapperClass='mb-3' id='surname' placeholder={"Surname"} value={surname} type='text'
+                    <input className='form-control mb-3' id='surname' placeholder={"Surname"} value={surname} type='text'
                               onChange={(e) => setSurname(e.target.value)}/>
-                    <input wrapperClass='mb-3' placeholder='Email Address' id='email' value={email} type='email'
+                    <input className='form-control mb-3' placeholder='Email Address' id='email' value={email} type='email'
                               onChange={(e) => setEmail(e.target.value)}/>
-                    <input wrapperClass='mb-3' placeholder='Password' id='password' type='password' value={password}
+                    <input className='form-control mb-3' placeholder='Password' id='password' type='password' value={password}
                               onChange={(e) => setPassword(e.target.value)}/>
-                    <input wrapperClass='mb-3' placeholder='Confirm Password' id='confirmPassword' type='password'
+                    <input className='form-control mb-3' placeholder='Confirm Password' id='confirmPassword' type='password'
                               value={confirmPassword}
                               onChange={(e) => setConfirmPassword(e.target.value)}/>
 
@@ -67,7 +67,7 @@ const SignupPage = async () => {
                         <p>Already Registered? <a href="/">Login</a></p>
                     </div>
 
-                </container>
+                </div>
             </div>
         </div>
     );
