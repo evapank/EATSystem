@@ -42,9 +42,10 @@ public class SecurityConfig {
 	}
 
 	public SecurityFilterChain configurePermissionToEndpoints(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
-		return http
-		.cors(AbstractHttpConfigurer::disable)
-		.csrf(AbstractHttpConfigurer::disable)
+		//return http
+		//.cors(AbstractHttpConfigurer::disable)
+		//.csrf(AbstractHttpConfigurer::disable)
+		http
 		.authorizeHttpRequests(auth->
 		auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		.requestMatchers("/h2-console/**").permitAll()
@@ -59,8 +60,12 @@ public class SecurityConfig {
 		.authenticationManager(authenticationManager)
 		.userDetailsService(userDetailsService)
 		.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class)
-		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-		.build();
+		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		http.csrf(auth->auth.ignoringRequestMatchers("/h2-console/**"));
+		http.cors(auth->auth.disable());
+		http.headers(frame->frame.frameOptions(option->option.disable()));
+		return http.build();
+		//.build();
 	}
 
 	@Bean

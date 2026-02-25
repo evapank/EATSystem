@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lv.venta.EATSystem.config.JwtProvider;
 import lv.venta.EATSystem.enums.SecurityRole;
+import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.response.AuthResponse;
@@ -26,8 +27,7 @@ import lv.venta.EATSystem.services.impl.MyUserServiceImpl;
 
 @RestController
 @RequestMapping("/auth")
-public class MyUserController{}
-/*public class MyUserController {
+public class MyUserController {
 	
 	
 	@Autowired
@@ -45,7 +45,7 @@ public class MyUserController{}
         String password = user.getPassword();
         String name = user.getEmployee().getName();
         String surname = user.getEmployee().getSurname();
-        ArrayList<SecurityRole> role = (ArrayList<SecurityRole>) user.getRoles();
+        MyAuthority role =  user.getAuthority();
 
         MyUser isEmailExist = myUserService.findUserByEmail(email);
         if (isEmailExist != null) {
@@ -56,7 +56,7 @@ public class MyUserController{}
         createdUser.getEmployee().setEmail(email);
         createdUser.getEmployee().setName(name);
         createdUser.getEmployee().setSurname(surname);
-        createdUser.setRoles(role);
+        createdUser.setAuthority(role);
         createdUser.setPassword(passwordEncoder.encode(password));
         
         myUserService.saveUser(createdUser);
@@ -77,7 +77,7 @@ public class MyUserController{}
 
 
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<AuthResponse> signin(@RequestBody MyUser loginRequest) {
         String username = loginRequest.getEmployee().getEmail();
         String password = loginRequest.getPassword();
@@ -125,4 +125,3 @@ public class MyUserController{}
 
 
 }
-*/
