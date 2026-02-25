@@ -42,9 +42,9 @@ public class MyUserServiceImpl implements IMyUserService{
 	}
 
 	@Override
-	public MyUser findUserById(String userId) {
+	public MyUser findUserById(int userId) {
 		MyUser result = null;
-		if (userRepo.existsById(userId)) {
+		if (userRepo.existsByIdMyUser(userId)) {
 			result = userRepo.findByIdMyUser(userId);
 		}
 		return result;
