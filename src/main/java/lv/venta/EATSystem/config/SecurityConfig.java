@@ -41,31 +41,38 @@ public class SecurityConfig {
 	return new MyUserDetailsServiceImpl(userRepo, authorityRepo);
 	}
 
+	@Bean
+
 	public SecurityFilterChain configurePermissionToEndpoints(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
 		//return http
 		//.cors(AbstractHttpConfigurer::disable)
 		//.csrf(AbstractHttpConfigurer::disable)
-		http
-		.authorizeHttpRequests(auth->
+		http.authorizeHttpRequests(auth->
 		auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		.requestMatchers("/h2-console/**").permitAll()
+		.requestMatchers("/auth/login").permitAll()
+		.requestMatchers("/dashboards").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
-		.requestMatchers("/**/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/department/**").hasAuthority(SecurityRole.ADMIN.toString())
+		//.requestMatchers("/**/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
-		.requestMatchers("/**/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.ADMIN.toString())
+		//.requestMatchers("/**/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.ADMIN.toString())
 		.requestMatchers("/projectmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
-		.requestMatchers("/**/projectmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
-		.anyRequest().permitAll()
+		//.requestMatchers("/**/projectmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
+		//.anyRequest().hasAuthority(SecurityRole.ADMIN.toString())
 		)
 		.authenticationManager(authenticationManager)
 		.userDetailsService(userDetailsService)
-		.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new JwtTokenValidator(), UsernamePasswordAuthenticationFilter.class)
+		//.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class)
 		.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-		http.csrf(auth->auth.ignoringRequestMatchers("/h2-console/**"));
-		http.cors(auth->auth.disable());
+		//http.csrf(auth->auth.ignoringRequestMatchers("/h2-console/**"));
+		http.csrf(csrf -> csrf.disable());
+		http.cors(cors -> {}); //	http.cors(auth->auth.disable());
 		http.headers(frame->frame.frameOptions(option->option.disable()));
 		return http.build();
 		//.build();
+
 	}
 
 	@Bean

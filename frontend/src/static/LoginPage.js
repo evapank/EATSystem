@@ -14,7 +14,7 @@ const LoginPage = () => {
                 setError('Please enter both username and password.');
                 return;
             }
-            const response = await UserService.logIn({...username, password: password});
+            const response = await UserService.logIn(username, password);
             console.log('Login successful:', response.data);
             navigate('/');
         } catch (error) {
