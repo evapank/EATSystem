@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lv.venta.EATSystem.config.JwtProvider;
 import lv.venta.EATSystem.enums.SecurityRole;
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.repos.IMyUserRepo;
@@ -41,8 +43,11 @@ public class MyUserController {
 	private IMyUserService myUserService;
 	
 	@PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody MyUser user) throws Exception  {
-        String email = user.getEmployee().getEmail();
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody MyUser user, Employee employee) throws Exception  {
+		
+		user.setEmployee(employee);
+	
+		String email = user.getEmployee().getEmail();
         String password = user.getPassword();
         String name = user.getEmployee().getName();
         String surname = user.getEmployee().getSurname();
