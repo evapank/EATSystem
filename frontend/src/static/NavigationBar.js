@@ -12,6 +12,7 @@ const NavigationBar = () => {
                     <li className="nav-item"><NavLink className="nav-link" eventkey ="5" as={Link} to="/order/all">Orders</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" eventkey ="6" as={Link} to="/employeeorderstatus/all">Employee order statuses</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" eventkey ="7" as={Link} to="/employeestatus/all">Employee statuses</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" eventkey ="8" as={Link} to="/dashboard">Dashboard</NavLink></li>
                 </ul>
             </div>
                    

@@ -16,7 +16,7 @@ const LoginPage = () => {
             }
             const response = await UserService.logIn(username, password);
             console.log('Login successful:', response.data);
-            navigate('/');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Login failed:', error.response ? error.response.data : error.message);
             setError('Invalid username or password.');
