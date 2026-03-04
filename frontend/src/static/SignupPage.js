@@ -23,7 +23,7 @@ const SignupPage = () => {
             throw new Error("Passwords do not match");
            }
            const response = UserService.signUp(username, email, password, role);
-           localStorage.setItem("token", response.data.jwt);
+           //localStorage.setItem("token", response.data.jwt);
            navigate('/dashboard');
         } catch (error){
             console.error('Signup failed:', error.response ? error.response.data : error.message);
