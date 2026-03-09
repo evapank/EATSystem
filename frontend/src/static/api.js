@@ -21,7 +21,8 @@ const api = axios.create({
 
 export const UserService = {
 	logIn: (username, password) => api.post('/auth/login', {username, password}),
-	signUp: (username, email, password, role) => api.post('/auth/signup', {username, email, password, role})
+	signUp: (username, email, password, role) => api.post('/auth/signup', {username, email, password, role}),
+	employeeView: (id) => api.post(`/auth/user/employee/${id}`)
 };
 
 export const DepartmentService = {
