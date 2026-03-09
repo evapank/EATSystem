@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,10 +79,16 @@ public class MyUserController {
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.OK);
 
     }
-
-
-
-
+	@PostMapping("/user/employee/{id}")
+	public MyUser employeeProfileView (@PathVariable(name = "id") int id) throws Exception {
+		MyUser result = myUserService.findUserById(id);
+		if (result.getAuthority().getTitle()==SecurityRole.EMPLOYEE) {
+			return result;
+		} else {
+			throw new Exception("User is not employee");
+		}	
+	}
+	
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> signin(@RequestBody MyUser loginRequest) {
