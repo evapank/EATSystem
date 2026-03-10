@@ -3,6 +3,7 @@ package lv.venta.EATSystem.services;
 import java.util.ArrayList;
 
 import lv.venta.EATSystem.models.MyUser;
+import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 
 public interface IMyUserService {
@@ -18,5 +19,7 @@ public interface IMyUserService {
     public void saveUser(MyUser user);
     
     public ArrayList<Project> getAllEmployeeProjectsById (int userId);
+    
+    public ArrayList<Order> getAllEmployeeCurrentOrdersById (int userId);
 
 }

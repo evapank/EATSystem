@@ -1,19 +1,18 @@
 package lv.venta.EATSystem.services.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.MyUser;
+import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
+import lv.venta.EATSystem.repos.IOrderRepo;
 import lv.venta.EATSystem.repos.IProjectRepo;
 import lv.venta.EATSystem.services.IMyUserService;
 
@@ -28,6 +27,9 @@ public class MyUserServiceImpl implements IMyUserService{
 	
 	@Autowired
 	IProjectRepo projectRepo;
+	
+	@Autowired
+	IOrderRepo orderRepo;
 	
 	@Override
 	public ArrayList<MyUser> getAllUsers() {
@@ -72,6 +74,22 @@ public class MyUserServiceImpl implements IMyUserService{
 			projects = projectRepo.findByEmployeesIdEmployee(employee.getIdEmployee());
 		}
 		return projects;
+	}
+
+	@Override
+	public ArrayList<Order> getAllEmployeeCurrentOrdersById(int userId) {
+		ArrayList<Order> orders = new ArrayList<>();
+		LocalDateTime current = LocalDateTime.now();
+		if(userRepo.existsByIdMyUser(userId)) {
+			Employee employee = userRepo.findByIdMyUser(userId).getEmployee();
+			ArrayList<Order> temp = orderRepo.findAllByEmployeeOrderStatusEmployee(employee);
+			for (Order o: temp) {
+				if(o.getDateTimeEnd().isAfter(current)) {
+					orders.add(o);
+				}
+			}
+		}
+		return orders;
 	}
 	
 }

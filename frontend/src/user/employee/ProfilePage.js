@@ -31,13 +31,26 @@ const ProfilePage = () => {
   if (error) return <div className="alert alert-danger">{error}</div>;
   return (
         <div className="container mt-4">
-            <div>
+            <div class="container">
                 <label>Department: {user.employee?.department?.title}</label>
             </div>
-            <div>
-                <label>Projects:</label>
+            <div class="container-sm">
+                <label class="fs-3 fw-semibold">Projects:</label>
                 {projects.map(e => (
-					<label key={e.idProject} value={e.idProject}>{e.title}</label>
+					<label key={e.idProject} value={e.idProject}>
+                        ID: {e.idProject}
+                        Title: {e.title}
+                    </label>
+				))};
+            </div>
+            <div class="container-sm">
+                <label class="fs-3 fw-semibold">Orders:</label>
+                {orders.map(e => (
+					<label key={e.idOrder} value={e.idOrder}>
+                        Status: {e.orderStatus}
+                        Start: {e.dateTimeStart}
+                        End: {e.dateTimeEnd}
+                    </label>
 				))};
             </div>
         </div>

@@ -25,6 +25,7 @@ import lv.venta.EATSystem.enums.SecurityRole;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
+import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.response.AuthResponse;
@@ -95,6 +96,11 @@ public class MyUserController {
 	@GetMapping("/user/employee/{id}/projects")
 	public Collection<Project> getEmployeeProjects(@PathVariable(name = "id") int id){
 		return myUserService.getAllEmployeeProjectsById(id);
+	}
+	
+	@GetMapping("/user/employee/{id}/orders")
+	public Collection<Order> getEmployeeCurrentOrders(@PathVariable(name = "id") int id){
+		return myUserService.getAllEmployeeCurrentOrdersById(id);
 	}
 	
     @PostMapping("/login")
