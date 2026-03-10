@@ -2,12 +2,9 @@ import { useEffect, useState } from "react";
 import { UserService } from "../../static/api";
 
 const ProfilePage = () => {
-    const [employee, setEmployee] = useState({
-            name : '',
-            surname : '',
-            position : '',
-            department : {},
-            isManager : false
+    const [user, setUser] = useState({
+            username : '',
+            employee : {}
         });
         const [loading, setLoading] = useState(true);
         const {id} = useParams();
@@ -15,7 +12,8 @@ const ProfilePage = () => {
         useEffect(() => {
             const fetchEmployee = async () => {
                 try {
-                    const responseEmployee = await UserService.employeeView(id);
+                    const response = await UserService.employeeView(id);
+                    setUser(response.data);
                     setLoading(false);
                 } catch (error){
                     setError('cannot find employee');
@@ -25,6 +23,16 @@ const ProfilePage = () => {
             };
               fetchEmployee();
         }, []);
+
+        if (loading) return <div>Loading...</div>;
+  if (error) return <div className="alert alert-danger">{error}</div>;
+  return (
+        <div className="container mt-4">
+            <div>
+                <label>Department: {user.employee?.department?.title}</label>
+            </div>
+        </div>
+  );
     }
 
 export default ProfilePage;
