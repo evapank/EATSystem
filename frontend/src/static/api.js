@@ -24,7 +24,8 @@ export const UserService = {
 	signUp: (username, email, password, role) => api.post('/auth/signup', {username, email, password, role}),
 	employeeView: (id) => api.get(`/auth/user/employee/${id}`),
 	employeeProjects: (id) => api.post(`/auth/user/employee/${id}/projects`),
-	employeeOrders: (id) => api.post(`/auth/user/employee/${id}/orders`)
+	employeeOrders: (id) => api.post(`/auth/user/employee/${id}/orders`),
+	insertEmployeeStatus: (id, employeeStatus) => api.post(`/auth/user/employee/${id}/newStatus`, employeeStatus)
 };
 
 export const DepartmentService = {

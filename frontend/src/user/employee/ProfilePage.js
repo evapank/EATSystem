@@ -58,6 +58,9 @@ const ProfilePage = () => {
                     </label>
 				))};
             </div>
+            <Link to={`/auth/user/employee/${id}/newStatus`} className="btn btn-primary">
+                     Add new status
+            </Link>
         </div>
   );
     }

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import jakarta.validation.Valid;
 import lv.venta.EATSystem.config.JwtProvider;
 import lv.venta.EATSystem.enums.SecurityRole;
 import lv.venta.EATSystem.models.Employee;
+import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
@@ -101,6 +103,15 @@ public class MyUserController {
 	@GetMapping("/user/employee/{id}/orders")
 	public Collection<Order> getEmployeeCurrentOrders(@PathVariable(name = "id") int id){
 		return myUserService.getAllEmployeeCurrentOrdersById(id);
+	}
+	
+	@PostMapping("/user/employee/{id}/newStatus")
+	public EmployeeStatus createEmployeeStatusByEmployee(@PathVariable(name = "id") int id, @Valid @RequestBody EmployeeStatus employeeStatus, BindingResult result) throws Exception {
+		if(!result.hasErrors()) {
+			return myUserService.insertNewEmployeeStatusbyEmployee(id, employeeStatus);
+		}else {
+			throw new Exception("can't create");
+		}
 	}
 	
     @PostMapping("/login")

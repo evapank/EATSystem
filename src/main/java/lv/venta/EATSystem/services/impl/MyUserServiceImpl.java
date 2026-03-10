@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.models.Employee;
+import lv.venta.EATSystem.models.EmployeeOrderStatus;
+import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
+import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
 import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.repos.IOrderRepo;
@@ -30,6 +33,9 @@ public class MyUserServiceImpl implements IMyUserService{
 	
 	@Autowired
 	IOrderRepo orderRepo;
+	
+	@Autowired
+	IEmployeeStatusRepo empStRepo;
 	
 	@Override
 	public ArrayList<MyUser> getAllUsers() {
@@ -90,6 +96,20 @@ public class MyUserServiceImpl implements IMyUserService{
 			}
 		}
 		return orders;
+	}
+
+	@Override
+	public EmployeeStatus insertNewEmployeeStatusbyEmployee(int userId, EmployeeStatus empSt) {
+		EmployeeStatus result = new EmployeeStatus();
+		Employee employee = userRepo.findByIdMyUser(userId).getEmployee();
+		if(!empStRepo.existsById(empSt.getIdEmployeeStatus())) {
+			result.setEmployee(employee);
+			result.setGeneralStatus(empSt.getGeneralStatus());
+			result.setDateTimeStart(empSt.getDateTimeStart());
+			result.setDateTimeEnd(empSt.getDateTimeEnd());
+			empStRepo.save(result);
+		}
+		return result;
 	}
 	
 }
