@@ -24,7 +24,11 @@ const SignupPage = () => {
            }
            const response = UserService.signUp(username, email, password, role);
            //localStorage.setItem("token", response.data.jwt);
-           navigate('/dashboard');
+           if(role=='EMPLOYEE'){
+                navigate(`/auth/user/employee/${id}`);
+           }else{
+                navigate('/dashboard');
+        }
         } catch (error){
             console.error('Signup failed:', error.response ? error.response.data : error.message);
             setError(error.response ? error.response.data : error.message);

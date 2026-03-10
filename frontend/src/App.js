@@ -30,21 +30,24 @@ import UpdateEmployeeStatus from './employeeStatus/UpdateEmployeeStatus';
 import LoginPage from './static/LoginPage';
 import SignupPage from './static/SignupPage';
 import WelcomeDashboard from './static/WelcomeDashboard';
+import ProfilePage from './user/employee/ProfilePage';
+import AddStatusPage from './user/employee/AddStatusPage';
 
 const App = () => {
   return (
     <Router>
         <NavigationBar />
         <Routes>
-        <Route path="/" element={<LoginPage/>} />
-        <Route path="/auth/signup" element={ <SignupPage/>} />
-        <Route path = "/dashboard" element={<WelcomeDashboard/>}/>
+        <Route path={"/"} element={<LoginPage/>} />
+        <Route path={"/auth/signup"} element={ <SignupPage/>} />
+        <Route path={"/dashboard"} element={<WelcomeDashboard/>}/>
+        <Route path={`/auth/user/employee/${id}`} element={<ProfilePage/>}/>
+        <Route path={`/auth/user/employee/${id}/newStatus`} element={<AddStatusPage/>}/>
 
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>
         <Route path={`/department/create`} exact={true} element={<CreateDepartment/>}/>
-        <Route path={`/department/update/:id`} exact={true} element={<UpdateDepartment/>}/>
-            
+        <Route path={`/department/update/:id`} exact={true} element={<UpdateDepartment/>}/>  
       
         <Route path={'/employee/all'} exact={true} element={<AllEmployees/>}/>
         <Route path={`/employee/all/:id`} exact={true} element={<OneEmployee/>}/>

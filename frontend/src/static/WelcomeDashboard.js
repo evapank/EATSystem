@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 const WelcomeDasboard = () => {
-    const navigate = useNavigate();
 
     const handleLogout = () => {
         navigate('/');
     };
-
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="border rounded-lg p-4" style={{width: '500px', height: '400px'}}>
