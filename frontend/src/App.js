@@ -41,8 +41,8 @@ const App = () => {
         <Route path={"/"} element={<LoginPage/>} />
         <Route path={"/auth/signup"} element={ <SignupPage/>} />
         <Route path={"/dashboard"} element={<WelcomeDashboard/>}/>
-        <Route path={`/auth/user/employee/${id}`} element={<ProfilePage/>}/>
-        <Route path={`/auth/user/employee/${id}/newStatus`} element={<AddStatusPage/>}/>
+        <Route path={`/auth/user/employee/:id`} element={<ProfilePage/>}/>
+        <Route path={`/auth/user/employee/:id/newStatus`} element={<AddStatusPage/>}/>
 
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>
