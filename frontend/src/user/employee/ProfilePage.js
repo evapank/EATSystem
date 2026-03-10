@@ -7,6 +7,7 @@ const ProfilePage = () => {
             employee : {}
         });
         const [projects, setProjects] = useState([]);
+        const [orders, setOrders] = useState([]);
         const [loading, setLoading] = useState(true);
         const {id} = useParams();
 
@@ -15,8 +16,10 @@ const ProfilePage = () => {
                 try {
                     const responseUser = await UserService.employeeView(id);
                     const responseProject = await UserService.employeeProjects(id);
+                    const responseOrder = await UserService.employeeOrders(id);
                     setUser(responseUser.data);
                     setProjects(responseProject.data);
+                    setOrders(responseOrder.data);
                     setLoading(false);
                 } catch (error){
                     setError('cannot find employee');
@@ -31,11 +34,13 @@ const ProfilePage = () => {
   if (error) return <div className="alert alert-danger">{error}</div>;
   return (
         <div className="container mt-4">
+            <h2>{user.username}</h2>
             <div class="container">
-                <label>Department: {user.employee?.department?.title}</label>
+                <h3>Department:</h3>
+                <label>{user.employee?.department?.title}</label>
             </div>
             <div class="container-sm">
-                <label class="fs-3 fw-semibold">Projects:</label>
+                <h3>Projects:</h3>
                 {projects.map(e => (
 					<label key={e.idProject} value={e.idProject}>
                         ID: {e.idProject}
@@ -44,7 +49,7 @@ const ProfilePage = () => {
 				))};
             </div>
             <div class="container-sm">
-                <label class="fs-3 fw-semibold">Orders:</label>
+                <h3>Orders:</h3>
                 {orders.map(e => (
 					<label key={e.idOrder} value={e.idOrder}>
                         Status: {e.orderStatus}
