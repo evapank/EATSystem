@@ -9,9 +9,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.MyUser;
+import lv.venta.EATSystem.models.Project;
 import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
+import lv.venta.EATSystem.repos.IProjectRepo;
 import lv.venta.EATSystem.services.IMyUserService;
 
 @Service
@@ -22,6 +25,9 @@ public class MyUserServiceImpl implements IMyUserService{
 	
 	@Autowired
 	IMyAuthorityRepo authorityRepo;
+	
+	@Autowired
+	IProjectRepo projectRepo;
 	
 	@Override
 	public ArrayList<MyUser> getAllUsers() {
@@ -56,6 +62,16 @@ public class MyUserServiceImpl implements IMyUserService{
 			userRepo.save(user);
 		}
 		
+	}
+
+	@Override
+	public ArrayList<Project> getAllEmployeeProjectsById(int userId) {
+		ArrayList<Project> projects = new ArrayList<>();
+		if (userRepo.existsByIdMyUser(userId)) {
+			Employee employee = userRepo.findByIdMyUser(userId).getEmployee();
+			projects = projectRepo.findByEmployeesIdEmployee(employee.getIdEmployee());
+		}
+		return projects;
 	}
 	
 }

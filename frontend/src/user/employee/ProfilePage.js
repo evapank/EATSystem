@@ -6,14 +6,17 @@ const ProfilePage = () => {
             username : '',
             employee : {}
         });
+        const [projects, setProjects] = useState([]);
         const [loading, setLoading] = useState(true);
         const {id} = useParams();
 
         useEffect(() => {
             const fetchEmployee = async () => {
                 try {
-                    const response = await UserService.employeeView(id);
-                    setUser(response.data);
+                    const responseUser = await UserService.employeeView(id);
+                    const responseProject = await UserService.employeeProjects(id);
+                    setUser(responseUser.data);
+                    setProjects(responseProject.data);
                     setLoading(false);
                 } catch (error){
                     setError('cannot find employee');
@@ -30,6 +33,12 @@ const ProfilePage = () => {
         <div className="container mt-4">
             <div>
                 <label>Department: {user.employee?.department?.title}</label>
+            </div>
+            <div>
+                <label>Projects:</label>
+                {projects.map(e => (
+					<label key={e.idProject} value={e.idProject}>{e.title}</label>
+				))};
             </div>
         </div>
   );
