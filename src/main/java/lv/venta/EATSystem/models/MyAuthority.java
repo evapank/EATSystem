@@ -2,6 +2,8 @@ package lv.venta.EATSystem.models;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,7 @@ public class MyAuthority {
 	
 	@OneToMany(mappedBy = "authority")
 	@ToString.Exclude
+	@JsonIgnore
 	private Collection<MyUser> users;
 	
 	public MyAuthority(SecurityRole title) {

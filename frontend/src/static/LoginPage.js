@@ -16,8 +16,8 @@ const LoginPage = () => {
             }
             const response = await UserService.logIn(username, password);
             console.log('Login successful:', response.data);
-            if(role=='EMPLOYEE'){
-                navigate(`/auth/user/employee/${id}`);
+            if(response.data.role=='EMPLOYEE'){
+                navigate(`/auth/user/employee/${response.data.id}/projects`);
            }else{
                 navigate('/dashboard');
            }

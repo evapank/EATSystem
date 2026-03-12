@@ -95,7 +95,7 @@ public class MyUserController {
 		}	
 	}
 	
-	@GetMapping("/user/employee/{id}/projects")
+	@GetMapping("/user/employee/projects/{id}")
 	public Collection<Project> getEmployeeProjects(@PathVariable(name = "id") int id){
 		return myUserService.getAllEmployeeProjectsById(id);
 	}
@@ -118,6 +118,8 @@ public class MyUserController {
     public ResponseEntity<AuthResponse> signin(@RequestBody MyUser loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
+        MyUser user = myUserService.getUserByUsername(username);
+        MyAuthority authority = myUserService.getAuthorityForUser(username);
 
         System.out.println(username+"-------"+password);
 
@@ -127,7 +129,9 @@ public class MyUserController {
         String token = JwtProvider.generateToken(authentication);
         AuthResponse authResponse = new AuthResponse();
 
-        authResponse.setMessage("Login success");
+        authResponse.setRole(""+authority.getTitle());
+        authResponse.setMessage("login success");
+        authResponse.setId(user.getIdMyUser());
         authResponse.setJwt(token);
         authResponse.setStatus(true);
 

@@ -6,4 +6,7 @@ import lv.venta.EATSystem.models.MyAuthority;
 
 public interface IMyAuthorityRepo extends CrudRepository<MyAuthority, Integer>{
 
+
+	MyAuthority findByUsersUsername(String username);
+
 }

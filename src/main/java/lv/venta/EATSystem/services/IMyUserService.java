@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
@@ -26,5 +27,9 @@ public interface IMyUserService {
     public abstract ArrayList<Order> getAllEmployeeCurrentOrdersById (int userId);
     
     public abstract EmployeeStatus insertNewEmployeeStatusbyEmployee(int userId, EmployeeStatus empSt);
+    
+    public abstract MyAuthority getAuthorityForUser(String username);
+    
+    public abstract MyUser getUserByUsername(String username);
 
 }

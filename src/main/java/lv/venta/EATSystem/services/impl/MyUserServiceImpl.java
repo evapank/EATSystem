@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
@@ -109,6 +110,18 @@ public class MyUserServiceImpl implements IMyUserService{
 			result.setDateTimeEnd(empSt.getDateTimeEnd());
 			empStRepo.save(result);
 		}
+		return result;
+	}
+
+	@Override
+	public MyAuthority getAuthorityForUser(String username) {
+		MyAuthority result = authorityRepo.findByUsersUsername(username);
+		return result;
+	}
+
+	@Override
+	public MyUser getUserByUsername(String username) {
+		MyUser result = userRepo.findByUsername(username);
 		return result;
 	}
 	

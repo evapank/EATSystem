@@ -14,6 +14,8 @@ import lombok.ToString;
 public class AuthResponse {
     private String jwt;
     private String message;
+    private String role;
+    private int id;
     private Boolean status;
 
 }

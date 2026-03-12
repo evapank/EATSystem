@@ -52,6 +52,8 @@ public class SecurityConfig {
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
 		.requestMatchers("/auth/signup").permitAll()
+		.requestMatchers("/auth/user/employee/**").permitAll()
+		.requestMatchers("/auth/user/employee/projects/**").permitAll()
 		.requestMatchers("/dashboard").permitAll()
 		.requestMatchers("/dashboards").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/department/**").hasAuthority(SecurityRole.ADMIN.toString())
