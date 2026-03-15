@@ -7,9 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -52,17 +50,17 @@ public class SecurityConfig {
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
 		.requestMatchers("/auth/signup").permitAll()
-		.requestMatchers("/auth/user/employee/**").permitAll()
-		.requestMatchers("/auth/user/employee/projects/**").permitAll()
+		.requestMatchers("/auth/user/employee/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/projects/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/dashboard").permitAll()
-		.requestMatchers("/dashboards").hasAuthority(SecurityRole.ADMIN.toString())
-		.requestMatchers("/department/**").hasAuthority(SecurityRole.ADMIN.toString())
-		//.requestMatchers("/**/admin/**").hasAuthority(SecurityRole.ADMIN.toString())
-		.requestMatchers("/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
-		//.requestMatchers("/**/departmentmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.ADMIN.toString())
-		.requestMatchers("/projectmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
-		//.requestMatchers("/**/projectmanager/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
-		//.anyRequest().hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/department/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
+		.requestMatchers("/departmentmanager/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/projectmanager/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/employee/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/employeeorderstatus/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/employeestatus/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/order/**").hasAuthority(SecurityRole.ADMIN.toString())
+		.requestMatchers("/project/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
 		)
 		.authenticationManager(authenticationManager)
 		.userDetailsService(userDetailsService)
