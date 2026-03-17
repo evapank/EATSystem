@@ -1,5 +1,7 @@
 package lv.venta.EATSystem.services.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +9,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.config.MyUserDetails;
+import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
@@ -32,33 +35,59 @@ public class MyUserDetailsServiceImpl implements UserDetailsService, UserDetails
 		return new MyUserDetails(result);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void createUser(UserDetails user) {
-		// TODO Auto-generated method stub
+		if(!userExists(user.getUsername())) {
+			MyUser result = new MyUser();
+			result.setUsername(user.getUsername());
+			result.setPassword(user.getPassword());
+			ArrayList<MyAuthority> authorities = (ArrayList<MyAuthority>) user.getAuthorities();
+			for(MyAuthority a: authorities) {
+				result.setAuthority(a);
+				authorityRepo.save(a);
+			}
+			userRepo.save(result);
+		}
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void updateUser(UserDetails user) {
-		// TODO Auto-generated method stub
-		
+		if(userExists(user.getUsername())) {
+			MyUser result = new MyUser();
+			result.setUsername(user.getUsername());
+			result.setPassword(user.getPassword());
+			ArrayList<MyAuthority> authorities = (ArrayList<MyAuthority>) user.getAuthorities();
+			for(MyAuthority a: authorities) {
+				result.setAuthority(a);
+				authorityRepo.save(a);
+			}
+			userRepo.save(result);
+		}
 	}
 
 	@Override
 	public void deleteUser(String username) {
-		// TODO Auto-generated method stub
+		if(userExists(username)) {
+			MyUser user = userRepo.findByUsername(username);
+			userRepo.delete(user);
+		}
 		
 	}
 
 	@Override
 	public void changePassword(String oldPassword, String newPassword) {
-		// TODO Auto-generated method stub
+			oldPassword = newPassword;
 		
 	}
 
 	@Override
 	public boolean userExists(String username) {
-		// TODO Auto-generated method stub
+		if(userRepo.existsByUsername(username)) {
+			return true;
+		}
 		return false;
 	}
 

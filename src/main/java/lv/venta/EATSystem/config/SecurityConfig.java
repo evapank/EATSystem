@@ -31,7 +31,7 @@ public class SecurityConfig {
 		this.userDetailsService = userDetailsService;
 		this.userRepo = userRepo;
 		this.authorityRepo = authorityRepo;
-		//.jwToken = jwtToken;
+		//this.jwToken = jwtToken;
 	}
 
 
@@ -40,7 +40,6 @@ public class SecurityConfig {
 	}
 
 	@Bean
-
 	public SecurityFilterChain configurePermissionToEndpoints(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
 		//return http
 		//.cors(AbstractHttpConfigurer::disable)
@@ -50,8 +49,10 @@ public class SecurityConfig {
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
 		.requestMatchers("/auth/signup").permitAll()
-		.requestMatchers("/auth/user/employee/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/**").permitAll() //.hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/auth/user/employee/projects/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/orders/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/newStatus/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/dashboard").permitAll()
 		.requestMatchers("/department/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
 		.requestMatchers("/departmentmanager/**").hasAuthority(SecurityRole.ADMIN.toString())
@@ -85,5 +86,7 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
 	return config.getAuthenticationManager();
 	}
+	
+	
 
 }

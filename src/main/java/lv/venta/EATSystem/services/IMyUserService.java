@@ -14,8 +14,6 @@ public interface IMyUserService {
 	
 	public abstract ArrayList<MyUser> getAllUsers();
     
-    public abstract MyUser findUserProfileByJwt(String jwt);
-    
     public abstract MyUser findUserByEmail(String email);
     
     public abstract MyUser findUserById(int userId);

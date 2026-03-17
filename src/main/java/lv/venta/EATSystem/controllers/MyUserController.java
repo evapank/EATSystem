@@ -88,7 +88,7 @@ public class MyUserController {
 	@GetMapping("/user/employee/{id}")
 	public MyUser employeeProfileView (@PathVariable(name = "id") int id) throws Exception {
 		MyUser result = myUserService.findUserById(id);
-		if (result.getAuthority().getTitle()==SecurityRole.EMPLOYEE) {
+		if (myUserService.getAuthorityForUser(result.getUsername()).getTitle()==SecurityRole.EMPLOYEE) {
 			return result;
 		} else {
 			throw new Exception("User is not employee");
@@ -100,12 +100,12 @@ public class MyUserController {
 		return myUserService.getAllEmployeeProjectsById(id);
 	}
 	
-	@GetMapping("/user/employee/{id}/orders")
+	@GetMapping("/user/employee/orders/{id}")
 	public Collection<Order> getEmployeeCurrentOrders(@PathVariable(name = "id") int id){
 		return myUserService.getAllEmployeeCurrentOrdersById(id);
 	}
 	
-	@PostMapping("/user/employee/{id}/newStatus")
+	@PostMapping("/user/employee/newStatus/{id}")
 	public EmployeeStatus createEmployeeStatusByEmployee(@PathVariable(name = "id") int id, @Valid @RequestBody EmployeeStatus employeeStatus, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return myUserService.insertNewEmployeeStatusbyEmployee(id, employeeStatus);

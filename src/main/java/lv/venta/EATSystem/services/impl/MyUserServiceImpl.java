@@ -45,12 +45,6 @@ public class MyUserServiceImpl implements IMyUserService{
 	}
 
 	@Override
-	public MyUser findUserProfileByJwt(String jwt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public MyUser findUserByEmail(String email) {
 		MyUser result = userRepo.findByEmployeeEmail(email);
 		return result;
