@@ -44,7 +44,7 @@ const ProfilePage = () => {
           <p>Department: {user.employee?.department?.title}</p>
       </div>
       <div className="container mt-4">
-        <Link to={`/auth/user/employee/${id}/newStatus`} className="btn btn-dark float-right">
+        <Link to={`/auth/user/employee/newStatus/${id}`} className="btn btn-dark float-right">
                   Add new status
               </Link>
               <div className="container-fluid">

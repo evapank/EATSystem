@@ -23,7 +23,6 @@ import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
 public class SecurityConfig {
 
 	private final MyUserDetailsServiceImpl userDetailsService;
-	//private final JwtTokenValidator jwToken;
 	private final IMyUserRepo userRepo;
 	private final IMyAuthorityRepo authorityRepo;
 
@@ -49,10 +48,10 @@ public class SecurityConfig {
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
 		.requestMatchers("/auth/signup").permitAll()
-		.requestMatchers("/auth/user/employee/**").permitAll() //.hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/**").permitAll()//.hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/auth/user/employee/projects/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/auth/user/employee/orders/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
-		.requestMatchers("/auth/user/employee/newStatus/**").hasAuthority(SecurityRole.EMPLOYEE.toString())
+		.requestMatchers("/auth/user/employee/newStatus/**").permitAll()//.hasAuthority(SecurityRole.EMPLOYEE.toString())
 		.requestMatchers("/dashboard").permitAll()
 		.requestMatchers("/department/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.DEPARTMENT_MANAGER.toString())
 		.requestMatchers("/departmentmanager/**").hasAuthority(SecurityRole.ADMIN.toString())
