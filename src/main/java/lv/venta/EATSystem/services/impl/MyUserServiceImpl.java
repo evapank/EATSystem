@@ -100,8 +100,10 @@ public class MyUserServiceImpl implements IMyUserService{
 		if(!empStRepo.existsById(empSt.getIdEmployeeStatus())) {
 			result.setEmployee(employee);
 			result.setGeneralStatus(empSt.getGeneralStatus());
-			result.setDateTimeStart(empSt.getDateTimeStart());
-			result.setDateTimeEnd(empSt.getDateTimeEnd());
+			if(empSt.getDateTimeStart().isBefore(empSt.getDateTimeEnd())) {
+				result.setDateTimeStart(empSt.getDateTimeStart());
+				result.setDateTimeEnd(empSt.getDateTimeEnd());
+			}
 			empStRepo.save(result);
 		}
 		return result;

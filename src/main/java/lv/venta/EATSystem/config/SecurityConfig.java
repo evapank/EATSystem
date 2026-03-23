@@ -45,6 +45,7 @@ public class SecurityConfig {
 		//.csrf(AbstractHttpConfigurer::disable)
 		http.authorizeHttpRequests(auth->
 		auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		/*auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
 		.requestMatchers("/auth/signup").permitAll()
@@ -61,7 +62,7 @@ public class SecurityConfig {
 		.requestMatchers("/employeestatus/**").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/order/**").hasAuthority(SecurityRole.ADMIN.toString())
 		.requestMatchers("/project/**").hasAnyAuthority(SecurityRole.ADMIN.toString(), SecurityRole.PROJECT_MANAGER.toString())
-		)
+		*/)
 		.authenticationManager(authenticationManager)
 		.userDetailsService(userDetailsService)
 		.addFilterBefore(new JwtTokenValidator(), UsernamePasswordAuthenticationFilter.class)
