@@ -84,4 +84,10 @@ export const EmployeeStatusService = {
 	
 };
 
+export const OtherService = {
+	getRoles: () => api.get('/other/roles'),
+	getOrderStatuses: () => api.get('/other/orderstatus'),
+	getGeneralStatus: () => api.get('/other/generalstatus'),
+};
+
 export default api;
