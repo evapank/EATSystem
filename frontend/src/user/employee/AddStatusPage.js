@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserService } from "../../static/api";
+import { OtherService, UserService } from "../../static/api";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddStatusPage = () => {
@@ -8,6 +8,7 @@ const AddStatusPage = () => {
         dateTimeStart : '',
         dateTimeEnd : ''
     });
+    const [statusArray, setStatusArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const {id} = useParams();
@@ -27,6 +28,8 @@ const AddStatusPage = () => {
     useEffect(() => {
             const fetchDepartments = async () => {
                 try {
+                    const response = await OtherService.getGeneralStatus();
+                    setStatusArray(response.data);
                     console.log("success");
                         setLoading(false);
                     } catch (error){
@@ -44,8 +47,12 @@ const AddStatusPage = () => {
         <form action="@{/user/employee/newStatus/{id}}" object={employeeStatus} method="post" onSubmit={handleSubmit}>
             <div>
                 <label>General status:</label>
-               <input type='text' name='generalStatus' className='form-control' placeholder='Enter general status' value={employeeStatus.generalStatus}
-                            onChange={e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}/>
+              <select options={statusArray} name='generalStatus' className='form-control' onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
+							<option value=''>-- Select status --</option>
+							{employees.map((e, x) => (
+								<option key={x} value={x}>{e}</option>
+							))};
+						</select>
             </div>
             <div>
                 <label>Date time start:</label>
