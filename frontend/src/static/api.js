@@ -90,4 +90,8 @@ export const OtherService = {
 	getGeneralStatus: () => api.get('/other/generalstatus'),
 };
 
+export const MeetingService = {
+	getEmployeeStatuses: (dateTime) => api.get("meeting/employeestatuses", dateTime)
+};
+
 export default api;
