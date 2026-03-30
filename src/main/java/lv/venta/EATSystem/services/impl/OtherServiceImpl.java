@@ -1,14 +1,15 @@
 package lv.venta.EATSystem.services.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.enums.OrderStatus;
 import lv.venta.EATSystem.enums.SecurityRole;
 import lv.venta.EATSystem.services.IOtherService;
-
+@Service
 public class OtherServiceImpl implements IOtherService{
 
 	@Override

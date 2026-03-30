@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EmployeeService, EmployeeStatusService } from '../static/api';
+import { EmployeeService, EmployeeStatusService, OtherService } from '../static/api';
 import { useNavigate, useParams} from 'react-router-dom';
 
 const UpdateEmployeeStatus = () => {
@@ -13,6 +13,7 @@ const UpdateEmployeeStatus = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [employees, setEmployees] = useState([]);
+	const [statusArray, setStatusArray] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -20,6 +21,8 @@ const UpdateEmployeeStatus = () => {
 				try {
 					const updatedEmpSt = await EmployeeStatusService.getById(id);
 					const employeesResponse = await EmployeeService.getAll();
+					const generalStatusResponse = await OtherService.getGeneralStatus();
+					setStatusArray(generalStatusResponse.data);
 					setEmployeeStatus(updatedEmpSt.data);
 					setEmployees(employeesResponse.data);
 					setLoading(false);
@@ -65,9 +68,13 @@ const UpdateEmployeeStatus = () => {
        			</tr>
        			<tr>
        			<td><label>General status:</label></td>
-       			<td><input type='text' name='generalStatus' className='form-control'
-       						value={employeeStatus.generalStatus}
-       						onChange={e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}/> </td>
+       			<td> <select options={statusArray} name='generalStatus' className='form-control' onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
+							<option value=''>-- Select status --</option>
+							{statusArray.map((e, x) => (
+								<option key={x} value={x}>{e}</option>
+							))};
+						</select>
+				</td>
        			</tr>
                 <tr>
        			<td><label>Date time start:</label></td>

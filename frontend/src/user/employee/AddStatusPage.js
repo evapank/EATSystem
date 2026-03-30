@@ -49,7 +49,7 @@ const AddStatusPage = () => {
                 <label>General status:</label>
               <select options={statusArray} name='generalStatus' className='form-control' onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
 							<option value=''>-- Select status --</option>
-							{employees.map((e, x) => (
+							{statusArray.map((e, x) => (
 								<option key={x} value={x}>{e}</option>
 							))};
 						</select>

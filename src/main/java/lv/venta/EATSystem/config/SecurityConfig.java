@@ -44,7 +44,9 @@ public class SecurityConfig {
 		//.cors(AbstractHttpConfigurer::disable)
 		//.csrf(AbstractHttpConfigurer::disable)
 		http.authorizeHttpRequests(auth->
-		auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		auth.requestMatchers(HttpMethod.OPTIONS, "/").permitAll()
+		.requestMatchers("/**").permitAll()
+		.anyRequest().authenticated()
 		/*auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		.requestMatchers("/h2-console/**").permitAll()
 		.requestMatchers("/auth/login").permitAll()
