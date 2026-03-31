@@ -18,7 +18,7 @@ public interface IMeetingService {
 	
 	public abstract ArrayList<Meeting> deleteMeetingById(int id);
 	
-	public abstract Meeting insertNewMeeting(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, GeneralStatus generalStatus);
+	public abstract Meeting insertNewMeeting(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, GeneralStatus generalStatus) throws Exception;
 	
 	public abstract Meeting updateMeetingById(int id, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, GeneralStatus generalStatus);
 	

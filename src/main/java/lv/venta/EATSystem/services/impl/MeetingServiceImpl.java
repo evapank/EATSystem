@@ -12,6 +12,7 @@ import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.models.Meeting;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
+import lv.venta.EATSystem.repos.IMeetingRepo;
 import lv.venta.EATSystem.services.IMeetingService;
 
 @Service
@@ -22,6 +23,9 @@ public class MeetingServiceImpl implements IMeetingService{
 	
 	@Autowired
 	IEmployeeRepo employeeRepo;
+	
+	@Autowired
+	IMeetingRepo meetingRepo;
 	
 	@Override
 	public ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetime) {
@@ -40,39 +44,56 @@ public class MeetingServiceImpl implements IMeetingService{
 
 	@Override
 	public ArrayList<Meeting> selectAllMeetings() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Meeting> result = (ArrayList<Meeting>) meetingRepo.findAll();
+		return result;
 	}
 
 	@Override
 	public Meeting selectMeetingById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Meeting result = meetingRepo.findByIdMeeting(id);
+		return result;
 	}
 
 	@Override
 	public ArrayList<Meeting> deleteMeetingById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		meetingRepo.deleteById(id);
+		ArrayList<Meeting> result = selectAllMeetings();
+		return result;
 	}
 
 	@Override
 	public Meeting insertNewMeeting(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd,
-			GeneralStatus generalStatus) {
-		// TODO Auto-generated method stub
-		return null;
+			GeneralStatus generalStatus) throws Exception {
+		if(generalStatus!=GeneralStatus.DayOff) {
+			Meeting result = new Meeting(dateTimeStart, dateTimeEnd, generalStatus);
+			meetingRepo.save(result);
+			return result;
+		} else {
+			throw new Exception("Meeting cannot be a day off");
+		}
 	}
 
 	@Override
 	public Meeting updateMeetingById(int id, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd,
 			GeneralStatus generalStatus) {
-		// TODO Auto-generated method stub
-		return null;
+		Meeting result = new Meeting();
+		if (meetingRepo.existsById(id)) {
+			result = meetingRepo.findByIdMeeting(id);
+			result.setDateTimeStart(dateTimeStart);
+			result.setDateTimeEnd(dateTimeEnd);
+			result.setGeneralStatus(generalStatus);
+			meetingRepo.save(result);
+		}
+		return result;
 	}
 
 	@Override
 	public void addEmployee(int meetingId, Employee employee) {
-		// TODO Auto-generated method stub
+		if(meetingRepo.existsById(meetingId)) {
+			Meeting result = meetingRepo.findByIdMeeting(meetingId);
+			result.addEmployee(employee);
+			meetingRepo.save(result);
+		}
 		
 	}
 
