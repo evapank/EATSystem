@@ -68,7 +68,7 @@ const UpdateEmployeeStatus = () => {
        			</tr>
        			<tr>
        			<td><label>General status:</label></td>
-       			<td> <select options={statusArray} name='generalStatus' className='form-control' onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
+       			<td> <select options={statusArray} name='generalStatus' className='form-control' value={employeeStatus.generalStatus} onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
 							<option value=''>-- Select status --</option>
 							{statusArray.map((e, x) => (
 								<option key={x} value={x}>{e}</option>

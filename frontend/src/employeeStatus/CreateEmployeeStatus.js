@@ -13,6 +13,7 @@ const CreateEmployeeStatus = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [employees, setEmployees] = useState([]);
+    const [statusArray, setStatusArray] = useState([]);
     const navigate = useNavigate();
     
     const handleSubmit = async (e) => {
@@ -54,8 +55,12 @@ const CreateEmployeeStatus = () => {
             </div>
             <div>
                 <label>General status:</label>
-                <input type='text' name='generalStatus' className='form-control' placeholder='Enter general status' value={employeeStatus.generalStatus}
-                            onChange={e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}/>
+                <select options={statusArray} name='generalStatus' className='form-control' onChange= {e => setEmployeeStatus({...employeeStatus, generalStatus: e.target.value})}>
+							<option value=''>-- Select status --</option>
+							{statusArray.map((e, x) => (
+								<option key={x} value={x}>{e}</option>
+							))};
+						</select>
             </div>
             <div>
                 <label>Date time start:</label>
