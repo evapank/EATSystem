@@ -91,7 +91,9 @@ export const OtherService = {
 };
 
 export const MeetingService = {
-	getEmployeeStatuses: (dateTime) => api.get("meeting/employeestatuses", dateTime)
+	getEmployeeStatuses: (dateTime) => api.get('meeting/employeestatuses', dateTime),
+	create: (meeting) => api.post('meeting/create', meeting),
+	addEmployeeToMeeting: (meetingId, employee) => api.post('meeting/addEmployee', meetingId, employee)
 };
 
 export default api;

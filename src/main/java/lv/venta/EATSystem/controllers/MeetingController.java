@@ -3,12 +3,17 @@ package lv.venta.EATSystem.controllers;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import lv.venta.EATSystem.models.Meeting;
 import lv.venta.EATSystem.services.IMeetingService;
 
 @RestController
@@ -23,5 +28,15 @@ public class MeetingController {
 	@GetMapping("/employeestatuses")
 	public void getEmployeesAndStatusesForTheDayTime(LocalDateTime datetime) {
 		meetingService.getAllEmployeeStatusByDateTime(datetime);
+	}
+	
+	@PostMapping("/create")
+	public Meeting postAddMeeting(@Valid @RequestBody Meeting meeting, BindingResult result) throws Exception {
+		if(!result.hasErrors()) {
+			return meetingService.insertNewMeeting(meeting.getDateTimeStart(),
+												   meeting.getDateTimeEnd(), meeting.getGeneralStatus());
+		} else {
+			throw new Exception ("can't create");
+		}
 	}
 }
