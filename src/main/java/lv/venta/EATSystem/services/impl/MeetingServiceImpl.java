@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.Meeting;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
 import lv.venta.EATSystem.services.IMeetingService;
@@ -34,6 +36,44 @@ public class MeetingServiceImpl implements IMeetingService{
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public ArrayList<Meeting> selectAllMeetings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Meeting selectMeetingById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Meeting> deleteMeetingById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Meeting insertNewMeeting(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd,
+			GeneralStatus generalStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Meeting updateMeetingById(int id, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd,
+			GeneralStatus generalStatus) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addEmployee(int meetingId, Employee employee) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
