@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MeetingService, OtherService } from "../static/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NewMeeting = () => {
     const [meeting, setMeeting] = useState({
@@ -12,6 +12,9 @@ const NewMeeting = () => {
     const [employeeStatuses, setEmployeeStatuses] = useState([]);
     const [generalStatuses, setGeneralStatuses] = useState([]);
     const [employees, setEmployees] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
             const fetchMeeting = async() => {

@@ -32,6 +32,7 @@ import SignupPage from './static/SignupPage';
 import WelcomeDashboard from './static/WelcomeDashboard';
 import ProfilePage from './user/employee/ProfilePage';
 import AddStatusPage from './user/employee/AddStatusPage';
+import NewMeeting from './meeting/NewMeeting';
 
 const App = () => {
   return (
@@ -43,6 +44,8 @@ const App = () => {
         <Route path={"/dashboard"} element={<WelcomeDashboard/>}/>
         <Route path={`/auth/user/employee/:id`} element={<ProfilePage/>}/>
         <Route path={`/auth/user/employee/newStatus/:id`} element={<AddStatusPage/>}/>
+
+        <Route path={"/meeting/create"} element={<NewMeeting/>} />
 
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>

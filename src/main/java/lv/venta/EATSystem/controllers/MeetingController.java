@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.Meeting;
 import lv.venta.EATSystem.services.IMeetingService;
 
@@ -38,5 +39,10 @@ public class MeetingController {
 		} else {
 			throw new Exception ("can't create");
 		}
+	}
+	
+	@PostMapping("/addEmployee")
+	public void AddEmployeeToMeeting(int id, @Valid @RequestBody Employee employee, BindingResult result) {
+		meetingService.addEmployee(id, employee);
 	}
 }
