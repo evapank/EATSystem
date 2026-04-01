@@ -20,7 +20,8 @@ const NewMeeting = () => {
             const fetchMeeting = async() => {
                 try {
                     const response = await OtherService.getGeneralStatus();
-                    setStatusArray(response.data);
+                    console.log(response.data);
+                    setGeneralStatuses(response.data);
                 } catch (error){
 					setError('cannot find meeting');
 					setLoading(false);
@@ -52,11 +53,13 @@ const NewMeeting = () => {
        };
  
     return (
+         <div className="container mt-4">
+            <h2>Create new meeting</h2>
         <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
             <div>
                 <label>Date time start:</label>
                 <input type='datetime-local' name='dateTimeStart' className='form-control' placeholder='Enter start date and time' value={meeting.dateTimeStart}
-                            onChange={e => {onChangeDateTimeStart; setMeeting({...meeting, dateTimeStart: e.target.value})}}/>
+                            onChange={e => {onChangeDateTimeStart(e); setMeeting({...meeting, dateTimeStart: e.target.value})}}/>
             </div>
             <div>
                 <label>Date time end:</label>
@@ -83,6 +86,7 @@ const NewMeeting = () => {
             </div>
              <button type='submit' className="btn btn-success mb-3">Submit</button>
         </form>
+        </div>
     )
 };
 
