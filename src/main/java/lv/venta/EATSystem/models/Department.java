@@ -23,7 +23,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table
+@Table(name="department_table")
 @Entity
 public class Department {
 
