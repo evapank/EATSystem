@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MeetingService, OtherService } from "../static/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const NewMeetingTimeSelect = () => {
     const [meeting, setMeeting] = useState({
@@ -54,18 +54,21 @@ const NewMeetingTimeSelect = () => {
     return (
          <div className="container mt-4">
             <h2>Create new meeting</h2>
-        <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
+        <form action="@{/meeting/employeestatuses}" object={meeting} method="post" onSubmit={handleSubmit}>
             <div>
                 <label>Date time start:</label>
                 <input type='datetime-local' name='dateTimeStart' className='form-control' placeholder='Enter start date and time' value={meeting.dateTimeStart}
-                            onChange={e => {onChangeDateTimeStart(e); setMeeting({...meeting, dateTimeStart: e.target.value})}}/>
+                            onChange={e =>  setMeeting({...meeting, dateTimeStart: e.target.value})}/>
             </div>
             <div>
                 <label>Date time end:</label>
                 <input type='datetime-local' name='dateTimeEnd' className='form-control' placeholder='Enter end date and time' value={meeting.dateTimeEnd}
                             onChange={e => setMeeting({...meeting, dateTimeEnd: e.target.value})}/>
             </div>
-             <button type='submit' className="btn btn-success mb-3">Next</button>
+             <Link to={{
+                pathname: "/meeting/create",
+                state: employeeStatuses
+             }} >Next</Link>
         </form>
         </div>
     )
