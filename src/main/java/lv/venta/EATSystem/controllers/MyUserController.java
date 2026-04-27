@@ -1,6 +1,5 @@
 package lv.venta.EATSystem.controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,9 @@ import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
-import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.response.AuthResponse;
 import lv.venta.EATSystem.services.IMyUserService;
 import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
-import lv.venta.EATSystem.services.impl.MyUserServiceImpl;
 
 @RestController
 @RequestMapping("/auth")

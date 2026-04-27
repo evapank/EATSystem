@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { MeetingService, OtherService } from "../static/api";
 import { useNavigate, useParams } from "react-router-dom";
 
-const NewMeeting = () => {
+const NewMeetingTimeSelect = () => {
     const [meeting, setMeeting] = useState({
             dateTimeStart : '',
             dateTimeEnd : '',
-            generalStatus : ''
         });
     const [statusArray, setStatusArray] = useState([]);
     const [employeeStatuses, setEmployeeStatuses] = useState([]);
@@ -66,28 +65,10 @@ const NewMeeting = () => {
                 <input type='datetime-local' name='dateTimeEnd' className='form-control' placeholder='Enter end date and time' value={meeting.dateTimeEnd}
                             onChange={e => setMeeting({...meeting, dateTimeEnd: e.target.value})}/>
             </div>
-           <div>
-               <label>General status:</label>
-       		    <select options={generalStatuses} name='generalStatus' className='form-control' onChange= {e => setMeeting({...meeting, generalStatus: e.target.value})}>
-							<option value=''>-- Select status --</option>
-							{generalStatuses.map((e, x) => (
-								<option key={x} value={x}>{e}</option>
-							))};
-						</select>
-            </div>
-            <div>
-                <label>Employees:</label>
-                <select multiple={true} options={employeeStatuses} name='employees' className='form-control' onChange={onChangeEmployees}>
-                    <option value=''>-- Select Employee --</option>
-							{employeeStatuses.map(e => (
-								<option key={employeeStatuses.employee.idEmployee} value={employeeStatuses.employee.idEmployee}>{e.employee.name} {e.employee.surname} / {e.generalStatus}</option>
-							))};
-                </select>
-            </div>
-             <button type='submit' className="btn btn-success mb-3">Submit</button>
+             <button type='submit' className="btn btn-success mb-3">Next</button>
         </form>
         </div>
     )
 };
 
-export default NewMeeting;
+export default NewMeetingTimeSelect;
