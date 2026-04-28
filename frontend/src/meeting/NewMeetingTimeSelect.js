@@ -6,49 +6,22 @@ const NewMeetingTimeSelect = () => {
     const [meeting, setMeeting] = useState({
             dateTimeStart : '',
             dateTimeEnd : '',
+            generalStatus: ''
         });
-    const [statusArray, setStatusArray] = useState([]);
     const [employeeStatuses, setEmployeeStatuses] = useState([]);
     const [generalStatuses, setGeneralStatuses] = useState([]);
-    const [employees, setEmployees] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-            const fetchMeeting = async() => {
-                try {
-                    const response = await OtherService.getGeneralStatus();
-                    console.log(response.data);
-                    setGeneralStatuses(response.data);
-                } catch (error){
-					setError('cannot find meeting');
-					setLoading(false);
-					console.log(error);
-				}
-            };
-            fetchMeeting();
-    }, []);
 
     const onChangeDateTimeStart = async (dateTime) => {
         const response = await MeetingService.getEmployeeStatuses(dateTime);
         setEmployeeStatuses(response.data);
     };
 
-    const onChangeEmployees = (employee) => {
-        setEmployees(previousEmployee => ({
-            employees: [...previousEmployee.employees, employee]
-        }));
-    };
-
     const handleSubmit = async (e) => {
            e.preventDefault();
-           try{
-               await MeetingService.create(meeting);
-               navigate('/dashboard');
-           } catch (error) {
-               console.error('Submit error: ', error);
-           }
+               navigate("/meeting/create", {meeting, employeeStatuses});
        };
  
     return (
