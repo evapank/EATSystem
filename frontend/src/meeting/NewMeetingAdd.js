@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { MeetingService } from "../static/api";
 
 const NewMeetingAdd = () => {
@@ -13,6 +14,7 @@ const NewMeetingAdd = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
     
     useEffect(() => {
                 const fetchMeeting = async() => {
@@ -20,6 +22,7 @@ const NewMeetingAdd = () => {
                         const response = await OtherService.getGeneralStatus();
                         console.log(response.data);
                         setGeneralStatuses(response.data);
+                        setEmployeeStatuses(location.employeeStatuses);
                         setLoading(false);
                     } catch (error){
                         setError('cannot find meeting');
@@ -50,7 +53,8 @@ const NewMeetingAdd = () => {
 
     return (
          <div className="container mt-4">
-            <h2>Create new meeting</h2>
+            <h2>Create new meeting for the time:</h2>
+            {location.meeting.dateTimeStart} - {location.meeting.dateTimeEnd}
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>

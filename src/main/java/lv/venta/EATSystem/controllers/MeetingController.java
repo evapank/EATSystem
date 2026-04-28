@@ -1,6 +1,7 @@
 package lv.venta.EATSystem.controllers;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,13 @@ public class MeetingController {
 	
 	@Autowired
 	IMeetingService meetingService;
+	
+	@GetMapping("/all")
+	public Collection<Meeting> getAllMeetings(){
+		return meetingService.selectAllMeetings();
+	}
 
+	
 	@GetMapping("/employeestatuses")
 	public void getEmployeesAndStatusesForTheDayTime(LocalDateTime datetime) {
 		meetingService.getAllEmployeeStatusByDateTime(datetime);
