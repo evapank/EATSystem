@@ -22,10 +22,10 @@ const SignupPage = () => {
            if (password !== confirmPassword) {
             throw new Error("Passwords do not match");
            }
-           const response = UserService.signUp(username, email, password, role);
+           const response = await UserService.signUp(username, email, password, role);
            //localStorage.setItem("token", response.data.jwt);
-           if(role=='EMPLOYEE'){
-                navigate(`/auth/user/employee/${id}`);
+           if(response.data.role=='EMPLOYEE'){
+                navigate(`/auth/user/employee/${response.data.id}`);
            }else{
                 navigate('/dashboard');
         }

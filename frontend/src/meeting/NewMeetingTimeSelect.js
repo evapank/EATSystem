@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { MeetingService, OtherService } from "../static/api";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Moment from "react-moment";
+import moment from "moment";
 
 const NewMeetingTimeSelect = () => {
     const [meeting, setMeeting] = useState({
-            dateTimeStart : '',
-            dateTimeEnd : '',
+            dateTimeStart : moment(new Date()).format("YYYY-MM-DDTHH:mm"),
+            dateTimeEnd : moment(new Date()).format("YYYY-MM-DDTHH:mm"),
             generalStatus: ''
         });
     const [employeeStatuses, setEmployeeStatuses] = useState([]);

@@ -32,7 +32,9 @@ import SignupPage from './static/SignupPage';
 import WelcomeDashboard from './static/WelcomeDashboard';
 import ProfilePage from './user/employee/ProfilePage';
 import AddStatusPage from './user/employee/AddStatusPage';
-import NewMeeting from './meeting/NewMeeting';
+import NewMeetingAdd from './meeting/NewMeetingAdd';
+import NewMeetingTimeSelect from './meeting/NewMeetingTimeSelect';
+import AllMeetings from './meeting/AllMeetings';
 
 const App = () => {
   return (
@@ -45,7 +47,9 @@ const App = () => {
         <Route path={`/auth/user/employee/:id`} element={<ProfilePage/>}/>
         <Route path={`/auth/user/employee/newStatus/:id`} element={<AddStatusPage/>}/>
 
-        <Route path={"/meeting/create"} element={<NewMeeting/>} />
+        <Route path={"/meeting/all"} element={<AllMeetings/>} />
+        <Route path={"/meeting/employeestatuses"} element={<NewMeetingTimeSelect/>} />
+        <Route path={"/meeting/create"} element={<NewMeetingAdd/>} />
 
         <Route path={'/department/all'} exact={true} element={<AllDepartments/>}/>
         <Route path={`/department/all/:id`} exact={true} element={<OneDepartment/>}/>

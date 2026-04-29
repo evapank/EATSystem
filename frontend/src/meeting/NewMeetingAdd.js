@@ -1,10 +1,11 @@
-import { useLocation } from "react-router-dom";
-import { MeetingService } from "../static/api";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MeetingService, OtherService } from "../static/api";
+import { useEffect, useState } from "react";
 
 const NewMeetingAdd = () => {
     const [meeting, setMeeting] = useState({
-            dateTimeStart : '',
-            dateTimeEnd : '',
+            dateTimeStart : new Date(),
+            dateTimeEnd : new Date(),
             generalStatus: ''
         });
     const [statusArray, setStatusArray] = useState([]);

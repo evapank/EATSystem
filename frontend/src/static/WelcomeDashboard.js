@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 
 const WelcomeDasboard = () => {
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         navigate('/');
