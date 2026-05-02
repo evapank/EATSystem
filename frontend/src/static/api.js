@@ -95,7 +95,7 @@ export const MeetingService = {
 	getById: (id) => api.get(`/meeting/all/${id}`),
 	delete: (id) => api.delete(`/meeting/remove/${id}`),
 	update: (id, meeting) => api.put(`/meeting/update/${id}`, meeting),
-	getEmployeeStatuses: (dateTime) => api.get('meeting/employeestatuses', dateTime),
+	getEmployeeStatuses: (dateTimeStart, dateTimeEnd) => api.get('meeting/employeestatuses', dateTimeStart, dateTimeEnd),
 	create: (meeting) => api.post('meeting/create', meeting),
 	addEmployeeToMeeting: (meetingId, employee) => api.post('meeting/addEmployee', meetingId, employee)
 };

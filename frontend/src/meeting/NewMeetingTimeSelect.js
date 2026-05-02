@@ -29,16 +29,19 @@ const NewMeetingTimeSelect = () => {
     return (
          <div className="container mt-4">
             <h2>Choose meeting time:</h2>
-        <form action="@{/meeting/employeestatuses}" object={{dateTimeStart, dateTimeEnd}} method="post" onSubmit={handleSubmit}>
+        <form action="@{/meeting/employeestatuses}" object={{dateTimeStart, dateTimeEnd}}
+        method="post" onSubmit={handleSubmit}>
             <div>
                 <label>Date time start:</label>
-                <input type='datetime-local' name='dateTimeStart' className='form-control' placeholder='Enter start date and time' value={dateTimeStart}
-                            onChange={e =>  setDateTimeStart(e.target.value)}/>
+                <input type='datetime-local' name='dateTimeStart' className='form-control'
+                        placeholder='Enter start date and time' value={dateTimeStart}
+                        onChange={e =>  setDateTimeStart(e.target.value)}/>
             </div>
             <div>
                 <label>Date time end:</label>
-                <input type='datetime-local' name='dateTimeEnd' className='form-control' placeholder='Enter end date and time' value={dateTimeEnd}
-                            onChange={e => setDateTimeEnd(e.target.value)}/>
+                <input type='datetime-local' name='dateTimeEnd' className='form-control'
+                        placeholder='Enter end date and time' value={dateTimeEnd}
+                        onChange={e => setDateTimeEnd(e.target.value)}/>
             </div>
              <button type='submit' className="btn btn-primary mb-3">Next</button>
         </form>

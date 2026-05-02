@@ -16,13 +16,12 @@ const NewMeetingAdd = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
-    setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
     
     useEffect(() => {
             const fetchMeeting = async() => {
                 try {
-                     
+                    setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
+                    setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
                     const response = await OtherService.getGeneralStatus();
                     const emStResponse = await MeetingService.getEmployeeStatuses(meeting.dateTimeStart, meeting.dateTimeEnd);
                     console.log("statuses: "+response.data);

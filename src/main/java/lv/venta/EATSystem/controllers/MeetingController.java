@@ -63,7 +63,8 @@ public class MeetingController {
 	}
 	
 	@GetMapping("/employeestatuses")
-	public void getEmployeesAndStatusesForTheDayTime(@Valid @RequestParam("dateTimeStart") LocalDateTime dateTimeStart, @Valid @RequestParam("dateTimeEnd") LocalDateTime dateTimeEnd ) {
+	public void getEmployeesAndStatusesForTheDayTime(@Valid @RequestParam("dateTimeStart") LocalDateTime dateTimeStart,
+													@Valid @RequestParam("dateTimeEnd") LocalDateTime dateTimeEnd ) {
 		meetingService.getAllEmployeeStatusByDateTime(dateTimeStart, dateTimeEnd);
 	}
 	
