@@ -30,8 +30,14 @@ public class MeetingServiceImpl implements IMeetingService{
 	@Override
 	public ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetime) {
 		ArrayList<EmployeeStatus> allStatuses = (ArrayList<EmployeeStatus>) empStRepo.findAll();
+		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
 		ArrayList<EmployeeStatus> result = new ArrayList<>();
-		
+		for (Employee employee: allEmployees) {
+			if (!empStRepo.findByEmployeeAndDateTimeStart(employee, datetime)) {
+				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson, datetime, datetime.plusDays(1));
+				empStRepo.save(empSt);
+			}
+		}
 		for(EmployeeStatus status: allStatuses) {
 			if(status.getGeneralStatus()!=GeneralStatus.DayOff) {
 				if(status.getDateTimeStart().isBefore(datetime)&&status.getDateTimeEnd().isAfter(datetime)) {

@@ -1,9 +1,11 @@
 package lv.venta.EATSystem.repos;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.data.repository.CrudRepository;
 
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeStatus;
 
 public interface IEmployeeStatusRepo extends CrudRepository<EmployeeStatus, Integer>{
@@ -13,5 +15,7 @@ public interface IEmployeeStatusRepo extends CrudRepository<EmployeeStatus, Inte
 	void deleteByIdEmployeeStatus(int id);
 
 	ArrayList<EmployeeStatus> findByEmployeeIdEmployee(int id);
+
+	boolean findByEmployeeAndDateTimeStart(Employee employee, LocalDateTime datetime);
 
 }
