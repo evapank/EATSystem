@@ -3,6 +3,7 @@ package lv.venta.EATSystem.services;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import jakarta.validation.Valid;
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeStatus;
@@ -10,7 +11,7 @@ import lv.venta.EATSystem.models.Meeting;
 
 public interface IMeetingService {
 
-	public abstract ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetime);
+	public abstract ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetime, LocalDateTime dateTimeEnd);
 	
 	public abstract ArrayList<Meeting> selectAllMeetings();
 	

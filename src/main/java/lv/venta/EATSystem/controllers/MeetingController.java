@@ -1,9 +1,11 @@
 package lv.venta.EATSystem.controllers;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
@@ -60,8 +63,8 @@ public class MeetingController {
 	}
 	
 	@GetMapping("/employeestatuses")
-	public void getEmployeesAndStatusesForTheDayTime(LocalDateTime datetime) {
-		meetingService.getAllEmployeeStatusByDateTime(datetime);
+	public void getEmployeesAndStatusesForTheDayTime(@Valid @RequestParam("dateTimeStart") LocalDateTime dateTimeStart, @Valid @RequestParam("dateTimeEnd") LocalDateTime dateTimeEnd ) {
+		meetingService.getAllEmployeeStatusByDateTime(dateTimeStart, dateTimeEnd);
 	}
 	
 	@PostMapping("/create")

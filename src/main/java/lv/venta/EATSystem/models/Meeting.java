@@ -3,6 +3,9 @@ package lv.venta.EATSystem.models;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -43,9 +46,11 @@ public class Meeting {
 	private Collection<Employee> employees;
 	
 	@Column(name = "DateTimeStart")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeStart;
 	
 	@Column(name = "DateTimeEnd")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeEnd;
 	
 	@Column(name = "generalStatus")

@@ -16,6 +16,6 @@ public interface IEmployeeStatusRepo extends CrudRepository<EmployeeStatus, Inte
 
 	ArrayList<EmployeeStatus> findByEmployeeIdEmployee(int id);
 
-	boolean findByEmployeeAndDateTimeStart(Employee employee, LocalDateTime datetime);
+	EmployeeStatus findByEmployeeAndDateTimeStart(Employee employee, LocalDateTime datetime);
 
 }
