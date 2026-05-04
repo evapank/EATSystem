@@ -20,6 +20,7 @@ class OrderTest {
 								LocalDateTime.of(2026, Month.APRIL, 25, 15, 30, 00), OrderStatus.SickLeave, eos);
 	@Test
 	void test() {
+		assertEquals(10001, orderRight.getOrderNumber());
 		assertEquals("SickLeave", OrderStatus.SickLeave.toString());
 	}
 
