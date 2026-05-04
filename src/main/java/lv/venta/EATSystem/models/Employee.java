@@ -39,18 +39,18 @@ public class Employee {
 	private int idEmployee;
 	
 	@Column(name = "Name")
-	@Size(min = 1, max = 100)
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Size(min = 2, max = 100)
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String name;
 	
 	@Column(name = "Surname")
-	@Size(min = 1, max = 300)
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Size(min = 2, max = 300)
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String surname;
 	
 	@Column(name = "Position")
 	@Size(min = 3, max = 100)
-	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String position;
 	
 	@ManyToOne

@@ -1,19 +1,20 @@
 package lv.venta.EATSystem.models;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class DepartmentTest {
+class DepartmentTest {
 
 	Department depRight = new Department("Sales");
 	Department depWrong = new Department("1");
 	
 	@Test
-	void testDepartmentCreation() {
+	void test() {
 		
 		assertEquals("Sales", depRight.getTitle());
 		
 		assertEquals("", depWrong.getTitle());
 	}
+
 }

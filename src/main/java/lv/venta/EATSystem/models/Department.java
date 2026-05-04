@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class Department {
 	
 	@Column(name = "Title")
 	@Size(min = 3, max = 100)
-	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String title;
 	
 	@OneToMany(mappedBy = "department")
