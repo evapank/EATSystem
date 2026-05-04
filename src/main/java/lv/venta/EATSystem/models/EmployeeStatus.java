@@ -2,6 +2,9 @@ package lv.venta.EATSystem.models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +33,11 @@ public class EmployeeStatus extends Status{
 	protected int idEmployeeStatus;
 	
 	@Column(name = "DateTimeStart")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeStart;
 	
 	@Column(name = "DateTimeEnd")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeEnd;
 	
 	public EmployeeStatus (Employee employee, GeneralStatus generalStatus,
