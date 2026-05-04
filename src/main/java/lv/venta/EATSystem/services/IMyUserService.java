@@ -2,8 +2,6 @@ package lv.venta.EATSystem.services;
 
 import java.util.ArrayList;
 
-import lv.venta.EATSystem.models.Employee;
-import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
