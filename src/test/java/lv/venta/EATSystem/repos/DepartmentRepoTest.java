@@ -28,6 +28,6 @@ class DepartmentRepoTest {
 		updated.setTitle("Sales");
 		
 		assertNotNull(departmentRepo.findByTitle("Sales"));
-		assertNull(departmentRepo.findByTitle("Finance));
+		assertNull(departmentRepo.findByTitle("Finance"));
 	}
 }
