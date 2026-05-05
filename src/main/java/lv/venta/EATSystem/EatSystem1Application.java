@@ -3,6 +3,7 @@ package lv.venta.EATSystem;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,7 @@ import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.repos.IOrderRepo;
 import lv.venta.EATSystem.repos.IProjectRepo;
+import lv.venta.EATSystem.services.IEmailService;
 
 
 @SpringBootApplication
@@ -44,7 +46,7 @@ public class EatSystem1Application {
 	public CommandLineRunner runner(IDayRepo dayRepo, IDepartmentRepo departmentRepo,
 			IEmployeeOrderStatusRepo employeeOrderStatusRepo, IEmployeeRepo employeeRepo,
 			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo,
-			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
+			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo, IEmailService emailService) {
 		return new CommandLineRunner() {
 
 			@Override
@@ -133,6 +135,9 @@ public class EatSystem1Application {
 				emp2.addProjects(proj2);
 				employeeRepo.save(emp1);
 				employeeRepo.save(emp2);
+				
+				//emailService.sendEmail("s21pankeva@venta.lv", LocalDateTime.of( 2026, Month.APRIL, 24, 14, 30, 00),
+				//		 LocalDateTime.of( 2026, Month.APRIL, 24, 15, 30, 00));
 
 			}
 
