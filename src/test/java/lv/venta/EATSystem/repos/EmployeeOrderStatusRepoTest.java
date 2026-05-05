@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 
+@DataJpaTest
 class EmployeeOrderStatusRepoTest {
 	
 	@Autowired
