@@ -35,7 +35,7 @@ public class Department {
 	private int idDepartment;
 	
 	@Column(name = "Title")
-	@Size(min = 3, max = 100)
+	@Size(min = 2, max = 100)
 	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String title;
 	

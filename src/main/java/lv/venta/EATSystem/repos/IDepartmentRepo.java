@@ -12,4 +12,6 @@ public interface IDepartmentRepo extends CrudRepository<Department, Integer>{
 
 	Department findByEmployeesIdEmployee(int id);
 
+	Department findByTitle(String string);
+
 }
