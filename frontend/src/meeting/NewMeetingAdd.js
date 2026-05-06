@@ -16,14 +16,18 @@ const NewMeetingAdd = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
+    const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"}
     
     useEffect(() => {
             const fetchMeeting = async() => {
                 try {
                     setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
                     setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
+                    console.log(location.state.dateTimeStart + "+ " + location.state.dateTimeEnd)
                     const response = await OtherService.getGeneralStatus();
-                    const emStResponse = await MeetingService.getEmployeeStatuses(meeting.dateTimeStart, meeting.dateTimeEnd);
+                    myObject.dateTimeStart=location.state.dateTimeStart
+                    myObject.dateTimeEnd=location.state.dateTimeEnd
+                    const emStResponse = await MeetingService.getEmployeeStatuses(myObject);
                     console.log("statuses: "+response.data);
                     console.log("employee statuses: "+emStResponse.data)
                     setGeneralStatuses(response.data);
@@ -49,22 +53,23 @@ const NewMeetingAdd = () => {
        };
  
         const onChangeEmployees = (employee) => {
-            setEmployees({
-                employees: employees.concat(employee)
-            });
+            const newEmployee =employee.map( (e) => {
+                return {surname: employee.surname};
+                });
+            setEmployees(employee);
         };
 
     return (
          <div className="container mt-4">
             <h2>Create new meeting for the time:</h2>
-            {meeting.dateTimeStart} - {meeting.dateTimeEnd}
+
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <select multiple={true} options={employeeStatuses} name='employees' className='form-control' onChange={onChangeEmployees}>
+                    <select multiple={true} isObject={true} options={employeeStatuses} name='employees' className='form-control' onSelect={onChangeEmployees} onRemove={onChangeEmployees}>
                         <option value=''>-- Select Employee --</option>
                                 {employeeStatuses.map(e => (
-                                    <option key={employeeStatuses.employee.idEmployee} value={employeeStatuses.employee.idEmployee}>{e.employee.name} {e.employee.surname} / {e.generalStatus}</option>
+                                    <option key={employeeStatuses?.employee?.idEmployee} value={employeeStatuses?.employee?.idEmployee}>{e.employee.name} {e.employee.surname} / {e.generalStatus}</option>
                                 ))};
                     </select>
                 </div>

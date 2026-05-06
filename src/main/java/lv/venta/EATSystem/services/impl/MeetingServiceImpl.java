@@ -38,14 +38,14 @@ public class MeetingServiceImpl implements IMeetingService{
 				empStRepo.save(empSt);
 			}
 		}
-		for(EmployeeStatus status: allStatuses) {
+		for(EmployeeStatus status: empStRepo.findAll()) {
 			if(status.getGeneralStatus()!=GeneralStatus.DayOff) {
 				if(status.getDateTimeStart().isBefore(dateTimeStart)&&status.getDateTimeEnd().isAfter(dateTimeEnd)) {
 					result.add(status);
 				}
 			}
 		}
-		return result;
+		return (ArrayList<EmployeeStatus>) empStRepo.findAll();
 	}
 
 	@Override

@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Employee;
+import lv.venta.EATSystem.models.EmployeeStatus;
 import lv.venta.EATSystem.models.Meeting;
+import lv.venta.EATSystem.models.dto.MeetingDTO;
 import lv.venta.EATSystem.services.IMeetingService;
 
 @RestController
@@ -62,10 +64,10 @@ public class MeetingController {
 		}
 	}
 	
-	@GetMapping("/employeestatuses")
-	public void getEmployeesAndStatusesForTheDayTime(@Valid @RequestParam("dateTimeStart") LocalDateTime dateTimeStart,
-													@Valid @RequestParam("dateTimeEnd") LocalDateTime dateTimeEnd ) {
-		meetingService.getAllEmployeeStatusByDateTime(dateTimeStart, dateTimeEnd);
+	@PutMapping("/employeestatuses")
+	public Collection<EmployeeStatus> getEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
+		System.out.println(meetingdto);
+		return meetingService.getAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
 	}
 	
 	@PostMapping("/create")
