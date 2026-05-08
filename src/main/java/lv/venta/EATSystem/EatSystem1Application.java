@@ -46,7 +46,7 @@ public class EatSystem1Application {
 	public CommandLineRunner runner(IDayRepo dayRepo, IDepartmentRepo departmentRepo,
 			IEmployeeOrderStatusRepo employeeOrderStatusRepo, IEmployeeRepo employeeRepo,
 			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo,
-			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo, IEmailService emailService) {
+			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
 		return new CommandLineRunner() {
 
 			@Override

@@ -7,9 +7,11 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import lv.venta.EATSystem.enums.OrderStatus;
 
+@SpringBootTest(properties = "spring.profiles.active=test")
 class OrderTest {
 
 	Project project = new Project();

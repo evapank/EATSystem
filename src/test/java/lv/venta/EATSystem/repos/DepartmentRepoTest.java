@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import lv.venta.EATSystem.models.Department;
 
-@DataJpaTest
+@SpringBootTest(properties = "spring.profiles.active=test")
 class DepartmentRepoTest {
 	
 	@Autowired
@@ -23,13 +24,14 @@ class DepartmentRepoTest {
 
 	@Test
 	void testRepoUpdate() {
-		departmentRepo.save(new Department("Finance"));
+		departmentRepo.save(new Department("Planning"));
 		
-		Department updated = departmentRepo.findByTitle("Finance");
+		Department updated = departmentRepo.findByTitle("Planning");
 		
 		updated.setTitle("Sales");
+		departmentRepo.save(updated);
 		
 		assertNotNull(departmentRepo.findByTitle("Sales"));
-		assertNull(departmentRepo.findByTitle("Finance"));
+		assertNull(departmentRepo.findByTitle("Planning"));
 	}
 }
