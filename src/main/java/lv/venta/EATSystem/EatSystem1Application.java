@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.enums.OrderStatus;
 import lv.venta.EATSystem.enums.SecurityRole;
-import lv.venta.EATSystem.models.Day;
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
@@ -23,7 +22,6 @@ import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
-import lv.venta.EATSystem.repos.IDayRepo;
 import lv.venta.EATSystem.repos.IDepartmentRepo;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
@@ -43,7 +41,7 @@ public class EatSystem1Application {
 	}
 
 	@Bean
-	public CommandLineRunner runner(IDayRepo dayRepo, IDepartmentRepo departmentRepo,
+	public CommandLineRunner runner(IDepartmentRepo departmentRepo,
 			IEmployeeOrderStatusRepo employeeOrderStatusRepo, IEmployeeRepo employeeRepo,
 			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo,
 			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
@@ -108,11 +106,6 @@ public class EatSystem1Application {
 				
 				ord1.setEmployeeOrderStatus(empOrdSt1);
 				orderRepo.save(ord1);
-				
-				Day day1 = new Day(empSt1, LocalDate.of(2025, 11, 3));
-				Day day2 = new Day(empSt2, LocalDate.of(2025, 11, 4));
-				dayRepo.save(day1);
-				dayRepo.save(day2);
 				
 				Project proj1 = new Project(10001, "Mobile app development",LocalDate.of(2025, 1, 9),
 						LocalDate.of(2026, 1, 9), emp1);
