@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
@@ -15,10 +21,11 @@ class MeetingTest {
 
 	Meeting meetingRight = new Meeting(LocalDateTime.of(
             2026, Month.APRIL, 24, 14, 30, 00), LocalDateTime.of(
-                    2026, Month.APRIL, 24, 15, 30, 00), GeneralStatus.InPerson);
+                   2026, Month.APRIL, 24, 15, 30, 00), GeneralStatus.InPerson);
+	
+	Employee employee = new Employee();
 	@Test
-	void test() {
-		assertEquals("InPerson", GeneralStatus.InPerson.toString());
+	void testCreate() {
+		assertEquals("InPerson", meetingRight.getGeneralStatus().toString());
 	}
-
 }
