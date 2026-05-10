@@ -6,24 +6,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import lv.venta.EATSystem.models.MyUser;
-import lv.venta.EATSystem.repos.IMyUserRepo;
+import lv.venta.EATSystem.models.Order;
+import lv.venta.EATSystem.repos.IOrderRepo;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
-class MyUserServiceTest {
+class OrderServiceTest {
 
 	@Autowired
-	IMyUserService userService;
+	IOrderService orderService;
 	
 	@Autowired
-	IMyUserRepo userRepo;
+	IOrderRepo orderRepo;
 	
 	@Test
-	void test() {
-		MyUser user = new MyUser();
-		userRepo.save(user);
+	void testSelectAll() {
+		Order order = new Order();
+		orderRepo.save(order);
 		
-		assertFalse(userService.selectAllUsers().isEmpty());
+		assertFalse(orderService.selectAllOrders().isEmpty());
 	}
 
 }

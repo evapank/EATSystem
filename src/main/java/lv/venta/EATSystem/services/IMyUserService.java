@@ -10,7 +10,7 @@ import lv.venta.EATSystem.models.Project;
 
 public interface IMyUserService {
 	
-	public abstract ArrayList<MyUser> getAllUsers();
+	public abstract ArrayList<MyUser> selectAllUsers();
     
     public abstract MyUser findUserByEmail(String email);
     

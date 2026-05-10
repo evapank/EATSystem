@@ -38,7 +38,7 @@ public class MyUserServiceImpl implements IMyUserService{
 	IEmployeeStatusRepo empStRepo;
 	
 	@Override
-	public ArrayList<MyUser> getAllUsers() {
+	public ArrayList<MyUser> selectAllUsers() {
 		ArrayList<MyUser> result = (ArrayList<MyUser>) userRepo.findAll();
 		return result;
 	}
