@@ -17,7 +17,7 @@ const NewMeetingAdd = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"}
+    const myTime = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"}
     
     useEffect(() => {
             const fetchMeeting = async() => {
@@ -26,11 +26,12 @@ const NewMeetingAdd = () => {
                     setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
                     console.log(location.state.dateTimeStart + "+ " + location.state.dateTimeEnd)
                     const response = await OtherService.getGeneralStatus();
-                    myObject.dateTimeStart=location.state.dateTimeStart
-                    myObject.dateTimeEnd=location.state.dateTimeEnd
-                    const emStResponse = await MeetingService.getEmployeeStatuses(myObject);
+                    myTime.dateTimeStart=location.state.dateTimeStart
+                    myTime.dateTimeEnd=location.state.dateTimeEnd
+                    const emStResponse = await MeetingService.getEmployeeStatuses(myTime);
                     console.log("statuses: "+response.data);
-                    console.log("employee statuses: "+emStResponse.data)
+                    console.log("employee statuses: "+emStResponse.data);
+                    console.log("employee statuses1: "+emStResponse.data.employee);
                     setGeneralStatuses(response.data);
                     setEmployeeStatuses(emStResponse.data);
                     setLoading(false);
@@ -67,7 +68,7 @@ const NewMeetingAdd = () => {
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <Multiselect options={employeeStatuses} onSelect={onChangeEmployees} onRemove={onChangeEmployees} displayValue="employeeStatuses.employee.surname" className='form-control'/>
+                    <Multiselect options={employeeStatuses} onSelect={onChangeEmployees} onRemove={onChangeEmployees} displayValue={employeeStatuses.surname}{...employeeStatuses.generalStatus} className='form-control'/>
                 </div>
                 <div>
                 <label>General status:</label>
