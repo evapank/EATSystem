@@ -24,7 +24,7 @@ const SignupPage = () => {
            }
            const response = await UserService.signUp(username, email, password, role);
            //localStorage.setItem("token", response.data.jwt);
-           if(response.data.role=='EMPLOYEE'){
+           if(response.data.role==='EMPLOYEE'){
                 navigate(`/auth/user/employee/${response.data.id}`);
            }else{
                 navigate('/dashboard');

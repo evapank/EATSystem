@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { MeetingService, OtherService } from "../static/api";
 import { useEffect, useState } from "react";
+import Multiselect from "multiselect-react-dropdown";
 
 const NewMeetingAdd = () => {
     const [meeting, setMeeting] = useState({
@@ -66,12 +67,7 @@ const NewMeetingAdd = () => {
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <select multiple={true} isObject={true} options={employeeStatuses} name='employees' className='form-control' onSelect={onChangeEmployees} onRemove={onChangeEmployees}>
-                        <option value=''>-- Select Employee --</option>
-                                {employeeStatuses.map(e => (
-                                    <option key={employeeStatuses?.employee?.idEmployee} value={employeeStatuses?.employee?.idEmployee}>{e.employee.name} {e.employee.surname} / {e.generalStatus}</option>
-                                ))};
-                    </select>
+                    <Multiselect options={employeeStatuses} onSelect={onChangeEmployees} onRemove={onChangeEmployees} displayValue="employeeStatuses.employee.surname" className='form-control'/>
                 </div>
                 <div>
                 <label>General status:</label>

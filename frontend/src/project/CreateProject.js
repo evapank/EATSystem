@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DepartmentService, EmployeeService, ProjectService } from '../static/api';
+import { EmployeeService, ProjectService } from '../static/api';
 import { Link, useNavigate} from 'react-router-dom';
 import TextError from '../static/TextError';
 
