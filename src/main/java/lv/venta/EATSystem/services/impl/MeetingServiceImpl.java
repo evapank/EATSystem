@@ -45,7 +45,7 @@ public class MeetingServiceImpl implements IMeetingService{
 				}
 			}
 		}
-		return (ArrayList<EmployeeStatus>) empStRepo.findAll();
+		return result;
 	}
 
 	@Override

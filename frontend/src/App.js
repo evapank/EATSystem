@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-big-calendar/lib/css/react-big-calendar.css"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AllDepartments from './department/AllDepartments';
 import OneDepartment from './department/OneDepartment';
@@ -34,7 +35,7 @@ import ProfilePage from './user/employee/ProfilePage';
 import AddStatusPage from './user/employee/AddStatusPage';
 import NewMeetingAdd from './meeting/NewMeetingAdd';
 import NewMeetingTimeSelect from './meeting/NewMeetingTimeSelect';
-import AllMeetings from './meeting/AllMeetings';
+import AllMeetingsCalendar from './meeting/AllMeetingsCalendar';
 
 const App = () => {
   return (
@@ -47,7 +48,7 @@ const App = () => {
         <Route path={`/auth/user/employee/:id`} element={<ProfilePage/>}/>
         <Route path={`/auth/user/employee/newStatus/:id`} element={<AddStatusPage/>}/>
 
-        <Route path={"/meeting/all"} element={<AllMeetings/>} />
+        <Route path={"/meeting/all"} element={<AllMeetingsCalendar/>} />
         <Route path={"/meeting/employeestatuses"} element={<NewMeetingTimeSelect/>} />
         <Route path={"/meeting/create"} element={<NewMeetingAdd/>} />
 

@@ -18,6 +18,7 @@ import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
 import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.models.Meeting;
 import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
@@ -26,6 +27,7 @@ import lv.venta.EATSystem.repos.IDepartmentRepo;
 import lv.venta.EATSystem.repos.IEmployeeOrderStatusRepo;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
 import lv.venta.EATSystem.repos.IEmployeeStatusRepo;
+import lv.venta.EATSystem.repos.IMeetingRepo;
 import lv.venta.EATSystem.repos.IMyAuthorityRepo;
 import lv.venta.EATSystem.repos.IMyUserRepo;
 import lv.venta.EATSystem.repos.IOrderRepo;
@@ -44,7 +46,7 @@ public class EatSystem1Application {
 	public CommandLineRunner runner(IDepartmentRepo departmentRepo,
 			IEmployeeOrderStatusRepo employeeOrderStatusRepo, IEmployeeRepo employeeRepo,
 			IEmployeeStatusRepo employeeStatusRepo, IOrderRepo orderRepo, IProjectRepo projectRepo,
-			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
+			IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo, IMeetingRepo meetingRepo) {
 		return new CommandLineRunner() {
 
 			@Override
@@ -127,6 +129,14 @@ public class EatSystem1Application {
 				emp1.addProjects(proj2);
 				emp2.addProjects(proj2);
 				employeeRepo.save(emp1);
+				employeeRepo.save(emp2);
+				
+				Meeting meet1 = new Meeting(LocalDateTime.of(2026, Month.APRIL, 29, 11, 30, 00),
+											LocalDateTime.of(2026, Month.APRIL, 29, 12, 00, 00), GeneralStatus.InPerson);
+				meetingRepo.save(meet1);
+				
+				meet1.addEmployee(emp2);
+				meetingRepo.save(meet1);
 				employeeRepo.save(emp2);
 				
 				//emailService.sendEmail("s21pankeva@venta.lv", LocalDateTime.of( 2026, Month.APRIL, 24, 14, 30, 00),
