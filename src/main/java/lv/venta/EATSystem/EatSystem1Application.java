@@ -135,10 +135,6 @@ public class EatSystem1Application {
 											LocalDateTime.of(2026, Month.APRIL, 29, 12, 00, 00), GeneralStatus.InPerson);
 				meetingRepo.save(meet1);
 				
-				meet1.addEmployee(emp2);
-				meetingRepo.save(meet1);
-				employeeRepo.save(emp2);
-				
 				//emailService.sendEmail("s21pankeva@venta.lv", LocalDateTime.of( 2026, Month.APRIL, 24, 14, 30, 00),
 				//		 LocalDateTime.of( 2026, Month.APRIL, 24, 15, 30, 00));
 

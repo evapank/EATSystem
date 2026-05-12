@@ -11,8 +11,8 @@ const AllMeetingsCalendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const location = useLocation();
-	const locales = {'en-US': enUS}
-	const localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales})
+	const locales = {'en-US': enUS};
+	const localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales});
 	
 	useEffect(() => {
 		const fetchMeetings = async () => {
@@ -37,7 +37,7 @@ const AllMeetingsCalendar = () => {
       <Link to="/meeting/employeestatuses" className="btn btn-success mb-3">
         Add New Meeting
       </Link>
-      <Calendar localizer={localizer} events={meeting} startAccessor="start"endAccessor="end"/>
+      <Calendar localizer={localizer} events={meeting} startAccessor="dateTimeStart" endAccessor="dateTimeEnd" style={{ height: 500 }}/>
     </div>
   );
 };
