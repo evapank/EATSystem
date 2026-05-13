@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { MeetingService, OtherService } from "../static/api";
 import { useEffect, useState } from "react";
-import Select from "react-select/base";
+import Select from "react-select";
 
 const NewMeetingAdd = () => {
     const [meeting, setMeeting] = useState({
@@ -9,12 +9,7 @@ const NewMeetingAdd = () => {
             dateTimeEnd : '',
             generalStatus: ''
         });
-    const [employeeStatuses, setEmployeeStatuses] = useState({
-        employee: '',
-        generalStatus: '',
-        dateTimeStart: '',
-        dateTimeEnd: ''
-    });
+    const [employeeStatuses, setEmployeeStatuses] = useState();
     const [generalStatuses, setGeneralStatuses] = useState([]);
     const [selectedEmployees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,19 +23,16 @@ const NewMeetingAdd = () => {
                 try {
                     setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
                     setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
-                    console.log(location.state.dateTimeStart + "+ " + location.state.dateTimeEnd)
-                    const response = await OtherService.getGeneralStatus();
-                    myObject.dateTimeStart=location.state.dateTimeStart
-                    myObject.dateTimeEnd=location.state.dateTimeEnd
+                    myObject.dateTimeStart=location.state.dateTimeStart;
+                    myObject.dateTimeEnd=location.state.dateTimeEnd;
                     const emStResponse = await MeetingService.getEmployeeStatuses(myObject);
+                    const response = await OtherService.getGeneralStatus();
                     setGeneralStatuses(response.data);
-                    console.log("employeestatusresponse:",emStResponse.data)
-
+                    console.log("employeestatusresponse:",emStResponse.data);
                     //const tempEmpSt = emStResponse.data.map((empSt) => {
                     //    return {name: empSt, surname: empSt}
                    // });
                     setEmployeeStatuses(emStResponse.data);
-
                     console.log(employeeStatuses);
                     setLoading(false);
                 } catch (error){
@@ -69,14 +61,6 @@ const NewMeetingAdd = () => {
             setEmployees(employee);
         };
 
-        const empStOptions = () => {
-            const optionsArray = [{value: "value", label: "label"}];
-            employeeStatuses.map(employeeStatus =>
-                optionsArray.value = employeeStatus.idEmployeeStatus,
-                optionsArray.label = employeeStatus.employee.name + " " + employeeStatus.employee.surname);
-            return optionsArray;
-        };
-
     return (
          <div className="container mt-4">
             <h2>Create new meeting for the time:</h2>
@@ -84,7 +68,7 @@ const NewMeetingAdd = () => {
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <Select isMulti options={empStOptions}>
+                    <Select closeMenuOnSelect={false} isMulti options={employeeStatuses}>
                     </Select>
                 </div>
                 <div>
