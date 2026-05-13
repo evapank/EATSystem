@@ -9,7 +9,7 @@ const NewMeetingAdd = () => {
             dateTimeEnd : '',
             generalStatus: ''
         });
-    const [statusArray, setStatusArray] = useState([]);
+    const [employeeStatusesTemp, setEmployeeStatusesTemp] = useState([]);
     const [employeeStatuses, setEmployeeStatuses] = useState([]);
     const [generalStatuses, setGeneralStatuses] = useState([]);
     const [employees, setEmployees] = useState([]);
@@ -17,7 +17,8 @@ const NewMeetingAdd = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"}
+    const employeeTemplate = {['name']: "employee", ['surname']: "employee"};
+    const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
     
     useEffect(() => {
             const fetchMeeting = async() => {
@@ -29,10 +30,15 @@ const NewMeetingAdd = () => {
                     myObject.dateTimeStart=location.state.dateTimeStart
                     myObject.dateTimeEnd=location.state.dateTimeEnd
                     const emStResponse = await MeetingService.getEmployeeStatuses(myObject);
-                    console.log("statuses: "+response.data);
-                    console.log("employee statuses: "+emStResponse.data)
                     setGeneralStatuses(response.data);
+                    console.log("employeestatusresponse:",emStResponse.data)
+
+                    //const tempEmpSt = emStResponse.data.map((empSt) => {
+                    //    return {name: empSt, surname: empSt}
+                   // });
                     setEmployeeStatuses(emStResponse.data);
+
+                    console.log(employeeStatuses);
                     setLoading(false);
                 } catch (error){
                     setError('cannot find meeting');
@@ -67,7 +73,7 @@ const NewMeetingAdd = () => {
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <Multiselect options={employeeStatuses} onSelect={onChangeEmployees} onRemove={onChangeEmployees} displayValue="employeeStatuses.employee.surname" className='form-control'/>
+                    <Multiselect options={employeeStatuses} value={employees} onSelect={onChangeEmployees} itemTemplate={employeeTemplate} onRemove={onChangeEmployees}  className='form-control'/>
                 </div>
                 <div>
                 <label>General status:</label>
