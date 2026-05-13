@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { MeetingService, OtherService } from "../static/api";
 import { useEffect, useState } from "react";
-import Multiselect from "multiselect-react-dropdown";
+import Select from "react-select/base";
 
 const NewMeetingAdd = () => {
     const [meeting, setMeeting] = useState({
@@ -9,15 +9,18 @@ const NewMeetingAdd = () => {
             dateTimeEnd : '',
             generalStatus: ''
         });
-    const [employeeStatusesTemp, setEmployeeStatusesTemp] = useState([]);
-    const [employeeStatuses, setEmployeeStatuses] = useState([]);
+    const [employeeStatuses, setEmployeeStatuses] = useState({
+        employee: '',
+        generalStatus: '',
+        dateTimeStart: '',
+        dateTimeEnd: ''
+    });
     const [generalStatuses, setGeneralStatuses] = useState([]);
-    const [employees, setEmployees] = useState([]);
+    const [selectedEmployees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const employeeTemplate = {['name']: "employee", ['surname']: "employee"};
     const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
     
     useEffect(() => {
@@ -66,6 +69,14 @@ const NewMeetingAdd = () => {
             setEmployees(employee);
         };
 
+        const empStOptions = () => {
+            const optionsArray = [{value: "value", label: "label"}];
+            employeeStatuses.map(employeeStatus =>
+                optionsArray.value = employeeStatus.idEmployeeStatus,
+                optionsArray.label = employeeStatus.employee.name + " " + employeeStatus.employee.surname);
+            return optionsArray;
+        };
+
     return (
          <div className="container mt-4">
             <h2>Create new meeting for the time:</h2>
@@ -73,7 +84,8 @@ const NewMeetingAdd = () => {
             <form action="@{/meeting/create}" object={meeting} method="post" onSubmit={handleSubmit}>
                 <div>
                     <label>Employees:</label>
-                    <Multiselect options={employeeStatuses} value={employees} onSelect={onChangeEmployees} itemTemplate={employeeTemplate} onRemove={onChangeEmployees}  className='form-control'/>
+                    <Select isMulti options={empStOptions}>
+                    </Select>
                 </div>
                 <div>
                 <label>General status:</label>
