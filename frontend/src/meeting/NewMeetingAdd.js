@@ -16,16 +16,16 @@ const NewMeetingAdd = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const myObject = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
+    const myDateTime = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
     
     useEffect(() => {
             const fetchMeeting = async() => {
                 try {
                     setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
                     setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
-                    myObject.dateTimeStart=location.state.dateTimeStart;
-                    myObject.dateTimeEnd=location.state.dateTimeEnd;
-                    const emStResponse = await MeetingService.getEmployeeStatuses(myObject);
+                    myDateTime.dateTimeStart=location.state.dateTimeStart;
+                    myDateTime.dateTimeEnd=location.state.dateTimeEnd;
+                    const emStResponse = await MeetingService.getEmployeeStatuses(myDateTime);
                     const response = await OtherService.getGeneralStatus();
                     setGeneralStatuses(response.data);
                     console.log("employeestatusresponse:",emStResponse.data);
@@ -58,7 +58,7 @@ const NewMeetingAdd = () => {
             const newEmployee =employee.map( (e) => {
                 return {surname: employee.surname};
                 });
-            setEmployees(employee);
+            setEmployees(newEmployee);
         };
 
     return (

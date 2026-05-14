@@ -65,9 +65,15 @@ public class MeetingController {
 	}
 	
 	@PutMapping("/employeestatuses")
-	public Collection<EmployeeStatus> getEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
+	public Collection<EmployeeStatus> setEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
 		System.out.println(meetingdto);
 		return meetingService.getAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
+	}
+	
+	@GetMapping("/employeestatuses/get")
+	public void getEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
+		System.out.println(meetingdto);
+		meetingService.setAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
 	}
 	
 	@PostMapping("/create")

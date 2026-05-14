@@ -11,7 +11,9 @@ import lv.venta.EATSystem.models.Meeting;
 
 public interface IMeetingService {
 
-	public abstract ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetime, LocalDateTime dateTimeEnd);
+	public abstract void setAllEmployeeStatusByDateTime(LocalDateTime datetimeStart, LocalDateTime dateTimeEnd);
+	
+	public abstract ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime datetimeStart, LocalDateTime dateTimeEnd);
 	
 	public abstract ArrayList<Meeting> selectAllMeetings();
 	

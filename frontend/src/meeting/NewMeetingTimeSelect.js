@@ -1,24 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MeetingService } from "../static/api";
 
 const NewMeetingTimeSelect = () => {
     const [dateTimeStart, setDateTimeStart] = useState('');
     const [dateTimeEnd, setDateTimeEnd] = useState('');
-    //const [meeting, setMeeting] = useState({
-    //        dateTimeStart : '',
-    //        dateTimeEnd : '',
-    //        generalStatus: ''
-    //    });
-    //const [employeeStatuses, setEmployeeStatuses] = useState([]);;
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+     const myDateTime = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
 
     const handleSubmit = async (e) => {
            e.preventDefault();
            console.log(dateTimeStart + "/" + dateTimeEnd);
            try{
-                //const response = await MeetingService.getEmployeeStatuses(e.dateTimeStart);
-                //setEmployeeStatuses(response.data);
+                myDateTime.dateTimeStart = dateTimeStart;
+                myDateTime.dateTimeEnd = dateTimeEnd;
+                await MeetingService.setEmployeeStatuses(myDateTime);
                 navigate("/meeting/create", {state:{dateTimeStart: dateTimeStart, dateTimeEnd: dateTimeEnd}});
            } catch (error){
                 setError('cannot find meeting');
