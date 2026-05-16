@@ -19,6 +19,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -38,6 +39,7 @@ import lv.venta.EATSystem.models.dto.DepartmentDTO;
 import lv.venta.EATSystem.services.IDepartmentService;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
+@AutoConfigureMockMvc
 class DepartmentControllerTest {
 
 	@Mock
