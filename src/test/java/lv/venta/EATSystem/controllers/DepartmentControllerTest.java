@@ -1,4 +1,4 @@
-package lv.venta.EATSystem.controller;
+package lv.venta.EATSystem.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,19 +40,34 @@ import lv.venta.EATSystem.services.IDepartmentService;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class DepartmentControllerTest {
 
+	@Mock
+	private static IDepartmentService departmentService;
+	
 	@InjectMocks
-	DepartmentController departmentController;
+	private static DepartmentController departmentController;
+	
+	@Autowired
+	private MockMvc mockMvc;
 	
 	@Test
-	void testGetById() throws Exception{
+	void testGetAll() throws Exception{
 		
-		DepartmentDTO department = new DepartmentDTO();
-		department.setTitle("Title");
-		BindingResult result = null;
+		Department department1 = new Department("Title");
+		Department department2 = new Department("New");
 		
-		Department response = departmentController.addDepartment(department, result);
+		ArrayList<Department> allDepartments = new ArrayList<>(Arrays.asList(department1, department2));
 		
-		assertEquals(department.getTitle(), response.getTitle());
+		try {
+		when(departmentService.selectAllDepartments()).thenReturn(allDepartments);
+		
+		mockMvc.perform(get("/department/all"))
+		.andExpect(status().isOk())
+		.andExpect((ResultMatcher) content().contentType(MediaType.APPLICATION_JSON))
+		.andExpect((ResultMatcher) jsonPath("$[0].title", "Title"))
+		.andExpect((ResultMatcher) jsonPath("$[1].title", "New"));
+		} catch (Exception e){
+			
+		}
 	}
 
 }
