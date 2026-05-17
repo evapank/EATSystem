@@ -1,7 +1,6 @@
 package lv.venta.EATSystem.controllers;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -23,44 +22,35 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
-import lv.venta.EATSystem.models.Department;
-import lv.venta.EATSystem.models.Employee;
-import lv.venta.EATSystem.models.EmployeeStatus;
-import lv.venta.EATSystem.services.IEmployeeStatusService;
+import lv.venta.EATSystem.models.Meeting;
+import lv.venta.EATSystem.services.IMeetingService;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
-class EmployeeStatusControllerTest {
+class MeetingControllerTest {
 
 	@Mock
-	private static IEmployeeStatusService empStService;
+	private static IMeetingService meetingService;
 	
 	@InjectMocks
-	private static EmployeeStatusController empStController;
+	private static MeetingController meetingController;
 	
 	@Autowired
-	private MockMvc mockMvc;
+	MockMvc mockMvc;
 	
 	@Test
 	void test() {
-		Department department = new Department();
-		Employee employee = new Employee("Ryan", "Gary", "Assistant", department, "ryangary777@gmail.com", false);
+		Meeting meeting1 = new Meeting(LocalDateTime.of(2026, Month.JUNE, 2, 13, 00, 00), LocalDateTime.of(2026, Month.JUNE, 2, 14, 00, 00), GeneralStatus.InPerson);
+		Meeting meeting2 = new Meeting(LocalDateTime.of(2026, Month.JUNE, 10, 15, 30, 00), LocalDateTime.of(2026, Month.JUNE, 10, 16, 00, 00), GeneralStatus.Online);
 		
-		EmployeeStatus empSt1 = new EmployeeStatus(employee, GeneralStatus.DayOff,
-				LocalDateTime.of(2026, Month.APRIL, 26, 9, 00, 00), LocalDateTime.of(2026, Month.APRIL, 26, 18, 00, 00));
-		EmployeeStatus empSt2 = new EmployeeStatus(employee, GeneralStatus.InPerson,
-				LocalDateTime.of(2026, Month.APRIL, 29, 9, 00, 00), LocalDateTime.of(2026, Month.APRIL, 29, 18, 00, 00));
-		
-		ArrayList<EmployeeStatus> allEmpSt = new ArrayList<>(Arrays.asList(empSt1, empSt2));
+		ArrayList<Meeting> allMeetings = new ArrayList<>(Arrays.asList(meeting1, meeting2));
 		
 		try {
-			when(empStService.selectAllEmployeeStatuses()).thenReturn(allEmpSt);
-			
-			mockMvc.perform(get("/employeestatus/all"))
+			mockMvc.perform(get("/meeting/all"))
 			.andExpect(status().isOk())
 			.andExpect((ResultMatcher) content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect((ResultMatcher) jsonPath("$[0].employee.surname", "Gary"))
-			.andExpect((ResultMatcher) jsonPath("$[1].dateTimeStart", LocalDateTime.of(2026, Month.APRIL, 29, 9, 00, 00)));
+			.andExpect((ResultMatcher) jsonPath("$[0].generalStatus", GeneralStatus.InPerson))
+			.andExpect((ResultMatcher) jsonPath("$[1].dateTimeStart", LocalDateTime.of(2026, Month.JUNE, 10, 15, 30, 00)));
 		} catch (Exception e){
 			
 		}
