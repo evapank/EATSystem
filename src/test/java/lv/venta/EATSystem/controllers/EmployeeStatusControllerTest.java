@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,40 +25,42 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import lv.venta.EATSystem.enums.GeneralStatus;
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
-import lv.venta.EATSystem.models.EmployeeOrderStatus;
-import lv.venta.EATSystem.services.IEmployeeOrderStatusService;
+import lv.venta.EATSystem.models.EmployeeStatus;
+import lv.venta.EATSystem.services.IEmployeeStatusService;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
-class EmployeeOrderStatusControllerTest {
-	
+class EmployeeStatusControllerTest {
+
 	@Mock
-	private static IEmployeeOrderStatusService eosService;
+	private static IEmployeeStatusService empStService;
 	
 	@InjectMocks
-	private static EmployeeOrderStatusController eosController;
+	private static EmployeeStatusController empStController;
 	
 	@Autowired
 	private MockMvc mockMvc;
-
+	
 	@Test
 	void test() {
 		Department department = new Department();
-		Employee employee = new Employee("Judy", "Thompson", "Accountant", department, "thomson1980@gmail.com", false);
+		Employee employee = new Employee("Ryan", "Gary", "Assistant", department, "ryangary777@gmail.com", false);
 		
-		EmployeeOrderStatus eos1 = new EmployeeOrderStatus(employee, GeneralStatus.InPerson);
-		EmployeeOrderStatus eos2 = new EmployeeOrderStatus(employee, GeneralStatus.Online);
+		EmployeeStatus empSt1 = new EmployeeStatus(employee, GeneralStatus.DayOff,
+				LocalDateTime.of(2026, Month.APRIL, 26, 9, 00, 00), LocalDateTime.of(2026, Month.APRIL, 26, 18, 00, 00));
+		EmployeeStatus empSt2 = new EmployeeStatus(employee, GeneralStatus.InPerson,
+				LocalDateTime.of(2026, Month.APRIL, 29, 9, 00, 00), LocalDateTime.of(2026, Month.APRIL, 29, 18, 00, 00));
 		
-		ArrayList<EmployeeOrderStatus> allEos = new ArrayList<>(Arrays.asList(eos1, eos2));
+		ArrayList<EmployeeStatus> allEmpSt = new ArrayList<>(Arrays.asList(empSt1, empSt2));
 		
 		try {
-		when(eosService.selectAllEmployeeOrderStatuses()).thenReturn(allEos);
-		
-		mockMvc.perform(get("/employeeorderstatus/all"))
-		.andExpect(status().isOk())
-		.andExpect((ResultMatcher) content().contentType(MediaType.APPLICATION_JSON))
-		.andExpect((ResultMatcher) jsonPath("$[0].employee.surname", "Thompson"))
-		.andExpect((ResultMatcher) jsonPath("$[1].generalStatus", GeneralStatus.Online));
+			when(empStService.selectAllEmployeeStatuses()).thenReturn(allEmpSt);
+			
+			mockMvc.perform(get("/employeestatus/all"))
+			.andExpect(status().isOk())
+			.andExpect((ResultMatcher) content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect((ResultMatcher) jsonPath("$[0].employee.surname", "Gary"))
+			.andExpect((ResultMatcher) jsonPath("$[1].dateTimeStart",LocalDateTime.of(2026, Month.APRIL, 29, 9, 00, 00)));
 		} catch (Exception e){
 			
 		}
