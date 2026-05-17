@@ -86,6 +86,7 @@ export const OtherService = {
 	getRoles: () => api.get('/other/roles'),
 	getOrderStatuses: () => api.get('/other/orderstatus'),
 	getGeneralStatus: () => api.get('/other/generalstatus'),
+	getMeetingStatuses: () => api.get('/other/meetingstatuses')
 };
 
 export const MeetingService = {
@@ -94,7 +95,6 @@ export const MeetingService = {
 	delete: (id) => api.delete(`/meeting/remove/${id}`),
 	update: (id, meeting) => api.put(`/meeting/update/${id}`, meeting),
 	setEmployeeStatuses: (myDateTime) => api.put('meeting/employeestatuses', myDateTime),
-	getEmployeeStatuses: (myDateTime) => api.get('meeting/employeestatuses/get', myDateTime),
 	create: (meeting) => api.post('meeting/create', meeting),
 	addEmployeeToMeeting: (meetingId, employee) => api.post('meeting/addEmployee', meetingId, employee)
 };

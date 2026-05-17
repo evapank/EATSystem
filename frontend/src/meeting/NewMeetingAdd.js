@@ -9,8 +9,8 @@ const NewMeetingAdd = () => {
             dateTimeEnd : '',
             generalStatus: ''
         });
-    const [employeeStatuses, setEmployeeStatuses] = useState();
-    const [generalStatuses, setGeneralStatuses] = useState([]);
+    const [employeeStatuses, setEmployeeStatuses] = useState([]);
+    const [meetingStatuses, setMeetingStatuses] = useState([]);
     const [selectedEmployees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,15 +25,17 @@ const NewMeetingAdd = () => {
                     setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
                     myDateTime.dateTimeStart=location.state.dateTimeStart;
                     myDateTime.dateTimeEnd=location.state.dateTimeEnd;
-                    const emStResponse = await MeetingService.getEmployeeStatuses(myDateTime);
-                    const response = await OtherService.getGeneralStatus();
-                    setGeneralStatuses(response.data);
-                    console.log("employeestatusresponse:",emStResponse.data);
-                    //const tempEmpSt = emStResponse.data.map((empSt) => {
-                    //    return {name: empSt, surname: empSt}
-                   // });
-                    setEmployeeStatuses(emStResponse.data);
-                    console.log(employeeStatuses);
+                    const emStResponse = await MeetingService.setEmployeeStatuses(myDateTime);
+                    const response = await OtherService.getMeetingStatuses();
+                    setMeetingStatuses(response.data);
+                    console.log("Meeting statuses:", response.data);
+
+                    const employeeOptions = emStResponse.data.map((item) => ({
+                        value: item.employee.idEmployee,
+                        label: `${item.employee.name} ${item.employee.surname} - ${item.generalStatus}`
+                    }));
+                    console.log(employeeOptions);
+                    setEmployeeStatuses(employeeOptions);
                     setLoading(false);
                 } catch (error){
                     setError('cannot find meeting');
@@ -72,10 +74,10 @@ const NewMeetingAdd = () => {
                     </Select>
                 </div>
                 <div>
-                <label>General status:</label>
-                    <select options={generalStatuses} name='generalStatus' className='form-control' onChange= {e => setMeeting({...meeting, generalStatus: e.target.value})}>
+                <label>Meeting status:</label>
+                    <select options={meetingStatuses} name='meetingStatus' className='form-control' onChange= {e => setMeeting({...meeting, generalStatus: e.target.value})}>
                                 <option value=''>-- Select status --</option>
-                                {generalStatuses.map((e, x) => (
+                                {meetingStatuses.map((e, x) => (
                                     <option key={x} value={x}>{e}</option>
                                 ))};
                             </select>

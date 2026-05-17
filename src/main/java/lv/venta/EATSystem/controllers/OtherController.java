@@ -1,5 +1,7 @@
 package lv.venta.EATSystem.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,4 +36,9 @@ public class OtherController {
 	public Object[] getAllGeneralStatuses() {
 		return otherService.selectAllGeneralStatuses();
 	}
-}
+	
+	@GetMapping("/meetingstatuses")
+	public ArrayList<Object> getMeetingStatuses(){
+		return otherService.selectInPersonAndOnlineStatuses();
+	}
+} 

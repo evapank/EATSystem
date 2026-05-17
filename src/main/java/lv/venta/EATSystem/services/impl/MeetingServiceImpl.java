@@ -29,6 +29,16 @@ public class MeetingServiceImpl implements IMeetingService{
 	
 	@Override
 	public ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
+		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
+		
+		for (Employee employee: allEmployees) {
+			if (empStRepo.findByEmployeeAndDateTimeStart(employee, dateTimeStart)==null) {
+				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson, dateTimeStart, dateTimeEnd);
+				empSt.setDateTimeStart(dateTimeStart.minusHours(1));
+				empSt.setDateTimeEnd(dateTimeEnd.plusHours(1));
+				empStRepo.save(empSt);
+			}
+		}
 		ArrayList<EmployeeStatus> result = new ArrayList<>();
 		ArrayList<EmployeeStatus> allStatuses = (ArrayList<EmployeeStatus>) empStRepo.findAll();
 		for(EmployeeStatus status: allStatuses) {
@@ -92,21 +102,6 @@ public class MeetingServiceImpl implements IMeetingService{
 			Meeting result = meetingRepo.findByIdMeeting(meetingId);
 			result.addEmployee(employee);
 			meetingRepo.save(result);
-		}
-		
-	}
-
-	@Override
-	public void setAllEmployeeStatusByDateTime(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
-		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
-		
-		for (Employee employee: allEmployees) {
-			if (empStRepo.findByEmployeeAndDateTimeStart(employee, dateTimeStart)==null) {
-				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson, dateTimeStart, dateTimeEnd);
-				empSt.setDateTimeStart(dateTimeStart.minusHours(1));
-				empSt.setDateTimeEnd(dateTimeEnd.plusHours(1));
-				empStRepo.save(empSt);
-			}
 		}
 		
 	}

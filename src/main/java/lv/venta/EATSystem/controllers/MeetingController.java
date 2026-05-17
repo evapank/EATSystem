@@ -70,12 +70,6 @@ public class MeetingController {
 		return meetingService.getAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
 	}
 	
-	@GetMapping("/employeestatuses/get")
-	public void getEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
-		System.out.println(meetingdto);
-		meetingService.setAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
-	}
-	
 	@PostMapping("/create")
 	public Meeting postAddMeeting(@Valid @RequestBody Meeting meeting, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {

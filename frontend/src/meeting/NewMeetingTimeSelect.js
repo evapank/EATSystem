@@ -7,15 +7,11 @@ const NewMeetingTimeSelect = () => {
     const [dateTimeEnd, setDateTimeEnd] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-     const myDateTime = {['dateTimeStart']:"200", ['dateTimeEnd']:"100"};
 
     const handleSubmit = async (e) => {
            e.preventDefault();
            console.log(dateTimeStart + "/" + dateTimeEnd);
            try{
-                myDateTime.dateTimeStart = dateTimeStart;
-                myDateTime.dateTimeEnd = dateTimeEnd;
-                await MeetingService.setEmployeeStatuses(myDateTime);
                 navigate("/meeting/create", {state:{dateTimeStart: dateTimeStart, dateTimeEnd: dateTimeEnd}});
            } catch (error){
                 setError('cannot find meeting');

@@ -1,5 +1,6 @@
 package lv.venta.EATSystem.services.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,15 @@ public class OtherServiceImpl implements IOtherService{
 		Object[] result = Arrays.stream(OrderStatus.values())
 								.map(Enum::name)
 								.collect(Collectors.toList()).toArray();
+		return result;
+	}
+
+	@Override
+	public ArrayList<Object> selectInPersonAndOnlineStatuses() {
+		ArrayList<Object> result = new ArrayList<>();
+		result.add(GeneralStatus.InPerson);
+		result.add(GeneralStatus.Online);
+		
 		return result;
 	}
 
