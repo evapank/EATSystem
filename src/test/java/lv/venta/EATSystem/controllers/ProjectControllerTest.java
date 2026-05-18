@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -15,45 +16,50 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import lv.venta.EATSystem.enums.GeneralStatus;
+import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.models.Meeting;
-import lv.venta.EATSystem.services.IMeetingService;
+import lv.venta.EATSystem.models.Project;
+import lv.venta.EATSystem.services.IProjectService;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
-class MeetingControllerTest {
+class ProjectControllerTest {
 
 	@Mock
-	private static IMeetingService meetingService;
+	private static IProjectService projectService;
 	
 	@InjectMocks
-	private static MeetingController meetingController;
+	private static ProjectController projectController;
 	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Test
 	void test() {
-		Meeting meeting1 = new Meeting(LocalDateTime.of(2026, Month.JUNE, 2, 13, 00, 00), LocalDateTime.of(2026, Month.JUNE, 2, 14, 00, 00), GeneralStatus.InPerson);
-		Meeting meeting2 = new Meeting(LocalDateTime.of(2026, Month.JUNE, 10, 15, 30, 00), LocalDateTime.of(2026, Month.JUNE, 10, 16, 00, 00), GeneralStatus.Online);
+		Employee employee = new Employee();
+		Project project1 = new Project(30023, "App testing", LocalDate.of(2026, Month.APRIL, 12), LocalDate.of(2026, Month.APRIL, 26), employee);
+		Project project2 = new Project(30025, "Budget planning", LocalDate.of(2026, Month.JUNE, 1), LocalDate.of(2026, Month.JUNE, 5), employee);
 		
-		ArrayList<Meeting> allMeetings = new ArrayList<>(Arrays.asList(meeting1, meeting2));
+		ArrayList<Project> allProjects = new ArrayList<>(Arrays.asList(project1, project2));
 		
 		try {
-			when(meetingService.selectAllMeetings()).thenReturn(allMeetings);
+			when(projectService.selectAllProjects()).thenReturn(allProjects);
 			
-			mockMvc.perform(get("/meeting/all"))
+			mockMvc.perform(get("/project/all"))
 			.andExpect(status().isOk())
 			.andExpect((ResultMatcher) content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect((ResultMatcher) jsonPath("$[0].generalStatus", GeneralStatus.InPerson))
-			.andExpect((ResultMatcher) jsonPath("$[1].dateTimeStart", LocalDateTime.of(2026, Month.JUNE, 10, 15, 30, 00)));
+			.andExpect((ResultMatcher) jsonPath("$[0].title", "App testing"))
+			.andExpect((ResultMatcher) jsonPath("$[1].title", "Budget planning"));
 		} catch (Exception e){
 			
 		}
