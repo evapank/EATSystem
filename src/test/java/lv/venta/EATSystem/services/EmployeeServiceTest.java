@@ -16,13 +16,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import lv.venta.EATSystem.models.Department;
 import lv.venta.EATSystem.models.Employee;
 import lv.venta.EATSystem.repos.IEmployeeRepo;
+import lv.venta.EATSystem.services.impl.EmployeeServiceImpl;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
 @AutoConfigureMockMvc
 class EmployeeServiceTest {
 
 	@InjectMocks
-	IEmployeeService employeeService;
+	EmployeeServiceImpl employeeService;
 	
 	@Mock
 	IEmployeeRepo employeeRepo;
