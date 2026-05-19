@@ -42,7 +42,7 @@ class EmployeeOrderStatusServiceTest {
 		
 		when(eosRepo.save(any())).thenReturn(eos);
 		
-		EmployeeOrderStatus eosFromService = eosService.insertNewEmployeeOrderStatus(employee, eos.getGeneralStatus());
+		EmployeeOrderStatus eosFromService = eosService.insertNewEmployeeOrderStatus(eos.getEmployee(), eos.getGeneralStatus());
 		
 		assertEquals(GeneralStatus.DayOff, eosFromService.getGeneralStatus());
 	}

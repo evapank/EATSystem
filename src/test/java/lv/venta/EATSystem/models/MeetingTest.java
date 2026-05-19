@@ -24,8 +24,11 @@ class MeetingTest {
                    2026, Month.APRIL, 24, 15, 30, 00), GeneralStatus.InPerson);
 	
 	Employee employee = new Employee();
+	
 	@Test
 	void testCreate() {
 		assertEquals("InPerson", meetingRight.getGeneralStatus().toString());
+		assertEquals(LocalDateTime.of(2026, Month.APRIL, 24, 14, 30, 00), meetingRight.getDateTimeStart());
+		assertEquals(LocalDateTime.of(2026, Month.APRIL, 24, 15, 30, 00), meetingRight.getDateTimeEnd());
 	}
 }

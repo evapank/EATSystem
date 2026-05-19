@@ -67,7 +67,7 @@ class OrderControllerTest {
 			.andExpect((ResultMatcher) jsonPath("$[0].orderStatus", OrderStatus.BusinessTrip))
 			.andExpect((ResultMatcher) jsonPath("$[1].orderNumber",20004));
 		}  catch (Exception e){
-			
+			System.out.println(e);
 		}
 	}
 

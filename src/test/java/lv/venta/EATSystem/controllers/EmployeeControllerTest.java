@@ -38,7 +38,7 @@ class EmployeeControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	void test() {
+	void testGetAll() {
 		Department department = new Department();
 		Employee employee1 = new Employee("Andy", "Anderson", "Designer", department, "anderson@gmail.com", false);
 		Employee employee2 = new Employee("Barbara", "Johnson", "IT department manager", department, "b.johnson@gmail.com", true);
@@ -54,7 +54,7 @@ class EmployeeControllerTest {
 			.andExpect((ResultMatcher) jsonPath("$[0].name", "Andy"))
 			.andExpect((ResultMatcher) jsonPath("$[1].surname", "Johnson"));
 		} catch (Exception e) {
-			
+			System.out.println(e);
 		}
 	}
 

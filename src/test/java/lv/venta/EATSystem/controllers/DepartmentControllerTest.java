@@ -68,7 +68,7 @@ class DepartmentControllerTest {
 		.andExpect((ResultMatcher) jsonPath("$[0].title", "Title"))
 		.andExpect((ResultMatcher) jsonPath("$[1].title", "New"));
 		} catch (Exception e){
-			
+			System.out.println(e);
 		}
 	}
 
