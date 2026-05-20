@@ -1,7 +1,6 @@
 package lv.venta.EATSystem.services.impl;
 
-import java.util.ArrayList;
-
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,34 +34,30 @@ public class MyUserDetailsServiceImpl implements UserDetailsService, UserDetails
 		return new MyUserDetails(result);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void createUser(UserDetails user) {
 		if(!userExists(user.getUsername())) {
 			MyUser result = new MyUser();
 			result.setUsername(user.getUsername());
 			result.setPassword(user.getPassword());
-			ArrayList<MyAuthority> authorities = (ArrayList<MyAuthority>) user.getAuthorities();
-			for(MyAuthority a: authorities) {
-				result.setAuthority(a);
-				authorityRepo.save(a);
+			for(GrantedAuthority a: user.getAuthorities()) {
+				result.setAuthority((MyAuthority) a);
+				authorityRepo.save((MyAuthority) a);
 			}
 			userRepo.save(result);
 		}
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updateUser(UserDetails user) {
 		if(userExists(user.getUsername())) {
 			MyUser result = new MyUser();
 			result.setUsername(user.getUsername());
 			result.setPassword(user.getPassword());
-			ArrayList<MyAuthority> authorities = (ArrayList<MyAuthority>) user.getAuthorities();
-			for(MyAuthority a: authorities) {
-				result.setAuthority(a);
-				authorityRepo.save(a);
+			for(GrantedAuthority a: user.getAuthorities()) {
+				result.setAuthority((MyAuthority) a);
+				authorityRepo.save((MyAuthority) a);
 			}
 			userRepo.save(result);
 		}
