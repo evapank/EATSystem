@@ -19,10 +19,8 @@ const OneEmployee = () => {
 		const fetchEmployee = async () => {
 			try {
 				const responseEmployee = await EmployeeService.getById(id);
-				console.log(responseEmployee.data);
 				setEmployee(responseEmployee.data);
 				setLoading(false);
-				console.log("department: " + employee.department);
 			} catch (error){
 				setError('cannot find employee');
 				setLoading(false);
