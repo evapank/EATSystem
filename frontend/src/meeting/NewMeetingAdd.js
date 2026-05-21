@@ -50,6 +50,9 @@ const NewMeetingAdd = () => {
            e.preventDefault();
             try{
                 await MeetingService.create(meeting);
+               // selectedEmployees.map(e =>{
+                //    await MeetingService.addEmployeeToMeeting(e);
+               // });
                 navigate('/meeting/all');
             } catch (error) {
                 console.error('Submit error: ', error);

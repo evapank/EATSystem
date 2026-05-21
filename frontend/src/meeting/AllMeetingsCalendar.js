@@ -6,14 +6,26 @@ import { dateFnsLocalizer } from 'react-big-calendar';
 import { format, getDay, parse, startOfWeek } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import moment from 'moment';
+import { momentLocalizer } from 'react-big-calendar';
 
 const AllMeetingsCalendar = () => {
 	const [meeting, setMeetings] = useState([]);
+	const testArray = [{
+		start: new Date(2026, 5, 21, 14, 0),
+		end: new Date(2026, 5, 21, 15, 0),
+		title: "new Title"
+	},
+{
+		start: new Date(2026, 5, 25, 14, 0),
+		end: new Date(2026, 5, 25, 15, 0),
+		title: "new Title 2"
+	}]
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const location = useLocation();
 	const locales = {'en-GB': enGB};
-	const localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales});
+	//const localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales});
+	const localizer = momentLocalizer(moment);
 	
 	useEffect(() => {
 		const fetchMeetings = async () => {
@@ -27,6 +39,7 @@ const AllMeetingsCalendar = () => {
 				}));
 				console.log("meetingEvents: ", meetingEvents);
 				setMeetings(meetingEvents);
+				console.log("meeting: ", meeting);
 				setLoading(false);
 			} catch (error){
 				setError('cannot find meetings');
@@ -45,7 +58,7 @@ const AllMeetingsCalendar = () => {
       <Link to="/meeting/employeestatuses" className="btn btn-success mb-3">
         Add New Meeting
       </Link>
-      <Calendar localizer={localizer} events={meeting} startAccessor="start" endAccessor="end" style={{ height: 500 }}/>
+      <Calendar localizer={localizer} events={testArray} startAccessor="start" endAccessor="end" style={{ height: 500 }}/>
     </div>
   );
 };
