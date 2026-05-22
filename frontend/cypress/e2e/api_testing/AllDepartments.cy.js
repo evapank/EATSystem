@@ -1,5 +1,3 @@
-import AllDepartments from "../../../src/department/AllDepartments";
-
 const MockDepartments = [
     {
         "idDepartment": 1,
