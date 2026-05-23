@@ -38,6 +38,8 @@ public class MeetingController {
 	
 	@GetMapping("/all")
 	public Collection<Meeting> getAllMeetings(){
+		System.out.println("getAllMeetings:");
+		System.out.println(meetingService.selectAllMeetings());
 		return meetingService.selectAllMeetings();
 	}
 
@@ -66,13 +68,16 @@ public class MeetingController {
 	
 	@PutMapping("/employeestatuses")
 	public Collection<EmployeeStatus> setEmployeesAndStatusesForTheDayTime(@RequestBody(required = false) MeetingDTO meetingdto) {
+		System.out.println("setEmployeesAndStatusesForTheDayTime");
 		System.out.println(meetingdto);
 		return meetingService.getAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
 	}
 	
 	@PostMapping("/create")
-	public Meeting postAddMeeting(@Valid @RequestBody Meeting meeting, BindingResult result) throws Exception {
+	public Meeting postAddMeeting(@RequestBody(required = false) Meeting meeting, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
+			System.out.println("postAddMeeting:");
+			System.out.println(meeting);
 			return meetingService.insertNewMeeting(meeting.getDateTimeStart(),
 												   meeting.getDateTimeEnd(), meeting.getGeneralStatus());
 		} else {

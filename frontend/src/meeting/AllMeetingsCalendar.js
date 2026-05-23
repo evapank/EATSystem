@@ -10,16 +10,6 @@ import { momentLocalizer } from 'react-big-calendar';
 
 const AllMeetingsCalendar = () => {
 	const [meeting, setMeetings] = useState([]);
-	const testArray = [{
-		start: new Date(2026, 5, 21, 14, 0),
-		end: new Date(2026, 5, 21, 15, 0),
-		title: "new Title"
-	},
-{
-		start: new Date(2026, 5, 25, 14, 0),
-		end: new Date(2026, 5, 25, 15, 0),
-		title: "new Title 2"
-	}]
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const location = useLocation();
@@ -33,8 +23,8 @@ const AllMeetingsCalendar = () => {
 				const response = await MeetingService.getAll();
 				console.log(response.data);
 				const meetingEvents = response.data.map((item) => ({
-					start: item.dateTimeStart,
-					end: item.dateTimeEnd,
+					start: localDateTimeArrayToDate(item.dateTimeStart),
+					end: localDateTimeArrayToDate(item.dateTimeEnd),
 					title: item.generalStatus,
 				}));
 				console.log("meetingEvents: ", meetingEvents);
@@ -49,6 +39,16 @@ const AllMeetingsCalendar = () => {
 		};
 		fetchMeetings();
 	}, []);
+
+	const localDateTimeArrayToDate = (array) => {
+		if (!Array.isArray(array) || array.length < 5) {
+			console.log("Invalid LocalDateTime value:", array);
+    		return null;
+		  }
+
+		const [year, month, day, hour, minute, second = 0] = array;
+		return new Date(year, month - 1, day, hour, minute, second);
+	};
 	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
@@ -58,7 +58,7 @@ const AllMeetingsCalendar = () => {
       <Link to="/meeting/employeestatuses" className="btn btn-success mb-3">
         Add New Meeting
       </Link>
-      <Calendar localizer={localizer} events={testArray} startAccessor="start" endAccessor="end" style={{ height: 500 }}/>
+      <Calendar localizer={localizer} events={meeting} startAccessor="start" endAccessor="end" style={{ height: 500 }}/>
     </div>
   );
 };

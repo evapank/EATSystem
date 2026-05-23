@@ -33,9 +33,8 @@ public class MeetingServiceImpl implements IMeetingService{
 		
 		for (Employee employee: allEmployees) {
 			if (empStRepo.findByEmployeeAndDateTimeStart(employee, dateTimeStart)==null) {
-				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson, dateTimeStart, dateTimeEnd);
-				empSt.setDateTimeStart(dateTimeStart.minusHours(1));
-				empSt.setDateTimeEnd(dateTimeEnd.plusHours(1));
+				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson,
+									dateTimeStart.minusHours(1), dateTimeEnd.plusHours(1));
 				empStRepo.save(empSt);
 			}
 		}

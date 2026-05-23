@@ -17,5 +17,4 @@ describe("Get all departments", ()=> {
         cy.request("/department/all")
         cy.get("table").should("contain", "UI design").and("contain", "Frontend testing")
     });
-
 });
