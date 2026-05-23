@@ -95,7 +95,7 @@ export const MeetingService = {
 	delete: (id) => api.delete(`/meeting/remove/${id}`),
 	update: (id, meeting) => api.put(`/meeting/update/${id}`, meeting),
 	setEmployeeStatuses: (myDateTime) => api.put('meeting/employeestatuses', myDateTime),
-	create: (meeting) => api.post('meeting/create', meeting),
+	create: (meeting) => api.put('meeting/create', meeting),
 	addEmployeeToMeeting: (meetingId, employee) => api.post('meeting/addEmployee', meetingId, employee)
 };
 

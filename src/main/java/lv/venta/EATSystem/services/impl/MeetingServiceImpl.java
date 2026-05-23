@@ -32,9 +32,9 @@ public class MeetingServiceImpl implements IMeetingService{
 		ArrayList<Employee> allEmployees = (ArrayList<Employee>) employeeRepo.findAll();
 		
 		for (Employee employee: allEmployees) {
-			if (empStRepo.findByEmployeeAndDateTimeStart(employee, dateTimeStart)==null) {
+			if (!empStRepo.existsByEmployeeAndDateTimeStart(employee, dateTimeStart)) {
 				EmployeeStatus empSt = new EmployeeStatus(employee, GeneralStatus.InPerson,
-									dateTimeStart.minusHours(1), dateTimeEnd.plusHours(1));
+									dateTimeStart.minusMinutes(10), dateTimeEnd.plusHours(1));
 				empStRepo.save(empSt);
 			}
 		}
@@ -74,6 +74,7 @@ public class MeetingServiceImpl implements IMeetingService{
 			GeneralStatus generalStatus) throws Exception {
 		if(generalStatus!=GeneralStatus.DayOff) {
 			Meeting result = new Meeting(dateTimeStart, dateTimeEnd, generalStatus);
+			System.out.println("insertNewMeeting:" + result);
 			meetingRepo.save(result);
 			return result;
 		} else {

@@ -73,7 +73,7 @@ public class MeetingController {
 		return meetingService.getAllEmployeeStatusByDateTime(meetingdto.getDateTimeStart(), meetingdto.getDateTimeEnd());
 	}
 	
-	@PostMapping("/create")
+	@PutMapping("/create")
 	public Meeting postAddMeeting(@RequestBody(required = false) Meeting meeting, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			System.out.println("postAddMeeting:");

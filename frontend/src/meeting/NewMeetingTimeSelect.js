@@ -22,7 +22,7 @@ const NewMeetingTimeSelect = () => {
     return (
          <div className="container mt-4">
             <h2>Choose meeting time:</h2>
-        <form action="@{/meeting/employeestatuses}" object={{dateTimeStart, dateTimeEnd}}
+        <form action="@{/meeting/employeestatuses}"
         method="post" onSubmit={handleSubmit}>
             <div>
                 <label>Date time start:</label>

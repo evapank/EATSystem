@@ -23,17 +23,20 @@ const NewMeetingAdd = () => {
                 try {
                     myDateTime.dateTimeStart=location.state.dateTimeStart;
                     myDateTime.dateTimeEnd=location.state.dateTimeEnd;
-                    setMeeting({...meeting, dateTimeStart: location.state.dateTimeStart});
-                    setMeeting({...meeting, dateTimeEnd: myDateTime.dateTimeEnd});
+                    console.log("location.dateTimeStart:", location.state.dateTimeStart);
+                    console.log("location.dateTimeEnd:", location.state.dateTimeEnd);
+                    console.log("myDateTime.dateTimeStart:", myDateTime.dateTimeStart);
+                    console.log("myDateTime.dateTimeEnd:", myDateTime.dateTimeEnd);
+                    setMeeting({...meeting, dateTimeStart: myDateTime.dateTimeStart});
+                    setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
                     console.log("myDateTime:", myDateTime);
                     const emStResponse = await MeetingService.setEmployeeStatuses(myDateTime);
                     const response = await OtherService.getMeetingStatuses();
                     setMeetingStatuses(response.data);
-                    console.log("Meeting:", meeting);
 
                     const employeeOptions = emStResponse.data.map((item) => ({
                         value: item.employee.idEmployee,
-                        label: `${item.employee.name} ${item.employee.surname} - ${item.generalStatus}`
+                        label: `${item.employee.name} ${item.employee.surname} / ${item.generalStatus}`
                     }));
                     console.log(employeeOptions);
                     setEmployeeStatuses(employeeOptions);

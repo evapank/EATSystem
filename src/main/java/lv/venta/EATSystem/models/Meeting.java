@@ -46,11 +46,9 @@ public class Meeting {
 	private Collection<Employee> employees;
 	
 	@Column(name = "DateTimeStart")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeStart;
 	
 	@Column(name = "DateTimeEnd")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeEnd;
 	
 	@Column(name = "generalStatus")
