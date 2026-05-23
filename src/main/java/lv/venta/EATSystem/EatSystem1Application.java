@@ -133,7 +133,11 @@ public class EatSystem1Application {
 				
 				Meeting meet1 = new Meeting(LocalDateTime.of(2026, Month.APRIL, 29, 11, 30, 00),
 											LocalDateTime.of(2026, Month.APRIL, 29, 12, 00, 00), GeneralStatus.InPerson);
+				
+				Meeting meet2 = new Meeting(LocalDateTime.of(2026, Month.MAY, 29, 11, 30, 00),
+						LocalDateTime.of(2026, Month.MAY, 29, 12, 00, 00), GeneralStatus.Online);
 				meetingRepo.save(meet1);
+				meetingRepo.save(meet2);
 				
 				//emailService.sendEmail("s21pankeva@venta.lv", LocalDateTime.of( 2026, Month.APRIL, 24, 14, 30, 00),
 				//		 LocalDateTime.of( 2026, Month.APRIL, 24, 15, 30, 00));
