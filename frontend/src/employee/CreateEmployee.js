@@ -44,7 +44,7 @@ const CreateEmployee = () => {
   if (error)return <div className="alert alert-danger">{error}</div>;
   return (
     <div className="container mt-4">
-      <h2>Add new department</h2>
+      <h2>Add new employee</h2>
        	<form action="@{/employee/create}" object={employee} method="post" onSubmit={handleSubmit}>
        			<div>
        			<label>Name:</label>
