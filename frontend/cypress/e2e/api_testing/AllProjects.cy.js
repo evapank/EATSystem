@@ -49,3 +49,14 @@ describe("Get all projects", ()=> {
     });
 
 });
+
+describe("Get one project", ()=> {
+    it("Intercept request", ()=>{
+        cy.visit('http://localhost:3000/project/all/1')
+        cy.intercept("GET", "/project/all/1", MockProjects[0]).as("OneProject");
+        
+        cy.request("/project/all/1")
+        cy.get("table").should("contain", "Mobile app testing")
+    });
+
+});

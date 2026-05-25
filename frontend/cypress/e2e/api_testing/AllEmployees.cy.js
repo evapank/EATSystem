@@ -35,3 +35,14 @@ describe("Get all employees", ()=> {
     });
 
 });
+
+describe("Get one employee", ()=> {
+    it("Intercept request", ()=>{
+        cy.visit('http://localhost:3000/employee/all/1')
+        cy.intercept("GET", "/employee/all/1", MockEmployees[0]).as("OneEmployee");
+        
+        cy.request("employee/all/1")
+        cy.get("table").should("contain", "Jessica").and("contain", "Johnnson")
+    });
+
+});
