@@ -19,11 +19,11 @@ import lv.venta.EATSystem.enums.GeneralStatus;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class MeetingTest {
 
-	Meeting meetingRight = new Meeting(LocalDateTime.of(
+	private Meeting meetingRight = new Meeting(LocalDateTime.of(
             2026, Month.APRIL, 24, 14, 30, 00), LocalDateTime.of(
                    2026, Month.APRIL, 24, 15, 30, 00), GeneralStatus.InPerson);
 	
-	Employee employee = new Employee();
+	private Employee employee = new Employee();
 	
 	@Test
 	void testCreate() {

@@ -21,10 +21,10 @@ describe("Get all departments", ()=> {
 
 describe("Get one department", ()=> {
     it("Intercept request", ()=>{
-        cy.visit('http://localhost:3000/department/all/1');
-        cy.intercept("GET", "/department/all/1", MockDepartments[0]).as("OneDepartment");
+        cy.visit(`http://localhost:3000/department/all/${MockDepartments[0].idDepartment}`);
+        cy.intercept("GET", `/department/all/${MockDepartments[0].idDepartment}`, MockDepartments[0]).as("OneDepartment");
         
-        cy.request("/department/all/1")
+        cy.request(`/department/all/${MockDepartments[0].idDepartment}`)
         cy.get("table").should("contain", "UI design");
     });
 });

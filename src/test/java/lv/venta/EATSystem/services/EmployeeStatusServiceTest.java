@@ -25,10 +25,10 @@ import lv.venta.EATSystem.services.impl.EmployeeStatusServiceImpl;
 class EmployeeStatusServiceTest {
 
 	@InjectMocks
-	EmployeeStatusServiceImpl emplStService;
+	private static EmployeeStatusServiceImpl emplStService;
 	
 	@Mock
-	IEmployeeStatusRepo empStRepo;
+	private static IEmployeeStatusRepo empStRepo;
 	
 	@BeforeEach
 	void setUp()

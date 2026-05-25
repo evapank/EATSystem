@@ -13,7 +13,7 @@ import lv.venta.EATSystem.models.MyAuthority;
 class MyAuthorityRepoTest {
 
 	@Autowired
-	IMyAuthorityRepo authorityRepo;
+	private IMyAuthorityRepo authorityRepo;
 	
 	@Test
 	void testRepoSave() {

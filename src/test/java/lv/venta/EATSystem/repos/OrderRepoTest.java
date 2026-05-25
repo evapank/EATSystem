@@ -19,13 +19,13 @@ import lv.venta.EATSystem.models.Project;
 class OrderRepoTest {
 
 	@Autowired
-	IOrderRepo orderRepo;
+	private IOrderRepo orderRepo;
 	
 	@Autowired
-	IEmployeeOrderStatusRepo eosRepo;
+	private IEmployeeOrderStatusRepo eosRepo;
 	
 	@Autowired
-	IProjectRepo projectRepo;
+	private IProjectRepo projectRepo;
 	
 	@Test
 	void testRepoSave() {

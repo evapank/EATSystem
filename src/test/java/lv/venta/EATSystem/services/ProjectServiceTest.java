@@ -22,10 +22,10 @@ import lv.venta.EATSystem.services.impl.ProjectServiceImpl;
 class ProjectServiceTest {
 
 	@InjectMocks
-	ProjectServiceImpl projectService;
+	private static ProjectServiceImpl projectService;
 	
 	@Mock
-	IProjectRepo projectRepo;
+	private static IProjectRepo projectRepo;
 	
 	@Test
 	void testCreate() {

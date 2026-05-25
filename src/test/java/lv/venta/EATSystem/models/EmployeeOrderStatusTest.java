@@ -10,9 +10,9 @@ import lv.venta.EATSystem.enums.GeneralStatus;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class EmployeeOrderStatusTest {
 
-	Employee employee = new Employee();
+	private Employee employee = new Employee();
 	
-	EmployeeOrderStatus eos = new EmployeeOrderStatus(employee, GeneralStatus.InPerson);
+	private EmployeeOrderStatus eos = new EmployeeOrderStatus(employee, GeneralStatus.InPerson);
 	
 	@Test
 	void test() {

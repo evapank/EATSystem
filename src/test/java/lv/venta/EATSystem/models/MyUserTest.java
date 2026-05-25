@@ -11,11 +11,13 @@ import lv.venta.EATSystem.enums.SecurityRole;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class MyUserTest {
 	
-	MyAuthority authority = new MyAuthority(SecurityRole.EMPLOYEE);
-	Employee employee = new Employee();
-	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	private MyAuthority authority = new MyAuthority(SecurityRole.EMPLOYEE);
 	
-	MyUser userRight = new MyUser("employee", encoder.encode("employee"), authority, employee);
+	private Employee employee = new Employee();
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	
+	private MyUser userRight = new MyUser("employee", encoder.encode("employee"), authority, employee);
 
 	@Test
 	void test() {

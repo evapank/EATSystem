@@ -17,10 +17,10 @@ import lv.venta.EATSystem.models.EmployeeStatus;
 class EmployeeStatusRepoTest {
 
 	@Autowired
-	IEmployeeStatusRepo empStRepo;
+	private IEmployeeStatusRepo empStRepo;
 	
 	@Autowired
-	IEmployeeRepo employeeRepo;
+	private IEmployeeRepo employeeRepo;
 	
 	@Test
 	void testRepoSave() {

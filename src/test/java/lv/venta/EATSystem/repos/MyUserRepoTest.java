@@ -16,16 +16,16 @@ import lv.venta.EATSystem.models.MyUser;
 class MyUserRepoTest {
 	
 	@Autowired
-	IMyUserRepo userRepo;
+	private IMyUserRepo userRepo;
 	
 	@Autowired
-	BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder encoder;
 	
 	@Autowired
-	IMyAuthorityRepo authorityRepo;
+	private IMyAuthorityRepo authorityRepo;
 	
 	@Autowired
-	IEmployeeRepo employeeRepo;
+	private IEmployeeRepo employeeRepo;
 
 	@Test
 	void testRepoSave() {

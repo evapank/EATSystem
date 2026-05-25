@@ -72,3 +72,15 @@ describe("Get all employee statuses", ()=> {
     });
 
 });
+
+describe("Get one employee status", ()=> {
+    it("Intercept request", ()=>{
+        cy.visit(`http://localhost:3000/employeestatus/all/${MockEmployeeStatuses[0].idEmployeeStatus}`)
+        cy.intercept("GET", `/employeestatus/all/${MockEmployeeStatuses[0].idEmployeeStatus}`, MockEmployeeStatuses[0]).as("OneEmployeeStatus");
+        
+        cy.request(`/employeestatus/all/${MockEmployeeStatuses[0].idEmployeeStatus}`)
+        cy.get("table").should("contain", "Online")
+        .and("contain", "Carl Jefferson")
+    });
+
+});
