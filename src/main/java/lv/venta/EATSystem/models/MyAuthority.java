@@ -1,47 +1,48 @@
 package lv.venta.EATSystem.models;
 
-import java.time.LocalDate;
+import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lv.venta.EATSystem.enums.SecurityRole;
 
-@Getter
+
 @Setter
+@Getter
 @NoArgsConstructor
 @ToString
-@Table(name = "day_table")
 @Entity
-public class Day {
+@Table(name="myAuthority_table")
+public class MyAuthority {
 	
 	@Id
-	@Column(name = "IdDay")
+	@Column(name = "AuthorityId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter(value = AccessLevel.NONE)
-	private int idDay;
+	private int authorityId;
 	
-	@OneToOne
-	@JoinColumn(name = "IdEmployeeStatus")
-	private EmployeeStatus employeeStatus;
+	@Column(name = "Title")
+	private SecurityRole title;
 	
-	@Column(name = "Date")
-	private LocalDate date;
+	@OneToMany(mappedBy = "authority")
+	@ToString.Exclude
+	@JsonIgnore
+	private Collection<MyUser> users;
 	
-	public Day (EmployeeStatus employeeStatus, LocalDate date) {
-		
-		this.employeeStatus = employeeStatus;
-		this.date = date;
-		
+	public MyAuthority(SecurityRole title) {
+		this.title = title;
 	}
-
 }
+

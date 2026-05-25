@@ -3,6 +3,8 @@ package lv.venta.EATSystem.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,19 +39,19 @@ public class Employee {
 	private int idEmployee;
 	
 	@Column(name = "Name")
-	@Size(min = 1, max = 100)
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Size(min = 2, max = 100)
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String name;
 	
 	@Column(name = "Surname")
-	@Size(min = 1, max = 300)
-	@Pattern(regexp = "[A-Z]{1}[a-z]+")
+	@Size(min = 2, max = 300)
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
 	private String surname;
 	
 	@Column(name = "Position")
 	@Size(min = 3, max = 100)
-	//@Pattern(regexp = "[A-Z]{1}[a-z]+")
-	private String postion;
+	@Pattern(regexp = "[A-Z]{1}[a-z\\s]+")
+	private String position;
 	
 	@ManyToOne
 	@JoinColumn(name = "IdDepartment")
@@ -60,26 +62,35 @@ public class Employee {
 	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
 	private String email;
 	
+	@Column(name = "IsManager")
+	private boolean isManager;
+	
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "IdEmployee"),inverseJoinColumns = @JoinColumn(name = "IdProject"),
 	name = "projects_employees")
 	@ToString.Exclude
+	@JsonIgnore
 	private Collection<Project> projects  = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	@ToString.Exclude
 	private Collection<EmployeeOrderStatus> orderStatuses  = new ArrayList<EmployeeOrderStatus>();
 	
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
+	@ToString.Exclude
 	private Collection<EmployeeStatus> statuses  = new ArrayList<EmployeeStatus>();
 	
 	public Employee (String name, String surname, String position, Department department,
-			String email) {
+			String email, boolean isManager) {
 		
 		this.name = name;
 		this.surname = surname;
-		this.postion = position;
+		this.position = position;
 		this.department = department;
 		this.email = email;
+		this.isManager = isManager;
 	}
 	
 	public void addProjects(Project project) {
@@ -98,6 +109,10 @@ public class Employee {
 		
 		statuses.add(status);
 		
+	}
+	
+	public void removeProject(Project project) {
+		projects.remove(project);
 	}
 	
 

@@ -2,13 +2,14 @@ package lv.venta.EATSystem.models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,34 +22,29 @@ import lv.venta.EATSystem.enums.GeneralStatus;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table
 @Entity
-public class EmployeeStatus {
+@Table
+public class EmployeeStatus extends Status{
 	
 	@Id
 	@Column(name = "IdEmployeeStatus")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Setter(value = AccessLevel.NONE)
-	private int idEmployeeStatus;
-	
-	@ManyToOne
-	@JoinColumn(name = "IdEmployee")
-	private Employee employee;
-	
-	@Column(name = "generalStatus")
-	private GeneralStatus generalStatus;
+	protected int idEmployeeStatus;
 	
 	@Column(name = "DateTimeStart")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeStart;
 	
 	@Column(name = "DateTimeEnd")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime dateTimeEnd;
 	
 	public EmployeeStatus (Employee employee, GeneralStatus generalStatus,
 			LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
 		
-		this.employee = employee;
-		this.generalStatus = generalStatus;
+		setEmployee(employee);
+		setGeneralStatus(generalStatus);
 		this.dateTimeStart = dateTimeStart;
 		this.dateTimeEnd = dateTimeEnd;
 		
