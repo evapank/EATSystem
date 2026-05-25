@@ -21,7 +21,7 @@ class EmployeeStatusTest {
 	
 	@Test
 	void test() {
-		assertEquals("Online", GeneralStatus.Online.toString());
+		assertEquals("Online", empStRight.getGeneralStatus().toString());
 	}
 
 }
