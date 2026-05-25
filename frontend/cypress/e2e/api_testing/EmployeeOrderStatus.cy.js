@@ -47,10 +47,10 @@ describe("Get all employee order statuses", ()=> {
 
 describe("Get one employee order status", ()=> {
     it("Intercept request", ()=>{
-        cy.visit('http://localhost:3000/employeeorderstatus/all/1')
-        cy.intercept("GET", "/employeeorderstatus/all/1", MockEos[0]).as("OneEos");
+        cy.visit(`http://localhost:3000/employeeorderstatus/all/${MockEos[0].idEmployeeOrderStatus}`)
+        cy.intercept("GET", `/employeeorderstatus/all/${MockEos[0].idEmployeeOrderStatus}`, MockEos[0]).as("OneEos");
         
-        cy.request("/employeeorderstatus/all")
+        cy.request(`/employeeorderstatus/all/${MockEos[0].idEmployeeOrderStatus}`)
         cy.get("table").should("contain","Online")
         .and("contain", "Sam Smith")
     });

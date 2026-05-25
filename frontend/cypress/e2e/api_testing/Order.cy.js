@@ -75,10 +75,10 @@ describe("Get all orders", ()=> {
 
 describe("Get one order", ()=> {
     it("Intercept request", ()=>{
-        cy.visit('http://localhost:3000/order/all/1')
-        cy.intercept("GET", "/order/all/1", MockOrders[0]).as("OneOrder");
+        cy.visit(`http://localhost:3000/order/all/${MockOrders[0].idOrder}`)
+        cy.intercept("GET", `/order/all/${MockOrders[0].idOrder}`, MockOrders[0]).as("OneOrder");
         
-        cy.request("/order/all/1")
+        cy.request(`/order/all/${MockOrders[0].idOrder}`)
         cy.get("table").should("contain", "Vacation").and("contain", 123455)
     });
 
