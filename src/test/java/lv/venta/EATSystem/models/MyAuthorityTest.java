@@ -15,7 +15,7 @@ class MyAuthorityTest {
 	
 	@Test
 	void test() {
-		assertEquals("EMPLOYEE", SecurityRole.EMPLOYEE.toString());
+		assertEquals("EMPLOYEE", authority.getTitle().toString());
 	}
 
 }

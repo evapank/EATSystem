@@ -17,7 +17,7 @@ class EmployeeOrderStatusTest {
 	@Test
 	void test() {
 		
-		assertEquals("InPerson", GeneralStatus.InPerson.toString());
+		assertEquals("InPerson", eos.getGeneralStatus().toString());
 	}
 
 }
