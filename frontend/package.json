@@ -54,6 +54,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "ajv": "^7.2.4",
+    "cypress-sonarqube-reporter": "^1.14.0",
     "eslint-plugin-jest": "^29.15.2",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
