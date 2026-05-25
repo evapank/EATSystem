@@ -16,7 +16,7 @@ import lv.venta.EATSystem.models.Meeting;
 class MeetingRepoTest {
 
 	@Autowired
-	IMeetingRepo meetingRepo;
+	private IMeetingRepo meetingRepo;
 	
 	@Test
 	void test() {

@@ -27,10 +27,10 @@ import lv.venta.EATSystem.services.impl.OrderServiceImpl;
 class OrderServiceTest {
 
 	@InjectMocks
-	OrderServiceImpl orderService;
+	private static OrderServiceImpl orderService;
 	
 	@Mock
-	IOrderRepo orderRepo;
+	private static IOrderRepo orderRepo;
 	
 	@BeforeEach
 	void setUp()

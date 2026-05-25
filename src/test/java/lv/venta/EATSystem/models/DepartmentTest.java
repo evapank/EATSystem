@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class DepartmentTest {
 
-	Department depRight = new Department("Sales");
+	private Department depRight = new Department("Sales");
 	
 	@Test
 	void test() {

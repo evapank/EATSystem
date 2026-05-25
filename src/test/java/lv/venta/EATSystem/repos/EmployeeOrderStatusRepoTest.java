@@ -15,10 +15,10 @@ import lv.venta.EATSystem.models.EmployeeOrderStatus;
 class EmployeeOrderStatusRepoTest {
 	
 	@Autowired
-	IEmployeeOrderStatusRepo eosRepo;
+	private IEmployeeOrderStatusRepo eosRepo;
 	
 	@Autowired
-	IEmployeeRepo employeeRepo;
+	private IEmployeeRepo employeeRepo;
 
 	@Test
 	void testRepoSave() {

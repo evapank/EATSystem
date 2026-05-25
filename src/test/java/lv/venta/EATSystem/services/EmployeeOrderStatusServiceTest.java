@@ -24,10 +24,10 @@ import lv.venta.EATSystem.services.impl.EmployeeOrderStatusServiceImpl;
 class EmployeeOrderStatusServiceTest {
 
 	@InjectMocks
-	EmployeeOrderStatusServiceImpl eosService;
+	private static EmployeeOrderStatusServiceImpl eosService;
 	
 	@Mock
-	IEmployeeOrderStatusRepo eosRepo;
+	private static IEmployeeOrderStatusRepo eosRepo;
 	
 	@BeforeEach
 	void setUp()

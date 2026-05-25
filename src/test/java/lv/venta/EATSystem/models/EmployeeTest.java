@@ -8,9 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class EmployeeTest {
 
-Department department = new Department();
+	private Department department = new Department();
 	
-	Employee empRight = new Employee("Eva", "Pankevica", "Engineer", department, "evaPankevica@gmail.com", false);
+	private Employee empRight = new Employee("Eva", "Pankevica", "Engineer", department, "evaPankevica@gmail.com", false);
 	
 	@Test
 	void test() {

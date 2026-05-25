@@ -13,7 +13,7 @@ import lv.venta.EATSystem.models.Department;
 class DepartmentRepoTest {
 	
 	@Autowired
-	IDepartmentRepo departmentRepo;
+	private IDepartmentRepo departmentRepo;
 
 	@Test
 	void testRepoSave() {

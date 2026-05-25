@@ -16,10 +16,10 @@ import lv.venta.EATSystem.models.Project;
 class ProjectRepoTest {
 
 	@Autowired
-	IProjectRepo projectRepo;
+	private IProjectRepo projectRepo;
 	
 	@Autowired
-	IEmployeeRepo employeeRepo;
+	private IEmployeeRepo employeeRepo;
 	
 	@Test
 	void testRepoSave() {

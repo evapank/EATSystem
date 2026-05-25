@@ -11,7 +11,8 @@ import lv.venta.EATSystem.enums.SecurityRole;
 @SpringBootTest(properties = "spring.profiles.active=test")
 class MyAuthorityTest {
 
-	MyAuthority authority = new MyAuthority(SecurityRole.EMPLOYEE);
+	private MyAuthority authority = new MyAuthority(SecurityRole.EMPLOYEE);
+	
 	@Test
 	void test() {
 		assertEquals("EMPLOYEE", SecurityRole.EMPLOYEE.toString());

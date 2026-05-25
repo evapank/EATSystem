@@ -22,10 +22,10 @@ import lv.venta.EATSystem.services.impl.MeetingServiceImpl;
 class MeetingServiceTest {
 
 	@InjectMocks
-	MeetingServiceImpl meetingService;
+	private static MeetingServiceImpl meetingService;
 	
 	@Mock
-	IMeetingRepo meetingRepo;
+	private static IMeetingRepo meetingRepo;
 	
 	@Test
 	void testCreate() {
