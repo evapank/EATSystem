@@ -14,8 +14,14 @@ const AllMeetingsCalendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const location = useLocation();
-	const locales = {'en-GB': enGB};
+	//const locales = {'en-GB': enGB};
 	//const localizer = dateFnsLocalizer({format, parse, startOfWeek, getDay, locales});
+	moment.locale('es', {
+    week: {
+        dow: 1,
+        doy: 1,
+    },
+});
 	const localizer = momentLocalizer(moment);
 	
 	useEffect(() => {
