@@ -92,22 +92,28 @@ public class EatSystem1Application {
 				employeeStatusRepo.save(empSt2);
 				
 				Order ord1 = new Order(100023, null, LocalDate.of(2025, 10, 28),
-						LocalDateTime.of(LocalDate.of(2025, 11, 3), LocalTime.of(8, 0)),
-						LocalDateTime.of(LocalDate.of(2025, 11, 7), LocalTime.of(17, 0)),
+						LocalDateTime.of(LocalDate.of(2026, 11, 3), LocalTime.of(8, 0)),
+						LocalDateTime.of(LocalDate.of(2026, 11, 7), LocalTime.of(17, 0)),
 						OrderStatus.Vacation, null);
 				Order ord2 = new Order(200532, null, LocalDate.of(2025, 10, 20),
-						LocalDateTime.of(LocalDate.of(2025, 1, 12), LocalTime.of(9, 0)),
-						LocalDateTime.of(LocalDate.of(2025, 5, 12), LocalTime.of(12, 0)),
+						LocalDateTime.of(LocalDate.of(2026, 5, 20), LocalTime.of(9, 0)),
+						LocalDateTime.of(LocalDate.of(2026, 5, 30), LocalTime.of(12, 0)),
 						OrderStatus.BusinessTrip, null);
 				orderRepo.save(ord1);
 				orderRepo.save(ord2);
 				
-				EmployeeOrderStatus empOrdSt1 = new EmployeeOrderStatus(emp1, GeneralStatus.Online);
-				empOrdSt1.addOrder(ord1);
-				employeeOrderStatusRepo.save(empOrdSt1);
+				//EmployeeOrderStatus empOrdSt1 = new EmployeeOrderStatus(emp1, GeneralStatus.Online);
+				EmployeeOrderStatus empOrdSt2 = new EmployeeOrderStatus(emp2, GeneralStatus.Online);
+				EmployeeOrderStatus empOrdSt3 = new EmployeeOrderStatus(emp2, GeneralStatus.DayOff);
+				empOrdSt2.addOrder(ord2);
+				empOrdSt3.addOrder(ord1);
+				employeeOrderStatusRepo.save(empOrdSt2);
+				employeeOrderStatusRepo.save(empOrdSt3);
 				
-				ord1.setEmployeeOrderStatus(empOrdSt1);
+				ord1.setEmployeeOrderStatus(empOrdSt3);
+				ord2.setEmployeeOrderStatus(empOrdSt2);
 				orderRepo.save(ord1);
+				orderRepo.save(ord2);
 				
 				Project proj1 = new Project(10001, "Mobile app development",LocalDate.of(2025, 1, 9),
 						LocalDate.of(2026, 1, 9), emp1);

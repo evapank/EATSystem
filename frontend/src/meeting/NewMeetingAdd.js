@@ -21,15 +21,15 @@ const NewMeetingAdd = () => {
     useEffect(() => {
             const fetchMeeting = async() => {
                 try {
-                    myDateTime.dateTimeStart=location.state.dateTimeStart;
-                    myDateTime.dateTimeEnd=location.state.dateTimeEnd;
-                    console.log("location.dateTimeStart:", location.state.dateTimeStart);
-                    console.log("location.dateTimeEnd:", location.state.dateTimeEnd);
-                    console.log("myDateTime.dateTimeStart:", myDateTime.dateTimeStart);
-                    console.log("myDateTime.dateTimeEnd:", myDateTime.dateTimeEnd);
-                    setMeeting({...meeting, dateTimeStart: myDateTime.dateTimeStart});
-                    setMeeting({...meeting, dateTimeEnd: location.state.dateTimeEnd});
-                    console.log("myDateTime:", myDateTime);
+                    const dateTimeStart = location.state.dateTimeStart;
+                    const dateTimeEnd = location.state.dateTimeEnd;
+                    myDateTime.dateTimeStart=dateTimeStart;
+                    myDateTime.dateTimeEnd=dateTimeEnd;
+
+                    setMeeting(prev => ({
+                        ...prev, dateTimeStart, dateTimeEnd
+                    }));
+    
                     const emStResponse = await MeetingService.setEmployeeStatuses(myDateTime);
                     const response = await OtherService.getMeetingStatuses();
                     setMeetingStatuses(response.data);

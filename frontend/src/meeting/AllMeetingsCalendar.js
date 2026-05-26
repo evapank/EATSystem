@@ -7,6 +7,7 @@ import { format, getDay, parse, startOfWeek } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import moment from 'moment';
 import { momentLocalizer } from 'react-big-calendar';
+import { localDateTimeArrayToDate } from '../static/DateConverters';
 
 const AllMeetingsCalendar = () => {
 	const [meeting, setMeetings] = useState([]);
@@ -39,16 +40,6 @@ const AllMeetingsCalendar = () => {
 		};
 		fetchMeetings();
 	}, []);
-
-	const localDateTimeArrayToDate = (array) => {
-		if (!Array.isArray(array) || array.length < 5) {
-			console.log("Invalid LocalDateTime value:", array);
-    		return null;
-		  }
-
-		const [year, month, day, hour, minute, second = 0] = array;
-		return new Date(year, month - 1, day, hour, minute, second);
-	};
 	
 	if (loading) return <div>Loading...</div>;
   if (error) return <div className="alert alert-danger">{error}</div>;
