@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Employee;
+import lv.venta.EATSystem.models.dto.EmployeeDTO;
 import lv.venta.EATSystem.services.IEmployeeService;
 
 @RestController
@@ -49,7 +50,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/create")
-	public Employee postAddEmployee(@Valid @RequestBody Employee employee, BindingResult result) throws Exception {
+	public Employee postAddEmployee(@Valid @RequestBody EmployeeDTO employee, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return employeeService.insertNewEmployee(employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {
@@ -58,7 +59,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid @RequestBody Employee employee, BindingResult result) throws Exception {
+	public Employee updateEmployeeById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeDTO employee, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return employeeService.updateEmployeeById(id, employee.getName(), employee.getSurname(), employee.getPosition(), employee.getDepartment(), employee.getEmail(), employee.isManager());
 		} else {

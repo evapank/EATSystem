@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Project;
+import lv.venta.EATSystem.models.dto.ProjectDTO;
 import lv.venta.EATSystem.services.IProjectService;
 
 @RestController
@@ -45,7 +46,7 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/create")
-	public Project postAddProject(@Valid @RequestBody Project project, BindingResult result) throws Exception {
+	public Project postAddProject(@Valid @RequestBody ProjectDTO project, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return projectService.insertNewProject(project.getProjectNumber(), project.getTitle(), project.getDateStart(), project.getDateEnd(),
 					project.getProjectManager());
@@ -55,7 +56,7 @@ public class ProjectController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public Project updateProject(@Valid @RequestBody Project project, BindingResult result,  @PathVariable(name = "id") int id) throws Exception {
+	public Project updateProject(@Valid @RequestBody ProjectDTO project, BindingResult result,  @PathVariable(name = "id") int id) throws Exception {
 		if(!result.hasErrors()) {
 			return projectService.updateProjectById(id, project.getProjectNumber(), project.getTitle(), project.getDateStart(), project.getDateEnd(),
 					project.getProjectManager());

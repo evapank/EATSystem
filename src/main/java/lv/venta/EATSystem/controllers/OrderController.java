@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.Order;
+import lv.venta.EATSystem.models.dto.OrderDTO;
 import lv.venta.EATSystem.services.IOrderService;
 
 @RestController
@@ -44,7 +45,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/create")
-	public Order postAddOrder(@Valid @RequestBody Order order, BindingResult result) throws Exception {
+	public Order postAddOrder(@Valid @RequestBody OrderDTO order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return orderService.insertNewOrder(order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());
@@ -54,7 +55,7 @@ public class OrderController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid @RequestBody Order order, BindingResult result) throws Exception {
+	public Order updateOrderById(@PathVariable(name = "id") int id, @Valid @RequestBody OrderDTO order, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return orderService.updateOrderById(id, order.getOrderNumber(), order.getProject(), order.getOrderDate(), order.getDateTimeStart(),
 					order.getDateTimeEnd(), order.getOrderStatus(), order.getEmployeeOrderStatus());

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lv.venta.EATSystem.models.EmployeeOrderStatus;
+import lv.venta.EATSystem.models.dto.EmployeeOrderStatusDTO;
 import lv.venta.EATSystem.services.IEmployeeOrderStatusService;
 
 @RestController
@@ -45,7 +46,7 @@ public class EmployeeOrderStatusController {
 	}
 	
 	@PostMapping("/create")
-	public EmployeeOrderStatus postAddEmployeeOrderStatus(@Valid @RequestBody EmployeeOrderStatus eos, BindingResult result) throws Exception {
+	public EmployeeOrderStatus postAddEmployeeOrderStatus(@Valid @RequestBody EmployeeOrderStatusDTO eos, BindingResult result) throws Exception {
 		if(!result.hasErrors()) {
 			return eosService.insertNewEmployeeOrderStatus(eos.getEmployee(), eos.getGeneralStatus());
 		} else {
@@ -54,7 +55,7 @@ public class EmployeeOrderStatusController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public EmployeeOrderStatus updateEmployeeOrderStatusById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeOrderStatus eos, BindingResult result) throws Exception {
+	public EmployeeOrderStatus updateEmployeeOrderStatusById(@PathVariable(name="id") int id, @Valid @RequestBody EmployeeOrderStatusDTO eos, BindingResult result) throws Exception {
 	if(!result.hasErrors()) {
 			return eosService.updateEmployeeOrderStatusById(id, eos.getEmployee(), eos.getGeneralStatus());
 		} else {
