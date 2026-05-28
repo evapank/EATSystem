@@ -23,8 +23,12 @@ import lv.venta.EATSystem.services.IProjectService;
 @RequestMapping("/project")
 public class ProjectController {
 	
+	private final IProjectService projectService;
+	
 	@Autowired
-	IProjectService projectService;
+	public ProjectController(IProjectService projectService) {
+		this.projectService = projectService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<Project> getAllProjects() {

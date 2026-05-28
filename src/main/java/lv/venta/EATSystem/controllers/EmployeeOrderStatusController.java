@@ -22,8 +22,12 @@ import lv.venta.EATSystem.services.IEmployeeOrderStatusService;
 @RequestMapping("/employeeorderstatus")
 public class EmployeeOrderStatusController {
 	
+	private final IEmployeeOrderStatusService eosService;
+	
 	@Autowired
-	IEmployeeOrderStatusService eosService;
+	public EmployeeOrderStatusController(IEmployeeOrderStatusService eosService) {
+		this.eosService = eosService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<EmployeeOrderStatus> getAllEmployeeOrderStatuses() {

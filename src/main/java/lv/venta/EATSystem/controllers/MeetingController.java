@@ -33,8 +33,12 @@ import lv.venta.EATSystem.services.IMeetingService;
 @Transactional
 public class MeetingController {
 	
+	private final IMeetingService meetingService;
+	
 	@Autowired
-	IMeetingService meetingService;
+	public MeetingController(IMeetingService meetingService) {
+		this.meetingService = meetingService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<Meeting> getAllMeetings(){

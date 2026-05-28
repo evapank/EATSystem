@@ -22,8 +22,12 @@ import lv.venta.EATSystem.services.IOrderService;
 @RequestMapping("/order")
 public class OrderController {
 	
+	private final IOrderService orderService;
+	
 	@Autowired
-	IOrderService orderService;
+	public OrderController(IOrderService orderService) {
+		this.orderService = orderService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<Order> getAllOrders() {

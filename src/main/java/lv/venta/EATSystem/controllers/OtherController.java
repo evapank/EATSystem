@@ -19,8 +19,12 @@ import lv.venta.EATSystem.services.IOtherService;
 @Transactional
 public class OtherController {
 
+	private final IOtherService otherService;
+	
 	@Autowired
-	IOtherService otherService;
+	public OtherController(IOtherService otherService) {
+		this.otherService = otherService;
+	}
 	
 	@GetMapping("/roles")
 	public Object[] getAllSecurityRoles() {
