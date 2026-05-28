@@ -14,8 +14,12 @@ import lv.venta.EATSystem.services.IEmployeeOrderStatusService;
 @Service
 public class EmployeeOrderStatusServiceImpl implements IEmployeeOrderStatusService{
 
-	@Autowired
 	private IEmployeeOrderStatusRepo eosRepo;
+	
+	@Autowired
+	public EmployeeOrderStatusServiceImpl (IEmployeeOrderStatusRepo eosRepo) {
+		this.eosRepo = eosRepo;
+	}
 	
 	@Override
 	public ArrayList<EmployeeOrderStatus> selectAllEmployeeOrderStatuses() {

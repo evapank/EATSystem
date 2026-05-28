@@ -17,8 +17,12 @@ import lv.venta.EATSystem.services.IOrderService;
 @Service
 public class OrderServiceImpl implements IOrderService{
 	
-	@Autowired
 	private IOrderRepo orderRepo;
+	
+	@Autowired
+	public OrderServiceImpl(IOrderRepo orderRepo) {
+		this.orderRepo = orderRepo;
+	}
 
 	@Override
 	public ArrayList<Order> selectAllOrders() {

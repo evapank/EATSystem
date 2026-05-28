@@ -20,20 +20,25 @@ import lv.venta.EATSystem.services.IEmployeeService;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService{
 
-	@Autowired
 	private IEmployeeRepo employeeRepo;
 	
-	@Autowired
 	private IEmployeeOrderStatusRepo eosRepo;
 	
-	@Autowired
 	private IEmployeeStatusRepo empStRepo;
 	
-	@Autowired
 	private IDepartmentRepo departmentRepo;
 	
-	@Autowired
 	private IProjectRepo projectRepo;
+	
+	@Autowired
+	public EmployeeServiceImpl(IEmployeeRepo employeeRepo, IEmployeeOrderStatusRepo eosRepo, IEmployeeStatusRepo empStRepo,
+			IDepartmentRepo departmentRepo, IProjectRepo projectRepo) {
+		this.employeeRepo = employeeRepo;
+		this.eosRepo = eosRepo;
+		this.empStRepo = empStRepo;
+		this.departmentRepo = departmentRepo;
+		this.projectRepo = projectRepo;
+	}
 	
 	@Override
 	public ArrayList<Employee> selectAllEmployees() {

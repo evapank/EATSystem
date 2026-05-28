@@ -14,8 +14,12 @@ import lv.venta.EATSystem.services.IProjectService;
 @Service
 public class ProjectServiceImpl implements IProjectService{
 	
-	@Autowired
 	private IProjectRepo projectRepo;
+	
+	@Autowired
+	public ProjectServiceImpl (IProjectRepo projectRepo) {
+		this.projectRepo = projectRepo;
+	}
 
 	@Override
 	public ArrayList<Project> selectAllProjects() {

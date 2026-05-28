@@ -14,12 +14,15 @@ import lv.venta.EATSystem.services.IDepartmentService;
 @Service
 public class DepartmentServiceImpl implements IDepartmentService{
 	
-	@Autowired
 	private IDepartmentRepo departmentRepo;
 	
-	@Autowired
 	private IEmployeeRepo employeeRepo;
 
+	@Autowired
+	public DepartmentServiceImpl(IDepartmentRepo departmentRepo, IEmployeeRepo employeeRepo) {
+		this.departmentRepo = departmentRepo;
+		this.employeeRepo = employeeRepo;
+	}
 	@Override
 	public ArrayList<Department> selectAllDepartments() {
 		ArrayList<Department> result = (ArrayList<Department>) departmentRepo.findAll();

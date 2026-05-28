@@ -15,8 +15,12 @@ import lv.venta.EATSystem.services.IEmployeeStatusService;
 @Service
 public class EmployeeStatusServiceImpl implements IEmployeeStatusService{
 	
-	@Autowired
 	private IEmployeeStatusRepo empStRepo;
+	
+	@Autowired
+	public EmployeeStatusServiceImpl(IEmployeeStatusRepo emStatusRepo) {
+		this.empStRepo = emStatusRepo;
+	}
 
 	@Override
 	public ArrayList<EmployeeStatus> selectAllEmployeeStatuses() {

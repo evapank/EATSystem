@@ -18,14 +18,18 @@ import lv.venta.EATSystem.services.IMeetingService;
 @Service
 public class MeetingServiceImpl implements IMeetingService{
 
-	@Autowired
-	IEmployeeStatusRepo empStRepo;
+	private IEmployeeStatusRepo empStRepo;
+	
+	private IEmployeeRepo employeeRepo;
+	
+	private IMeetingRepo meetingRepo;
 	
 	@Autowired
-	IEmployeeRepo employeeRepo;
-	
-	@Autowired
-	IMeetingRepo meetingRepo;
+	public MeetingServiceImpl(IEmployeeStatusRepo empStRepo, IEmployeeRepo employeeRepo, IMeetingRepo meetingRepo) {
+		this.empStRepo = empStRepo;
+		this.employeeRepo = employeeRepo;
+		this.meetingRepo = meetingRepo;
+	}
 	
 	@Override
 	public ArrayList<EmployeeStatus> getAllEmployeeStatusByDateTime(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
