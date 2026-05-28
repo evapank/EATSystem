@@ -20,8 +20,13 @@ import lv.venta.EATSystem.services.IEmailService;
 @Transactional
 public class EmailController {
 
+	private final IEmailService emailService;
+	
 	@Autowired
-	IEmailService emailService;
+	public EmailController(IEmailService emailService) {
+		this.emailService = emailService;
+	}
+	
 	
 	@GetMapping("/send")
 	public void sendEmail (@Valid @RequestBody String email, @Valid @RequestBody LocalDateTime dateTimeStart, @Valid @RequestBody LocalDateTime dateTimeEnd) {

@@ -27,8 +27,12 @@ import lv.venta.EATSystem.services.IEmployeeService;
 @Transactional
 public class EmployeeController {
 	
+	private final IEmployeeService employeeService;
+	
 	@Autowired
-	IEmployeeService employeeService;
+	public EmployeeController(IEmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<Employee> getAllEmployees() {

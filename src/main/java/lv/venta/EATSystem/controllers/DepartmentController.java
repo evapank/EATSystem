@@ -30,11 +30,15 @@ import lv.venta.EATSystem.services.IEmployeeService;
 @Transactional
 public class DepartmentController {
 	
-	@Autowired
-	IDepartmentService departmentService;
+	private final IDepartmentService departmentService;
+	
+	private final IEmployeeService employeeService;
 	
 	@Autowired
-	IEmployeeService employeeService;
+	public DepartmentController(IDepartmentService departmentService, IEmployeeService employeeService) {
+		this.departmentService = departmentService;
+		this.employeeService = employeeService;
+	}
 	
 	@GetMapping("/all")
 	public Collection<Department> getAllDepartments() {
