@@ -28,6 +28,7 @@ import lv.venta.EATSystem.models.MyAuthority;
 import lv.venta.EATSystem.models.MyUser;
 import lv.venta.EATSystem.models.Order;
 import lv.venta.EATSystem.models.Project;
+import lv.venta.EATSystem.models.dto.MyUserDTO;
 import lv.venta.EATSystem.response.AuthResponse;
 import lv.venta.EATSystem.services.IMyUserService;
 import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
@@ -47,7 +48,7 @@ public class MyUserController {
 	private IMyUserService myUserService;
 	
 	@PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody MyUser user, Employee employee) throws Exception  {
+    public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody MyUserDTO user, Employee employee) throws Exception  {
 		
 		user.setEmployee(employee);
 	
@@ -112,7 +113,7 @@ public class MyUserController {
 	}
 	
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> signin(@RequestBody MyUser loginRequest) {
+    public ResponseEntity<AuthResponse> signin(@RequestBody MyUserDTO loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
         MyUser user = myUserService.getUserByUsername(username);
