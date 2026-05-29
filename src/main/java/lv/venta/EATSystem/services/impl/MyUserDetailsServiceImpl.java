@@ -1,5 +1,6 @@
 package lv.venta.EATSystem.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +20,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService, UserDetails
 	private IMyUserRepo userRepo;
 	private IMyAuthorityRepo authorityRepo;
 	
+	@Autowired
 	public MyUserDetailsServiceImpl(IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo) {
 		this.userRepo = userRepo;
 		this.authorityRepo = authorityRepo;

@@ -22,20 +22,26 @@ import lv.venta.EATSystem.services.IMyUserService;
 @Service
 public class MyUserServiceImpl implements IMyUserService{
 
-	@Autowired
 	IMyUserRepo userRepo;
 	
-	@Autowired
 	IMyAuthorityRepo authorityRepo;
 	
-	@Autowired
 	IProjectRepo projectRepo;
-	
-	@Autowired
+
 	IOrderRepo orderRepo;
 	
-	@Autowired
 	IEmployeeStatusRepo empStRepo;
+	
+	@Autowired
+	public MyUserServiceImpl(IMyUserRepo userRepo, IMyAuthorityRepo authorityRepo, IProjectRepo projectRepo,
+							IOrderRepo orderRepo, IEmployeeStatusRepo empStRepo) {
+		this.userRepo = userRepo;
+		this.authorityRepo = authorityRepo;
+		this.projectRepo = projectRepo;
+		this.orderRepo = orderRepo;
+		this.empStRepo = empStRepo;
+	}
+	
 	
 	@Override
 	public ArrayList<MyUser> selectAllUsers() {
