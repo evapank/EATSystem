@@ -47,6 +47,12 @@ public class MyUserController {
 	@Autowired
 	private IMyUserService myUserService;
 	
+	public MyUserController(PasswordEncoder passwordEncoder, MyUserDetailsServiceImpl customUserDetails, IMyUserService myUserService) {
+		this.passwordEncoder = passwordEncoder;
+		this.customUserDetails = customUserDetails;
+		this.myUserService = myUserService;
+	}
+	
 	@PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@Valid @RequestBody MyUserDTO user, Employee employee) throws Exception  {
 		
