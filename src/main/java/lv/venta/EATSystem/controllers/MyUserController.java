@@ -37,16 +37,13 @@ import lv.venta.EATSystem.services.impl.MyUserDetailsServiceImpl;
 @RequestMapping("/auth")
 public class MyUserController {
 	
-	
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Autowired 
 	private MyUserDetailsServiceImpl customUserDetails;
 	
-	@Autowired
 	private IMyUserService myUserService;
 	
+	@Autowired
 	public MyUserController(PasswordEncoder passwordEncoder, MyUserDetailsServiceImpl customUserDetails, IMyUserService myUserService) {
 		this.passwordEncoder = passwordEncoder;
 		this.customUserDetails = customUserDetails;
