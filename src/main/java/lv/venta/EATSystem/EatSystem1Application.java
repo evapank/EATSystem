@@ -74,8 +74,8 @@ public class EatSystem1Application {
 				
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				
-				MyUser u1 = new MyUser("admin", encoder.encode(System.getenv("admin")), ADMIN, emp1);
-				MyUser u2 = new MyUser("employee", encoder.encode(System.getenv("employee")), EMPLOYEE, emp2);
+				MyUser u1 = new MyUser("admin", encoder.encode("admin"), ADMIN, emp1);
+				MyUser u2 = new MyUser("employee", encoder.encode("employee"), EMPLOYEE, emp2);
 				userRepo.save(u1);
 				userRepo.save(u2);
 				authorityRepo.save(ADMIN);
